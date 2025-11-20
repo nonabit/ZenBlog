@@ -1,86 +1,101 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import FusionHeader from '../components/react/FusionHeader';
+import ScrollProgress from '../components/react/ScrollProgress';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+
+// 简单的日期格式化
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+		<BaseHead title={title} description={description} image={`/og/${Astro.params.slug}.png`} />
+        <script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
 			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
+		</script>
 	</head>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
+	<body class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans">
+		
+        <!-- 1. 进度条 (仅在文章页显示) -->
+        <ScrollProgress client:load />
+
+        <!-- 2. 全局导航 -->
+		<FusionHeader client:load transition:persist />
+
+		<main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
+            
+            <!-- 3. 文章头部 (Hero) -->
+            <article class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div class="mb-10 text-center">
+                    <a href="/" class="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline">
+                        <ArrowLeft size={14} />
+                        <span>Back to Home</span>
+                    </a>
+                    
+                    <div class="flex items-center justify-center gap-4 text-xs font-mono text-zinc-400 mb-6 uppercase tracking-wider">
+                        <span class="flex items-center gap-1">
+                            <Calendar size={12} /> {formattedDate}
+                        </span>
+                        <span class="w-px h-3 bg-zinc-200 dark:bg-zinc-800"></span>
+                        <span class="flex items-center gap-1">
+                            <Clock size={12} /> 5 min read
+                        </span>
+                    </div>
+
+                    <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-6">
+                        {title}
+                    </h1>
+                    
+                    {heroImage && (
+                        <div class="relative aspect-video w-full overflow-hidden rounded-xl mt-8 border border-zinc-100 dark:border-zinc-800">
+                             <img src={heroImage.src} alt={title} class="object-cover w-full h-full" />
+                        </div>
+                    )}
+                </div>
+
+                <hr class="border-zinc-100 dark:border-zinc-800 mb-12" />
+
+                <!-- 4. Markdown 正文 -->
+                <!-- prose-zinc: 设置灰度色调 -->
+                <!-- prose-headings:font-serif: 再次确保标题字体 -->
+                <div class="prose prose-zinc dark:prose-invert max-w-none 
+                    prose-headings:font-serif prose-headings:font-semibold 
+                    prose-a:text-zinc-900 dark:prose-a:text-zinc-100 prose-a:no-underline prose-a:border-b prose-a:border-zinc-300 dark:prose-a:border-zinc-700 hover:prose-a:border-zinc-900 dark:hover:prose-a:border-zinc-100 hover:prose-a:transition-colors
+                    prose-img:rounded-xl
+                    ">
 					<slot />
 				</div>
 			</article>
 		</main>
-		<Footer />
+
+        <!-- Footer -->
+        <footer class="max-w-screen-lg mx-auto px-6 py-12 text-center text-zinc-400 text-sm font-mono border-t border-zinc-100 dark:border-zinc-900 mt-20">
+			&copy; {new Date().getFullYear()} 9Byte.dev. All rights reserved.
+		</footer>
+
 	</body>
 </html>

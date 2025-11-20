@@ -1,0 +1,91 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import FusionHeader from '../components/react/FusionHeader';
+import ProjectCard from '../components/react/ProjectCard';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import type { ProjectListItem } from '../types/content';
+
+// 1. 获取原始数据
+const allProjects = (await getCollection('projects')).sort(
+    // 2. 显式标注类型，解决 TS 报错
+	(a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order
+);
+
+// 3. 数据清洗：转换为纯净对象，确保 React 组件能正确接收
+const projects: ProjectListItem[] = allProjects.map((project: CollectionEntry<'projects'>) => ({
+    slug: project.id,
+    data: {
+        title: project.data.title,
+        description: project.data.description,
+        heroImage: project.data.heroImage ? project.data.heroImage.src : undefined,
+        stack: project.data.stack,
+        github: project.data.github,
+        demo: project.data.demo,
+    }
+}));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Projects | ${SITE_TITLE}`} description="A collection of my digital artifacts." />
+        <script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<body class="bg-white dark:bg-black transition-colors duration-500">
+		
+		<FusionHeader client:load />
+
+		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20">
+            
+            <div class="mb-16 max-w-2xl">
+                <h1 class="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6">
+                    Selected Works
+                </h1>
+                <p class="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
+                    A curated selection of side projects, open source contributions, and experiments.
+                    <br />
+                    Building things is the best way to learn.
+                </p>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {projects.map((project) => (
+                    <ProjectCard client:load project={project} />
+                ))}
+            </div>
+            
+            {projects.length === 0 && (
+                <div class="py-20 text-center border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl">
+                    <p class="text-zinc-400 font-mono text-sm">No projects found. Start building!</p>
+                </div>
+            )}
+
+		</main>
+
+		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-zinc-400 text-sm font-mono flex justify-between items-center border-t border-zinc-100 dark:border-zinc-900 mt-auto">
+			<div>&copy; {new Date().getFullYear()} 9Byte.dev</div>
+			<div class="flex items-center gap-1">
+				<span>Fuelled by Caffeine</span>
+			</div>
+		</footer>
+
+	</body>
+</html>

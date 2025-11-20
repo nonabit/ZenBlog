@@ -1,49 +1,69 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import FusionHeader from '../components/react/FusionHeader';
+import FusionHome from '../components/react/FusionHome';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+// 1. 导入类型定义
+import type { CollectionEntry } from 'astro:content';
+import type { BlogListItem } from '../types/content';
+
+// 获取最新的3篇文章
+const allPosts = (await getCollection('blog'))
+  // 2. 为排序函数的参数 a, b 添加显式类型
+  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// 3. 为 map 函数的参数 post 添加显式类型
+const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
+  slug: post.id,
+  data: {
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate,
+  }
+}));
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- 解决暗色模式闪屏 (FOUC) 的小脚本 -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
 	</head>
-	<body>
-		<Header />
+	<body class="bg-white dark:bg-black transition-colors duration-500">
+		
+		<!-- Header: 使用 client:load 指令，因为它需要立即响应交互 (Cmd+K) -->
+		<FusionHeader client:load transition:persist />
+
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
+			<FusionHome client:load posts={posts} />
 		</main>
-		<Footer />
+
+		<!-- Footer: 简单的静态组件，不需要 React -->
+		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-zinc-400 text-sm font-mono flex justify-between items-center border-t border-zinc-100 dark:border-zinc-900">
+			<div>&copy; {new Date().getFullYear()} 9Byte.Dev</div>
+			<div class="flex items-center gap-1">
+				<span>Fuelled by Caffeine</span>
+			</div>
+		</footer>
+
 	</body>
 </html>

@@ -16,4 +16,19 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+// --- 新增：Projects 集合 (适配 Astro 5.0 loader API) ---
+const projects = defineCollection({
+    loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            order: z.number().default(0),
+            heroImage: image().optional(),
+            stack: z.array(z.string()).default([]),
+            github: z.string().optional(),
+            demo: z.string().optional(),
+        }),
+});
+
+export const collections = { blog, projects };

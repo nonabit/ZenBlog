@@ -1,0 +1,121 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import FusionHeader from '../components/react/FusionHeader';
+import { SITE_TITLE } from '../consts';
+import { Disc, BookOpen, MapPin, Zap } from 'lucide-react';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Now | ${SITE_TITLE}`} description="What I'm doing now." />
+        <script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<body class="bg-white dark:bg-black transition-colors duration-500">
+		
+		<!-- Header 添加了 transition:persist，如果你在其他页面也加了，这里就会无缝衔接 -->
+		<FusionHeader client:load transition:persist />
+
+		<main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
+            
+            <div class="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </div>
+                    <span class="font-mono text-xs text-zinc-400 uppercase tracking-wider">Updated: November 2024</span>
+                </div>
+
+                <h1 class="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-8">
+                    Now
+                </h1>
+                
+                <div class="prose prose-zinc dark:prose-invert max-w-none leading-relaxed">
+                    <p class="text-xl font-light text-zinc-600 dark:text-zinc-300">
+                        Currently working as a <strong>Senior Frontend Engineer</strong> at Tech Corp, focusing on building scalable design systems.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 border-t border-zinc-100 dark:border-zinc-900 pt-12">
+                
+                <!-- Building -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-serif font-bold text-lg">
+                        <Zap size={18} />
+                        <h3>Building</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-zinc-500 dark:text-zinc-400">
+                        <li>• Astro Fusion Theme (This blog!)</li>
+                        <li>• A Rust-based CLI tool for image optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Reading -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-serif font-bold text-lg">
+                        <BookOpen size={18} />
+                        <h3>Reading</h3>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+                        <div class="w-12 h-16 bg-zinc-200 dark:bg-zinc-800 rounded shadow-sm flex-shrink-0"></div>
+                        <div>
+                            <div class="font-medium text-zinc-900 dark:text-zinc-100">Designing Data-Intensive Applications</div>
+                            <div class="text-xs text-zinc-400 mt-1">Martin Kleppmann</div>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Listening -->
+                 <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-serif font-bold text-lg">
+                        <Disc size={18} />
+                        <h3>On Repeat</h3>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+                         <div class="w-12 h-12 bg-zinc-800 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div class="w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
+                         </div>
+                        <div>
+                            <div class="font-medium text-zinc-900 dark:text-zinc-100">Interstellar OST</div>
+                            <div class="text-xs text-zinc-400 mt-1">Hans Zimmer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 font-serif font-bold text-lg">
+                        <MapPin size={18} />
+                        <h3>Location</h3>
+                    </div>
+                    <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                        Shanghai, China 🇨🇳
+                    </p>
+                </div>
+
+            </div>
+
+		</main>
+
+		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-center text-zinc-400 text-sm font-mono border-t border-zinc-100 dark:border-zinc-900 mt-auto">
+			&copy; {new Date().getFullYear()} 9Byte.dev
+		</footer>
+	</body>
+</html>

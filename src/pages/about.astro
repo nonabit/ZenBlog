@@ -1,63 +1,120 @@
 ---
-import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import FusionHeader from '../components/react/FusionHeader';
+import CareerTimeline from '../components/react/CareerTimeLine';
+import { SITE_TITLE } from '../consts';
+import { MapPin, Mail, Link as LinkIcon } from 'lucide-react';
+import Avatar from '../assets/avatar.jpg';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description="More about me and my journey." />
+        <script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+		</script>
+	</head>
+	<body class="bg-white dark:bg-black transition-colors duration-500">
+		<FusionHeader client:load transition:persist />
+		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                {/* 左侧：个人简介 (Sticky) */}
+                <div class="md:col-span-1">
+                    <div class="sticky top-24">
+                        <div class="relative w-32 h-32 mb-8 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 rotate-3 hover:rotate-0 transition-transform duration-500">
+                            <!-- 这里替换成你的真实头像 -->
+                            <img src={Avatar.src} alt="Avatar" class="object-cover w-full h-full" />
+                        </div>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+                        <h1 class="font-serif text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
+                            Zen Zhang
+                        </h1>
+                        <div class="text-zinc-500 dark:text-zinc-400 text-sm space-y-3 mb-8">
+                            <div class="flex items-center gap-2">
+                                <MapPin size={16} />
+                                <span>Shanghai, China</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <Mail size={16} />
+                                <span>9byte.ai@gmail.com</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <LinkIcon size={16} />
+                                <a href="https://github.com/yourname" class="hover:underline">github.com/99byte</a>
+                            </div>
+                        </div>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+                        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                            I build accessible, pixel-perfect, performant web experiences.
+                        </p>
+                    </div>
+                </div>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+                {/* 右侧：详细内容 & 时间轴 */}
+                <div class="md:col-span-2 space-y-16">
+                    
+                    {/* Intro Section */}
+                    <section class="prose prose-zinc dark:prose-invert">
+                        <h2 class="font-serif text-2xl font-bold mb-6">About Me</h2>
+                        <p>
+                            Hello! I'm Alex, a software engineer based in Shanghai. I enjoy creating things that live on the internet. My interest in web development started back in 2015 when I decided to try editing custom Tumblr themes — turns out hacking together HTML & CSS taught me a lot about how the web works.
+                        </p>
+                        <p>
+                            Fast-forward to today, and I've had the privilege of working at an advertising agency, a start-up, and a huge corporation. My main focus these days is building accessible, inclusive products and digital experiences at Upstatement.
+                        </p>
+                    </section>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+                    {/* Timeline Section */}
+                    <section>
+                        <h2 class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-8">
+                            Career Path
+                        </h2>
+                        <CareerTimeline client:visible />
+                    </section>
+
+                    {/* Gear / Uses Section (可选) */}
+                    <section>
+                        <h2 class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">
+                            Gear & Tools
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+                                <div class="text-xs font-mono text-zinc-400 mb-1">Editor</div>
+                                <div class="font-medium">VS Code + Neovim</div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+                                <div class="text-xs font-mono text-zinc-400 mb-1">Terminal</div>
+                                <div class="font-medium">Warp / iTerm2</div>
+                            </div>
+                             <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
+                                <div class="text-xs font-mono text-zinc-400 mb-1">Hardware</div>
+                                <div class="font-medium">MacBook Pro M1</div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+
+		</main>
+
+		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-center text-zinc-400 text-sm font-mono border-t border-zinc-100 dark:border-zinc-900 mt-auto">
+			&copy; {new Date().getFullYear()} 9Byte.dev
+		</footer>
+
+	</body>
+</html>
