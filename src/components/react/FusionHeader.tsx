@@ -94,7 +94,7 @@ export default function FusionHeader() {
         <div className="max-w-screen-lg mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo 也可以加上轻微磁吸，但通常 Logo 保持稳重 */}
           <a href="/" className="font-serif font-bold text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
-            <span className="w-2 h-2 bg-zinc-900 dark:bg-zinc-100 rounded-full animate-pulse translate-y-[-2px]"></span>
+            <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse translate-y-[-2px]"></span>
             9Byte.Dev
           </a>
           

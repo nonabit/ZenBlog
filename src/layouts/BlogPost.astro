@@ -1,101 +1,132 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import FusionHeader from '../components/react/FusionHeader';
-import ScrollProgress from '../components/react/ScrollProgress';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import FusionHeader from "../components/react/FusionHeader";
+import FusionFooter from "../components/react/FusionFooter";
+import ScrollProgress from "../components/react/ScrollProgress";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 
 // 简单的日期格式化
-const formattedDate = pubDate.toLocaleDateString('en-US', {
-	year: 'numeric',
-	month: 'long',
-	day: 'numeric',
+const formattedDate = pubDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
 });
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} image={`/og/${Astro.params.slug}.png`} />
+<!-- 优化 1: 将语言改为 zh-CN，有助于浏览器正确渲染中文字体 -->
+<html lang="zh-CN">
+    <head>
+        <!-- 保留你的 OG Image 逻辑 -->
+        <BaseHead
+            title={title}
+            description={description}
+            image={`/og/${Astro.params.slug}.png`}
+        />
         <script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
-			if (theme === 'dark') {
-				document.documentElement.classList.add('dark');
-			} else {
-				document.documentElement.classList.remove('dark');
-			}
-		</script>
-	</head>
+            const theme = (() => {
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("theme")
+                ) {
+                    return localStorage.getItem("theme");
+                }
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
+                }
+                return "light";
+            })();
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        </script>
+    </head>
 
-	<body class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans">
-		
-        <!-- 1. 进度条 (仅在文章页显示) -->
+    <body
+        class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans"
+    >
+        <!-- 1. 进度条 -->
         <ScrollProgress client:load />
 
-        <!-- 2. 全局导航 -->
-		<FusionHeader client:load transition:persist />
+        <!-- 2. 全局导航 (保留你的 transition:persist) -->
+        <FusionHeader client:load transition:persist />
 
-		<main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
-            
+        <main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
             <!-- 3. 文章头部 (Hero) -->
-            <article class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <article
+                class="animate-in fade-in slide-in-from-bottom-4 duration-700"
+            >
                 <div class="mb-10 text-center">
-                    <a href="/" class="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline">
+                    <a
+                        href="/"
+                        class="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline"
+                    >
                         <ArrowLeft size={14} />
                         <span>Back to Home</span>
                     </a>
-                    
-                    <div class="flex items-center justify-center gap-4 text-xs font-mono text-zinc-400 mb-6 uppercase tracking-wider">
+
+                    <div
+                        class="flex items-center justify-center gap-4 text-xs font-mono text-zinc-400 mb-6 uppercase tracking-wider"
+                    >
                         <span class="flex items-center gap-1">
-                            <Calendar size={12} /> {formattedDate}
+                            <Calendar size={12} />
+                            {formattedDate}
                         </span>
-                        <span class="w-px h-3 bg-zinc-200 dark:bg-zinc-800"></span>
+                        <span class="w-px h-3 bg-zinc-200 dark:bg-zinc-800"
+                        ></span>
                         <span class="flex items-center gap-1">
                             <Clock size={12} /> 5 min read
                         </span>
                     </div>
 
-                    <h1 class="font-serif text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-6">
+                    <h1
+                        class="font-serif text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-6"
+                    >
                         {title}
                     </h1>
-                    
-                    {heroImage && (
-                        <div class="relative aspect-video w-full overflow-hidden rounded-xl mt-8 border border-zinc-100 dark:border-zinc-800">
-                             <img src={heroImage.src} alt={title} class="object-cover w-full h-full" />
-                        </div>
-                    )}
+
+                    {
+                        heroImage && (
+                            <div class="relative aspect-video w-full overflow-hidden rounded-xl mt-8 border border-zinc-100 dark:border-zinc-800">
+                                {/* 保留你的 src 处理方式 */}
+                                <img
+                                    src={heroImage.src}
+                                    alt={title}
+                                    class="object-cover w-full h-full"
+                                />
+                            </div>
+                        )
+                    }
                 </div>
 
                 <hr class="border-zinc-100 dark:border-zinc-800 mb-12" />
 
-                <!-- 4. Markdown 正文 -->
-                <!-- prose-zinc: 设置灰度色调 -->
-                <!-- prose-headings:font-serif: 再次确保标题字体 -->
-                <div class="prose prose-zinc dark:prose-invert max-w-none 
-                    prose-headings:font-serif prose-headings:font-semibold 
+                <!-- 4. Markdown 正文优化 -->
+                <!-- 
+                    优化点：
+                    1. prose-p:leading-relaxed: 将行高设置为 1.625，比 loose 紧凑，比 normal 宽松，最适合中文。
+                    2. text-justify: 让中文段落两端对齐，消除右侧参差不齐的缺口，增加块状感。
+                    3. prose-headings:font-bold: 标题加粗，提升层级对比度。
+                -->
+                <div
+                    class="prose prose-zinc dark:prose-invert max-w-none
+                    prose-headings:font-serif prose-headings:font-bold
                     prose-a:text-zinc-900 dark:prose-a:text-zinc-100 prose-a:no-underline prose-a:border-b prose-a:border-zinc-300 dark:prose-a:border-zinc-700 hover:prose-a:border-zinc-900 dark:hover:prose-a:border-zinc-100 hover:prose-a:transition-colors
                     prose-img:rounded-xl
-                    ">
-					<slot />
-				</div>
-			</article>
-		</main>
+                    prose-p:leading-normal text-justify"
+                >
+                    <slot />
+                </div>
+            </article>
+        </main>
 
-        <!-- Footer -->
-        <footer class="max-w-screen-lg mx-auto px-6 py-12 text-center text-zinc-400 text-sm font-mono border-t border-zinc-100 dark:border-zinc-900 mt-20">
-			&copy; {new Date().getFullYear()} 9Byte.dev. All rights reserved.
-		</footer>
-
-	</body>
+        {/* 统一的页脚 */}
+        <FusionFooter client:visible />
+    </body>
 </html>

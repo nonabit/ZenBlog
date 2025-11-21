@@ -2,6 +2,8 @@
 import BaseHead from '../components/BaseHead.astro';
 import FusionHeader from '../components/react/FusionHeader';
 import FusionHome from '../components/react/FusionHome';
+import FusionFooterCTA from '../components/react/FusionFooterCTA';
+import FusionFooter from '../components/react/FusionFooter';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 // 1. 导入类型定义
@@ -57,13 +59,9 @@ const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
 			<FusionHome client:load posts={posts} />
 		</main>
 
-		<!-- Footer: 简单的静态组件，不需要 React -->
-		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-zinc-400 text-sm font-mono flex justify-between items-center border-t border-zinc-100 dark:border-zinc-900">
-			<div>&copy; {new Date().getFullYear()} 9Byte.Dev</div>
-			<div class="flex items-center gap-1">
-				<span>Fuelled by Caffeine</span>
-			</div>
-		</footer>
+		<!-- 首页：同时显示 CTA 区域和 Footer -->
+        <FusionFooterCTA client:visible />
+        <FusionFooter client:visible />
 
 	</body>
 </html>

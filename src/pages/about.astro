@@ -1,49 +1,66 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import FusionHeader from '../components/react/FusionHeader';
-import CareerTimeline from '../components/react/CareerTimeLine';
-import { SITE_TITLE } from '../consts';
-import { MapPin, Mail, Link as LinkIcon } from 'lucide-react';
-import Avatar from '../assets/avatar.jpg';
+import BaseHead from "../components/BaseHead.astro";
+import FusionHeader from "../components/react/FusionHeader";
+import FusionFooter from "../components/react/FusionFooter";
+import CareerTimeline from "../components/react/CareerTimeLine";
+import { SITE_TITLE } from "../consts";
+import { MapPin, Mail, Link as LinkIcon } from "lucide-react";
+import Avatar from "../assets/avatar.jpg";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={`About | ${SITE_TITLE}`} description="More about me and my journey." />
+    <head>
+        <BaseHead
+            title={`About | ${SITE_TITLE}`}
+            description="More about me and my journey."
+        />
         <script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-				return 'light';
-			})();
-			if (theme === 'dark') {
-				document.documentElement.classList.add('dark');
-			} else {
-				document.documentElement.classList.remove('dark');
-			}
-		</script>
-	</head>
-	<body class="bg-white dark:bg-black transition-colors duration-500">
-		<FusionHeader client:load transition:persist />
-		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20">
+            const theme = (() => {
+                if (
+                    typeof localStorage !== "undefined" &&
+                    localStorage.getItem("theme")
+                ) {
+                    return localStorage.getItem("theme");
+                }
+                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                    return "dark";
+                }
+                return "light";
+            })();
+            if (theme === "dark") {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
+        </script>
+    </head>
+    <body class="bg-white dark:bg-black transition-colors duration-500">
+        <FusionHeader client:load transition:persist />
+        <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {/* 左侧：个人简介 (Sticky) */}
                 <div class="md:col-span-1">
                     <div class="sticky top-24">
-                        <div class="relative w-32 h-32 mb-8 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <div
+                            class="relative w-32 h-32 mb-8 overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-800 rotate-3 hover:rotate-0 transition-transform duration-500"
+                        >
                             <!-- 这里替换成你的真实头像 -->
-                            <img src={Avatar.src} alt="Avatar" class="object-cover w-full h-full" />
+                            <img
+                                src={Avatar.src}
+                                alt="Avatar"
+                                class="object-cover w-full h-full"
+                            />
                         </div>
 
-                        <h1 class="font-serif text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4">
+                        <h1
+                            class="font-serif text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4"
+                        >
                             Zen Zhang
                         </h1>
-                        <div class="text-zinc-500 dark:text-zinc-400 text-sm space-y-3 mb-8">
+                        <div
+                            class="text-zinc-500 dark:text-zinc-400 text-sm space-y-3 mb-8"
+                        >
                             <div class="flex items-center gap-2">
                                 <MapPin size={16} />
                                 <span>Shanghai, China</span>
@@ -54,33 +71,51 @@ import Avatar from '../assets/avatar.jpg';
                             </div>
                             <div class="flex items-center gap-2">
                                 <LinkIcon size={16} />
-                                <a href="https://github.com/yourname" class="hover:underline">github.com/99byte</a>
+                                <a
+                                    href="https://github.com/99byte"
+                                    class="hover:underline">github.com/99byte</a
+                                >
                             </div>
                         </div>
 
-                        <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
-                            I build accessible, pixel-perfect, performant web experiences.
+                        <p
+                            class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6"
+                        >
+                            I build accessible, pixel-perfect, performant web
+                            experiences.
                         </p>
                     </div>
                 </div>
 
                 {/* 右侧：详细内容 & 时间轴 */}
                 <div class="md:col-span-2 space-y-16">
-                    
                     {/* Intro Section */}
                     <section class="prose prose-zinc dark:prose-invert">
-                        <h2 class="font-serif text-2xl font-bold mb-6">About Me</h2>
+                        <h2 class="font-serif text-2xl font-bold mb-6">
+                            About Me
+                        </h2>
                         <p>
-                            Hello! I'm Alex, a software engineer based in Shanghai. I enjoy creating things that live on the internet. My interest in web development started back in 2015 when I decided to try editing custom Tumblr themes — turns out hacking together HTML & CSS taught me a lot about how the web works.
+                            Hello! I'm Alex, a software engineer based in
+                            Shanghai. I enjoy creating things that live on the
+                            internet. My interest in web development started
+                            back in 2015 when I decided to try editing custom
+                            Tumblr themes — turns out hacking together HTML &
+                            CSS taught me a lot about how the web works.
                         </p>
                         <p>
-                            Fast-forward to today, and I've had the privilege of working at an advertising agency, a start-up, and a huge corporation. My main focus these days is building accessible, inclusive products and digital experiences at Upstatement.
+                            Fast-forward to today, and I've had the privilege of
+                            working at an advertising agency, a start-up, and a
+                            huge corporation. My main focus these days is
+                            building accessible, inclusive products and digital
+                            experiences at Upstatement.
                         </p>
                     </section>
 
                     {/* Timeline Section */}
                     <section>
-                        <h2 class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-8">
+                        <h2
+                            class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-8"
+                        >
                             Career Path
                         </h2>
                         <CareerTimeline client:visible />
@@ -88,33 +123,49 @@ import Avatar from '../assets/avatar.jpg';
 
                     {/* Gear / Uses Section (可选) */}
                     <section>
-                        <h2 class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6">
+                        <h2
+                            class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6"
+                        >
                             Gear & Tools
                         </h2>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                                <div class="text-xs font-mono text-zinc-400 mb-1">Editor</div>
+                            <div
+                                class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
+                            >
+                                <div
+                                    class="text-xs font-mono text-zinc-400 mb-1"
+                                >
+                                    Editor
+                                </div>
                                 <div class="font-medium">VS Code + Neovim</div>
                             </div>
-                            <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                                <div class="text-xs font-mono text-zinc-400 mb-1">Terminal</div>
+                            <div
+                                class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
+                            >
+                                <div
+                                    class="text-xs font-mono text-zinc-400 mb-1"
+                                >
+                                    Terminal
+                                </div>
                                 <div class="font-medium">Warp / iTerm2</div>
                             </div>
-                             <div class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                                <div class="text-xs font-mono text-zinc-400 mb-1">Hardware</div>
+                            <div
+                                class="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800"
+                            >
+                                <div
+                                    class="text-xs font-mono text-zinc-400 mb-1"
+                                >
+                                    Hardware
+                                </div>
                                 <div class="font-medium">MacBook Pro M1</div>
                             </div>
                         </div>
                     </section>
-
                 </div>
             </div>
+        </main>
 
-		</main>
-
-		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-center text-zinc-400 text-sm font-mono border-t border-zinc-100 dark:border-zinc-900 mt-auto">
-			&copy; {new Date().getFullYear()} 9Byte.dev
-		</footer>
-
-	</body>
+        {/* 统一的页脚 */}
+        <FusionFooter client:visible />
+    </body>
 </html>

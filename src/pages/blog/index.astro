@@ -1,65 +1,66 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import FusionHeader from '../../components/react/FusionHeader';
-import BlogList from '../../components/react/BlogList';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
+import BaseHead from "../../components/BaseHead.astro";
+import FusionHeader from "../../components/react/FusionHeader";
+import BlogList from "../../components/react/BlogList";
+import FusionFooter from "../../components/react/FusionFooter";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 // 1. 获取原始数据并排序
-const allPosts = (await getCollection('blog')).sort(
-	(a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+const allPosts = (await getCollection("blog")).sort(
+	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 // 2. 数据清洗：确保传给 React 的是纯净的 JSON 对象
-const posts = allPosts.map((post: CollectionEntry<'blog'>) => ({
-  slug: post.id,
-  data: {
-    title: post.data.title,
-    description: post.data.description,
-    pubDate: post.data.pubDate,
-  }
+const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
+	slug: post.id,
+	data: {
+		title: post.data.title,
+		description: post.data.description,
+		pubDate: post.data.pubDate,
+	},
 }));
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Blog | ${SITE_TITLE}`} description="Writings and thoughts." />
-        <script is:inline>
+		<BaseHead
+			title={`Blog | ${SITE_TITLE}`}
+			description="Writings and thoughts."
+		/>
+		<script is:inline>
 			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
+				if (
+					typeof localStorage !== "undefined" &&
+					localStorage.getItem("theme")
+				) {
+					return localStorage.getItem("theme");
 				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					return "dark";
 				}
-				return 'light';
+				return "light";
 			})();
-			if (theme === 'dark') {
-				document.documentElement.classList.add('dark');
+			if (theme === "dark") {
+				document.documentElement.classList.add("dark");
 			} else {
-				document.documentElement.classList.remove('dark');
+				document.documentElement.classList.remove("dark");
 			}
 		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
-		
-        {/* 头部导航 */}
+		{/* 头部导航 */}
 		<FusionHeader client:load transition:persist />
 
 		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20">
-            {/* 博客列表组件 */}
-            <BlogList client:load posts={posts} />
+			{/* 博客列表组件 */}
+			<BlogList client:load posts={posts} />
 		</main>
 
-        {/* 统一的页脚 */}
-		<footer class="max-w-screen-lg mx-auto px-6 py-12 text-zinc-400 text-sm font-mono flex justify-between items-center border-t border-zinc-100 dark:border-zinc-900 mt-auto">
-			<div>&copy; {new Date().getFullYear()} 9Byte.dev</div>
-			<div class="flex items-center gap-1">
-				<span>Fuelled by Caffeine</span>
-			</div>
-		</footer>
-
+		{/* 统一的页脚 */}
+		<FusionFooter client:visible />
 	</body>
 </html>

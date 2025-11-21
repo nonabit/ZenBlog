@@ -18,6 +18,9 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<!-- 品牌色定义 (移动端浏览器顶栏颜色) -->
+<!-- 使用你的品牌橙色 #f97316 (Tailwind orange-500) -->
+<meta name="theme-color" content="#f97316" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -41,9 +44,17 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<!-- Fonts: Bunny Fonts CDN -->
-<link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=inter:100,200,300,400,500,600,700,800,900|jetbrains-mono:100,200,300,400,500,600,700,800|newsreader:200,300,400,400i,500,600,700,800" rel="stylesheet" />
+<!-- Fonts: 使用 Google Fonts (支持自动分包，加载中文更快) -->
+<!-- 引入: 
+     1. Inter (英文正文)
+     2. Newsreader (英文标题)
+     3. JetBrains Mono (代码)
+     4. Noto Sans SC (中文正文 - 黑体)
+     5. Noto Serif SC (中文标题 - 宋体)
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400..700;1,400..700&family=Noto+Sans+SC:wght@300..700&family=Noto+Serif+SC:wght@400..700&display=swap" rel="stylesheet">
 
 <!-- 2. 启用视图过渡路由 -->
 <ClientRouter />

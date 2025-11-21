@@ -4,41 +4,49 @@ export default {
 	darkMode: 'class',
 	theme: {
 		fontFamily: {
-			serif: ['"Newsreader"', 'serif'],
-			sans: ['"Inter"', 'sans-serif'],
-			mono: ['"JetBrains Mono"', 'monospace'],
+			// 衬线体栈：Newsreader (英) -> Noto Serif SC (中) -> 系统宋体
+			serif: ['"Newsreader"', '"Noto Serif SC"', '"PingFang SC"', '"Microsoft YaHei"', 'serif'],
+			// 无衬线栈：Inter (英) -> Noto Sans SC (中) -> 系统黑体
+			sans: ['"Inter"', '"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+			// 等宽栈：JetBrains Mono (英) -> Noto Sans SC (中)
+			mono: ['"JetBrains Mono"', '"Noto Sans SC"', 'monospace'],
 		},
 		extend: {
 			colors: {
 				// 可以在这里添加你的品牌色
 			},
-            // --- 新增：定制 typography 插件样式 ---
 			typography: (theme) => ({
 				DEFAULT: {
 					css: {
-                        // 强制标题使用衬线体 (Newsreader)
 						'h1, h2, h3, h4, h5, h6': {
 							fontFamily: theme('fontFamily.serif'),
-							fontWeight: '600', 
-                            letterSpacing: '-0.025em',
+							fontWeight: '700',
+							letterSpacing: '-0.025em',
 						},
-                        // 优化代码块样式
-						'code::before': { content: '""' }, // 去掉行内代码的反引号
+						// --- 这里是控制段落的核心 ---
+						'p': {
+							textAlign: 'justify',
+							textJustify: 'inter-ideograph',
+							// [关键参数 1] 段落间距
+							// 默认是 1.25em，你可以尝试改为 0.75em, 0.8em 或 1em
+							marginTop: '0.5em',
+							marginBottom: '0.5em',
+						},
+						'code::before': { content: '""' },
 						'code::after': { content: '""' },
-                        'blockquote': {
-                            fontStyle: 'normal',
-                            borderLeftColor: theme('colors.zinc.300'),
-                        },
+						'blockquote': {
+							fontStyle: 'normal',
+							borderLeftColor: theme('colors.zinc.300'),
+						},
 					},
 				},
-                // 针对暗色模式的微调
-                invert: {
-                    css: {
-                        'blockquote': {
-                            borderLeftColor: theme('colors.zinc.700'),
-                        },
-                    }
-                }
+				invert: {
+					css: {
+						'blockquote': {
+							borderLeftColor: theme('colors.zinc.700'),
+						},
+					}
+				}
 			}),
 		},
 	},

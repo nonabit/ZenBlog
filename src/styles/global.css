@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 自定义一些基础样式 */
 @layer base {
   :root {
     --background: 255 255 255;
@@ -16,36 +15,51 @@
   }
 
   html {
-    font-family: "Inter", system-ui, sans-serif;
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200 transition-colors duration-300 antialiased;
+    /* 整合了之前的 tracking-wide 优化和字体设置 */
+    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200 transition-colors duration-300 antialiased font-sans tracking-wide;
   }
 
-  /* 修复标题字体，确保 fallback */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", "Merriweather", Georgia, serif;
+  /* 标题样式：使用宋体，字重适中，字间距正常 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-medium tracking-normal;
+  }
+
+  /* 代码块使用等宽字体 */
+  code,
+  pre {
+    @apply font-mono;
   }
 }
 
-/* 滚动条美化 (可选) */
+/* 滚动条美化 (全局生效，不放在 layer 中以免被 purge) */
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   @apply bg-transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   @apply bg-zinc-300 dark:bg-zinc-700 rounded-full;
 }
 
 @layer utilities {
-  /* 1. 自定义选中文本颜色 (匹配你的游标橙色) */
+
+  /* 1. 自定义选中文本颜色 */
   ::selection {
     @apply bg-orange-100 text-orange-900;
   }
+
   .dark ::selection {
     @apply bg-orange-900/30 text-orange-100;
   }
@@ -54,19 +68,19 @@
   .prose pre {
     @apply relative pt-12 pb-4 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm;
   }
-  
+
   /* 伪元素绘制红黄绿三个点 */
   .prose pre::before {
     content: "";
     @apply absolute top-4 left-4 w-3 h-3 rounded-full bg-red-400;
-    box-shadow: 20px 0 0 #facc15, 40px 0 0 #4ade80; /* 利用 shadow 复制出另外两个点 */
+    box-shadow: 20px 0 0 #facc15, 40px 0 0 #4ade80;
   }
 
   /* 3. 文章图片物理质感 */
   .prose img {
     @apply rounded-lg border border-zinc-100 dark:border-zinc-800 shadow-lg transition-transform duration-500;
   }
-  
+
   /* 鼠标悬停图片时轻微上浮 */
   .prose img:hover {
     @apply scale-[1.02];
