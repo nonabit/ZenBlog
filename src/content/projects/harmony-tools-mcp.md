@@ -1,11 +1,11 @@
 ---
-title: "Astro Fusion Theme"
-description: "A minimalist yet interactive blog theme built for developers. Featuring distinct typography and micro-interactions."
+title: "Harmony Tools MCP"
+description: "一个封装了 HarmonyOS 命令行工具的 MCP Server，包含了编译构建、安装、截图、UI 测试等功能"
 order: 1
 heroImage: "../../assets/blog-placeholder-1.jpg"
-stack: ["Astro", "React", "Tailwind", "Framer Motion"]
-github: "https://github.com/99byte/ZenBlog"
-demo: "https://9byte.xyz"
+stack: ["Python", "ArkTS", "Hvigor", "MCP"]
+github: "https://github.com/99byte/harmony-tools"
+demo: "https://pypi.org/project/harmony-tools-mcp/"
 ---
 
 Here is a detailed breakdown of how I built this theme...

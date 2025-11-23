@@ -105,7 +105,7 @@ const TechDeck = ({ group, delay = 0 }: { group: typeof STACK_GROUPS[0], delay?:
 
       interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % group.items.length);
-      }, 800);
+      }, 600);
     }
     return () => clearInterval(interval);
   }, [isHovering, group.items.length]);
@@ -184,32 +184,6 @@ const TimeDisplay = () => {
 
   return <span>{time}</span>;
 };
-
-// --- 新增：动态签名组件 ---
-const AnimatedSignature = () => (
-  <svg width="200" height="60" viewBox="0 0 200 60" className="text-zinc-900 dark:text-zinc-100 opacity-80">
-    <motion.path
-      d="M10 30 C 40 10, 60 50, 90 30 S 150 0, 190 30" // 这是一个抽象的签名轨迹
-      fill="transparent"
-      strokeWidth="2"
-      stroke="currentColor"
-      strokeLinecap="round"
-      initial={{ pathLength: 0, opacity: 0 }}
-      whileInView={{ pathLength: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-    />
-    {/* 装饰点 */}
-    <motion.circle
-      cx="195" cy="30" r="2"
-      fill="currentColor"
-      initial={{ scale: 0 }}
-      whileInView={{ scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay: 1.7, duration: 0.2 }}
-    />
-  </svg>
-);
 
 export default function FusionHome({ posts }: FusionHomeProps) {
   return (
