@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
+import type { ReactNode, MouseEvent } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
 interface MagneticProps {
-  children: React.ReactNode;
+  children: ReactNode;
   strength?: number; // 磁力强度，默认 0.2
 }
 
@@ -15,7 +16,7 @@ export default function Magnetic({ children, strength = 0.2 }: MagneticProps) {
   const x = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
   const y = useSpring(0, { stiffness: 150, damping: 15, mass: 0.1 });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
     if (!ref.current) return;
     

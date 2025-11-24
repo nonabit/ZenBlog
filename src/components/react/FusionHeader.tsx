@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Command, Search, ArrowUpRight, Moon, Sun, Rss } from 'lucide-react';
 import Magnetic from './Magnetic'; // 引入我们刚写的磁吸组件

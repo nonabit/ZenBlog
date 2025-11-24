@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, ExternalLink, Folder } from 'lucide-react';
 import type { ProjectListItem } from '../../types/content';

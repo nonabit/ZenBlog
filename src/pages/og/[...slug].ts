@@ -29,7 +29,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
          <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <div style="display: flex; width: 10px; height: 10px; background-color: #f97316; border-radius: 50%; margin-right: 12px;"></div>
             <div style="display: flex; font-size: 24px; color: #a1a1aa; font-family: 'Inter'; text-transform: uppercase; letter-spacing: 2px;">
-                Alex.Dev
+                9Byte.Dev
             </div>
          </div>
 
@@ -56,7 +56,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
          
          <div style="display: flex; align-items: center;">
             <div style="display: flex; font-size: 24px; color: #52525b; font-family: 'Inter';">
-                fusion-theme.alex.dev
+                fusion-theme.9Byte.Dev
             </div>
          </div>
       </div>

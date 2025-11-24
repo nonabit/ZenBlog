@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform, useVelocity, MotionValue } from 'framer-motion';
 
 // --- 子组件：单个刻度线 (Tick) ---

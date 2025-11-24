@@ -10,6 +10,8 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsxImportSource": "react",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   }
 }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MapPin, Bike, Mountain, Camera, Coffee, Book, Film, Gamepad2 } from 'lucide-react';
+import { Star, MapPin, Bike, Mountain, Camera, Coffee } from 'lucide-react';
 
 // --- 数据：生活微日志 (纯文本版) ---
 const LIFE_LOGS = [

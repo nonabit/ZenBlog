@@ -1,5 +1,4 @@
-import React from 'react';
-import { Github, Twitter, Mail, Rss, ArrowUp } from 'lucide-react';
+import { Github, Twitter, Mail, ArrowUp } from 'lucide-react';
 import Magnetic from './Magnetic';
 
 const SOCIAL_LINKS = [

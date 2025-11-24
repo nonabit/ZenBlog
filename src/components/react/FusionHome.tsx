@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, type Variants, useInView } from 'framer-motion';
-import { ArrowUpRight, Github, Twitter, Mail, MapPin, Cpu, Disc, Clock, Code2, Server, PenTool } from 'lucide-react';
+import { ArrowUpRight, MapPin, Cpu, Disc, Clock, Code2, Server, PenTool } from 'lucide-react';
 import type { BlogListItem } from '../../types/content';
 
 // 定义 Props 接口
