@@ -6,7 +6,7 @@ import fs from 'fs/promises';
 import type { CollectionEntry } from 'astro:content';
 import type { APIRoute } from 'astro';
 
-// 1. 定义 getStaticPaths 的返回类型
+// 1. Define return type for getStaticPaths
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map((post: CollectionEntry<'blog'>) => ({
@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   const post = props;
 
-  // FIX: Ensure all containers with multiple children have display: flex
+  // FIX: Explicitly add display: flex to ALL containers with multiple children
   const markup = html`
     <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #18181b; color: #fff; padding: 80px; justify-content: space-between;">
       
@@ -26,37 +26,37 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
          <div style="display: flex; align-items: center; margin-bottom: 20px;">
             <div style="width: 10px; height: 10px; background-color: #f97316; border-radius: 50%; margin-right: 12px;"></div>
             <div style="font-size: 24px; color: #a1a1aa; font-family: 'Inter'; text-transform: uppercase; letter-spacing: 2px;">
-                Alex.Dev
+                9Byte.Dev
             </div>
          </div>
 
-         <div style="font-size: 72px; font-family: 'Newsreader'; font-weight: 600; line-height: 1.1; margin-bottom: 24px; color: #fafafa;">
+         <div style="display: flex; font-size: 72px; font-family: 'Newsreader'; font-weight: 600; line-height: 1.1; margin-bottom: 24px; color: #fafafa;">
             ${post.data.title}
          </div>
 
-         <div style="font-size: 32px; color: #a1a1aa; font-family: 'Inter'; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+         <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter'; line-height: 1.5; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
             ${post.data.description}
          </div>
       </div>
 
       <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
          <div style="display: flex; flex-direction: column;">
-             <div style="font-size: 24px; color: #71717a; font-family: 'Inter'; margin-bottom: 8px;">Published</div>
-             <div style="font-size: 28px; color: #e4e4e7; font-family: 'Inter';">
+             <div style="display: flex; font-size: 24px; color: #71717a; font-family: 'Inter'; margin-bottom: 8px;">Published</div>
+             <div style="display: flex; font-size: 28px; color: #e4e4e7; font-family: 'Inter';">
                 ${post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
              </div>
          </div>
          
          <div style="display: flex; align-items: center;">
             <div style="font-size: 24px; color: #52525b; font-family: 'Inter';">
-                fusion-theme.alex.dev
+                fusion-theme.9Byte.Dev
             </div>
          </div>
       </div>
     </div>
   ` as any;
 
-  // 修改：在静态构建模式下，直接读取项目根目录下的 public 文件夹
+  // Load fonts from the public directory
   const interFont = await fs.readFile('./public/fonts/Inter-Regular.ttf');
   const newsreaderFont = await fs.readFile('./public/fonts/Newsreader-SemiBold.ttf');
 
