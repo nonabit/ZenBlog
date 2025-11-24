@@ -1,6 +1,9 @@
 {
   "functions": {
-    "src/pages/og/**/*": {
+    "render": {
+      "includeFiles": "public/fonts/**"
+    },
+    "api/**": {
       "includeFiles": "public/fonts/**"
     }
   }
