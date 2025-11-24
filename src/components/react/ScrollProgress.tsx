@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform, useVelocity, MotionValue } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
+import type { MotionValue } from 'framer-motion';
 
 // --- 子组件：单个刻度线 (Tick) ---
 const Tick = ({ 

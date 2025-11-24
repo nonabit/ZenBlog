@@ -1,7 +1,11 @@
-/* 引入 Tailwind 的三个核心层 */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-serif: "Newsreader", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "Noto Sans SC", monospace;
+}
 
 @layer base {
   :root {
