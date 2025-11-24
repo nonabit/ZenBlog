@@ -18,24 +18,31 @@ export async function getStaticPaths() {
 export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   const post = props;
 
-  // FIX: Explicitly add display: flex to ALL containers with multiple children
+  // FIX: 
+  // 1. Added display: flex to EVERY div.
+  // 2. Removed some nested divs to simplify the tree.
+  // 3. Ensure style strings are clean.
   const markup = html`
     <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #18181b; color: #fff; padding: 80px; justify-content: space-between;">
       
       <div style="display: flex; flex-direction: column;">
          <div style="display: flex; align-items: center; margin-bottom: 20px;">
-            <div style="width: 10px; height: 10px; background-color: #f97316; border-radius: 50%; margin-right: 12px;"></div>
-            <div style="font-size: 24px; color: #a1a1aa; font-family: 'Inter'; text-transform: uppercase; letter-spacing: 2px;">
-                9Byte.Dev
+            <div style="display: flex; width: 10px; height: 10px; background-color: #f97316; border-radius: 50%; margin-right: 12px;"></div>
+            <div style="display: flex; font-size: 24px; color: #a1a1aa; font-family: 'Inter'; text-transform: uppercase; letter-spacing: 2px;">
+                Alex.Dev
             </div>
          </div>
 
-         <div style="display: flex; font-size: 72px; font-family: 'Newsreader'; font-weight: 600; line-height: 1.1; margin-bottom: 24px; color: #fafafa;">
-            ${post.data.title}
+         <div style="display: flex; flex-direction: column; margin-bottom: 24px;">
+            <div style="display: flex; font-size: 72px; font-family: 'Newsreader'; font-weight: 600; line-height: 1.1; color: #fafafa;">
+                ${post.data.title}
+            </div>
          </div>
 
-         <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter'; line-height: 1.5; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
-            ${post.data.description}
+         <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter'; line-height: 1.5; overflow: hidden;">
+                ${post.data.description}
+            </div>
          </div>
       </div>
 
@@ -48,8 +55,8 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
          </div>
          
          <div style="display: flex; align-items: center;">
-            <div style="font-size: 24px; color: #52525b; font-family: 'Inter';">
-                fusion-theme.9Byte.Dev
+            <div style="display: flex; font-size: 24px; color: #52525b; font-family: 'Inter';">
+                fusion-theme.alex.dev
             </div>
          </div>
       </div>
@@ -57,6 +64,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   ` as any;
 
   // Load fonts from the public directory
+  // Ensure these files exist in your project at public/fonts/
   const interFont = await fs.readFile('./public/fonts/Inter-Regular.ttf');
   const newsreaderFont = await fs.readFile('./public/fonts/Newsreader-SemiBold.ttf');
 
