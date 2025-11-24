@@ -18,6 +18,7 @@ export async function getStaticPaths() {
 export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   const post = props;
 
+  // FIX: Ensure all containers with multiple children have display: flex
   const markup = html`
     <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #18181b; color: #fff; padding: 80px; justify-content: space-between;">
       
@@ -56,7 +57,6 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   ` as any;
 
   // 修改：在静态构建模式下，直接读取项目根目录下的 public 文件夹
-  // 这种相对路径写法在 Vercel 的 Build Step 中是有效的
   const interFont = await fs.readFile('./public/fonts/Inter-Regular.ttf');
   const newsreaderFont = await fs.readFile('./public/fonts/Newsreader-SemiBold.ttf');
 
