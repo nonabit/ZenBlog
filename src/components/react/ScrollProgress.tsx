@@ -101,7 +101,7 @@ export default function ScrollProgress() {
 
   return (
     <motion.div 
-      className="fixed left-8 top-[30%] -translate-y-1/2 h-[40vh] w-24 z-50 hidden xl:flex flex-col items-start pointer-events-none"
+      className="fixed left-8 top-[50%] -translate-y-1/2 h-[40vh] w-24 z-50 hidden xl:flex flex-col items-start pointer-events-none"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -20 }}
       transition={{ duration: 0.5 }}

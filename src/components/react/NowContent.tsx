@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, MapPin, Bike, Mountain, Camera, Coffee } from 'lucide-react';
+import { MapPin, Bike, Mountain, Camera, Coffee } from 'lucide-react';
 
 // --- 数据：生活微日志 (纯文本版) ---
 const LIFE_LOGS = [
@@ -177,9 +177,8 @@ export default function NowContent() {
 
         {/* 表头 */}
         <div className="grid grid-cols-12 gap-4 pb-3 border-b border-zinc-200 dark:border-zinc-800 text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
-          <div className="col-span-7 md:col-span-5">Title</div>
-          <div className="col-span-2 text-right md:text-left">Rating</div>
-          <div className="hidden md:block col-span-5">Comment</div>
+          <div className="col-span-9 md:col-span-6">Title</div>
+          <div className="hidden md:block col-span-6">Comment</div>
           <div className="col-span-3 md:hidden text-right">Status</div>
         </div>
 
@@ -197,7 +196,7 @@ export default function NowContent() {
                 className="grid grid-cols-12 gap-4 py-3 border-b border-zinc-100 dark:border-zinc-800/50 items-center text-sm group hover:bg-zinc-50 dark:hover:bg-zinc-900/50 -mx-4 px-4 rounded-lg transition-colors"
               >
                 {/* Title & Author */}
-                <div className="col-span-7 md:col-span-5">
+                <div className="col-span-9 md:col-span-6">
                   <div className="font-serif text-base text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors truncate pr-4">
                     {item.title}
                   </div>
@@ -208,20 +207,8 @@ export default function NowContent() {
                   </div>
                 </div>
 
-                {/* Rating */}
-                <div className="col-span-2 flex justify-end md:justify-start text-zinc-300 dark:text-zinc-700 group-hover:text-orange-400 transition-colors">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={12}
-                      fill={i < item.rating ? "currentColor" : "none"}
-                      className={i < item.rating ? "" : "opacity-30"}
-                    />
-                  ))}
-                </div>
-
                 {/* Comment (Desktop) */}
-                <div className="hidden md:block col-span-5 text-zinc-500 dark:text-zinc-400 italic truncate pr-2 text-xs">
+                <div className="hidden md:block col-span-6 text-zinc-500 dark:text-zinc-400 italic truncate pr-2 text-xs">
                   "{item.comment}"
                 </div>
 

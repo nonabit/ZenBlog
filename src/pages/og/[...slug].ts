@@ -34,13 +34,13 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
          </div>
 
          <div style="display: flex; flex-direction: column; margin-bottom: 24px;">
-            <div style="display: flex; font-size: 72px; font-family: 'Newsreader'; font-weight: 600; line-height: 1.1; color: #fafafa;">
+            <div style="display: flex; font-size: 72px; font-family: 'Newsreader', 'LXGW WenKai'; font-weight: 600; line-height: 1.1; color: #fafafa;">
                 ${post.data.title}
             </div>
          </div>
 
          <div style="display: flex; flex-direction: column;">
-            <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter'; line-height: 1.5; overflow: hidden;">
+            <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter', 'LXGW WenKai'; line-height: 1.5; overflow: hidden;">
                 ${post.data.description}
             </div>
          </div>
@@ -48,14 +48,14 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
 
       <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
          <div style="display: flex; flex-direction: column;">
-             <div style="display: flex; font-size: 24px; color: #71717a; font-family: 'Inter'; margin-bottom: 8px;">Published</div>
-             <div style="display: flex; font-size: 28px; color: #e4e4e7; font-family: 'Inter';">
+             <div style="display: flex; font-size: 24px; color: #71717a; font-family: 'Inter', 'LXGW WenKai'; margin-bottom: 8px;">Published</div>
+             <div style="display: flex; font-size: 28px; color: #e4e4e7; font-family: 'Inter', 'LXGW WenKai';">
                 ${post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
              </div>
          </div>
          
          <div style="display: flex; align-items: center;">
-            <div style="display: flex; font-size: 24px; color: #52525b; font-family: 'Inter';">
+            <div style="display: flex; font-size: 24px; color: #52525b; font-family: 'Inter', 'LXGW WenKai';">
                 fusion-theme.9Byte.Dev
             </div>
          </div>
@@ -67,6 +67,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
   // Ensure these files exist in your project at public/fonts/
   const interFont = await fs.readFile('./public/fonts/Inter-Regular.ttf');
   const newsreaderFont = await fs.readFile('./public/fonts/Newsreader-SemiBold.ttf');
+  const wenkaiFont = await fs.readFile('./public/fonts/LXGWWenKai-Regular.ttf');
 
   const svg: string = await satori(markup, {
     width: 1200,
@@ -83,6 +84,12 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
         data: newsreaderFont,
         style: 'normal',
         weight: 600,
+      },
+      {
+        name: 'LXGW WenKai',
+        data: wenkaiFont,
+        style: 'normal',
+        weight: 400,
       },
     ],
   });

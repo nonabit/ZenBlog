@@ -2,7 +2,7 @@
 title: "Harmony Tools MCP"
 description: "一个封装了 HarmonyOS 命令行工具的 MCP Server，包含了编译构建、安装、截图、UI 测试等功能"
 order: 1
-heroImage: "../../assets/blog-placeholder-1.jpg"
+heroImage: "../../assets/harmonytoolsmcp.png"
 stack: ["Python", "ArkTS", "Hvigor", "MCP"]
 github: "https://github.com/99byte/harmony-tools"
 demo: "https://pypi.org/project/harmony-tools-mcp/"

@@ -188,25 +188,18 @@ const TimeDisplay = () => {
 export default function FusionHome({ posts }: FusionHomeProps) {
   return (
     <div className="max-w-screen-lg mx-auto px-6 py-16 sm:py-24">
-      {/* ... (保留 Hero Section) ... */}
+      {/* Hero Section */}
       <motion.section
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
         className="mb-24"
       >
-        <motion.h1
-          variants={fadeInUp}
-          className="font-serif text-5xl sm:text-7xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-8 leading-[1.1]"
-        >
-          Crafting digital <br />
-          <span className="italic text-zinc-400 dark:text-zinc-600">artifacts</span> & stories.
+        <motion.h1 variants={fadeInUp} className="font-serif text-5xl sm:text-7xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-8 leading-[1.1]">
+          Backend Roots. <br /> <span className="italic text-zinc-400 dark:text-zinc-600">AI-Driven</span> Mindset.
         </motion.h1>
-        <motion.p
-          variants={fadeInUp}
-          className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed font-light"
-        >
-          I'm a design engineer obsessed with the intersection of typography and code. Currently building interfaces that feel human.
+        <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed font-light">
+          A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle. This is the trace of my existence.
         </motion.p>
       </motion.section>
 
@@ -237,11 +230,11 @@ export default function FusionHome({ posts }: FusionHomeProps) {
               <Cpu size={14} />
               <span>Building</span>
             </div>
-            <h3 className="text-2xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10">Astro Fusion Theme</h3>
+            <h3 className="text-2xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10">AI-Powered HarmonyOS Migration</h3>
           </div>
-          <div className="mt-4 relative z-10">
-            <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-w-sm">
-              Migrating from React SPA to Islands Architecture for better performance and SEO.
+          <div className="mt-4 relative z-10 w-full sm:w-[80%]">
+            <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
+              Building reusable tools to boost HarmonyOS app development efficiency. Helping migrate existing Android/iOS codebases to HarmonyOS.
             </p>
           </div>
         </BentoItem>
@@ -359,7 +352,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
                     {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-sm max-w-lg">
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg">
                   {post.data.description}
                 </p>
                 <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">

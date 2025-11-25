@@ -2,8 +2,8 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-serif: "Newsreader", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
-  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Newsreader", "LXGW WenKai", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
+  --font-sans: "Inter", "LXGW WenKai", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-mono: "JetBrains Mono", "Noto Sans SC", monospace;
 }
 
