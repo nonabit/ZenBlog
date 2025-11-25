@@ -10,11 +10,9 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { BlogListItem } from '../types/content';
 
-// 获取最新的3篇文章
+// 获取最新文章并按发布时间倒序
 const allPosts = (await getCollection('blog'))
-  // 2. 为排序函数的参数 a, b 添加显式类型
-  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 // 3. 为 map 函数的参数 post 添加显式类型
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
@@ -23,8 +21,11 @@ const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
     title: post.data.title,
     description: post.data.description,
     pubDate: post.data.pubDate,
+    showOnHome: post.data.showOnHome === true,
   }
 }));
+// 仅取首页展示的最新3篇
+const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 3);
 ---
 
 <!doctype html>
@@ -56,7 +57,7 @@ const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
 
 		<main>
 			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
-			<FusionHome client:load posts={posts} />
+            <FusionHome client:load posts={homePosts} />
 		</main>
 
 		<!-- 首页：同时显示 CTA 区域和 Footer -->

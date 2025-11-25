@@ -127,7 +127,7 @@ export default function ScrollProgress() {
         className="absolute left-0 w-full flex items-center z-10"
         style={{ top: y, translateY: '-50%' }}
       >
-         <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-orange-500 drop-shadow-sm"></div>
+         <div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-8 border-l-orange-500 drop-shadow-sm"></div>
          <div className="h-px w-12 bg-orange-500 ml-1 shadow-[0_0_10px_rgba(249,115,22,0.8)]"></div>
       </motion.div>
     </motion.div>

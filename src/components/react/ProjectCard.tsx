@@ -60,11 +60,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* 内容区域 */}
-      <div className="p-6 flex flex-col flex-grow">
+      <div className="p-6 flex flex-col grow">
         <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">
           {data.title}
         </h3>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 flex-grow">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 grow">
           {data.description}
         </p>
 

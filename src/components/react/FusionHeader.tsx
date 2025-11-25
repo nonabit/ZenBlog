@@ -90,8 +90,8 @@ export default function FusionHeader() {
   return (
     <>
       <CmdKModal isOpen={cmdKOpen} onClose={() => setCmdKOpen(false)} />
-      <header className="sticky top-0 z-40 w-full border-b border-transparent transition-all duration-300 bg-white/70 dark:bg-black/70 backdrop-blur-lg supports-[backdrop-filter]:bg-white/60">
-        <div className="max-w-screen-lg mx-auto px-6 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-40 w-full border-b border-transparent transition-all duration-300 bg-white/70 dark:bg-black/70 backdrop-blur-lg supports-backdrop-filter:bg-white/60">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo 也可以加上轻微磁吸，但通常 Logo 保持稳重 */}
           <a href="/" className="font-serif font-bold text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
             <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse translate-y-[-2px]"></span>

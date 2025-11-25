@@ -7,6 +7,7 @@ export interface BlogListItem {
     description: string;
     pubDate: Date;
     heroImage?: ImageMetadata;
+    showOnHome?: boolean;
   };
 }
 

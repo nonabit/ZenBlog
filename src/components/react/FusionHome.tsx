@@ -34,7 +34,7 @@ const BentoItem: React.FC<{ className?: string; children: React.ReactNode }> = (
     whileHover={{ y: -2, transition: { duration: 0.2 } }}
     className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 relative overflow-hidden group ${className}`}
   >
-    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-zinc-100/50 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <div className="absolute inset-0 bg-linear-to-tr from-white/0 via-white/0 to-zinc-100/50 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     {children}
   </motion.div>
 );
@@ -187,7 +187,7 @@ const TimeDisplay = () => {
 
 export default function FusionHome({ posts }: FusionHomeProps) {
   return (
-    <div className="max-w-screen-lg mx-auto px-6 py-16 sm:py-24">
+    <div className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
       {/* Hero Section */}
       <motion.section
         initial="hidden"

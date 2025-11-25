@@ -14,7 +14,7 @@ export default function FusionFooter() {
 
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
-      <div className="max-w-screen-lg mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
 
         {/* Left: Copyright & Status */}
         <div className="flex flex-col items-center md:items-start gap-2">

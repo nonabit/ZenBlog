@@ -89,7 +89,7 @@ const SubscribeForm = () => {
 
 export default function FusionFooterCTA() {
   return (
-    <section className="max-w-screen-lg mx-auto px-6 py-16 sm:py-24 border-t border-zinc-200 dark:border-zinc-800">
+    <section className="max-w-5xl mx-auto px-6 py-16 sm:py-24 border-t border-zinc-200 dark:border-zinc-800">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
         <div className="space-y-6">
           <h3 className="font-serif text-3xl font-medium text-zinc-900 dark:text-zinc-100">

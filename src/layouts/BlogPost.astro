@@ -8,7 +8,7 @@ import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, heroImage } = Astro.props;
 
 // 简单的日期格式化
 const formattedDate = pubDate.toLocaleDateString("en-US", {
@@ -57,7 +57,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
         <!-- 2. 全局导航 (保留你的 transition:persist) -->
         <FusionHeader client:load transition:persist />
 
-        <main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
+        <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20">
             <!-- 3. 文章头部 (Hero) -->
             <article
                 class="animate-in fade-in slide-in-from-bottom-4 duration-700"
@@ -65,10 +65,10 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
                 <div class="mb-10 text-center">
                     <a
                         href="/"
-                        class="inline-flex items-center gap-1 text-xs font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline"
+                        class="inline-flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline"
                     >
                         <ArrowLeft size={14} />
-                        <span>Back to Home</span>
+                        <span>cd ..</span>
                     </a>
 
                     <div
