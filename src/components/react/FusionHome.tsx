@@ -232,7 +232,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
             </div>
             <h3 className="text-2xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10">AI-Powered HarmonyOS Migration</h3>
           </div>
-          <div className="mt-4 relative z-10 w-full sm:w-[80%]">
+          <div className="mt-4 relative z-10 w-full sm:w-full">
             <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
               Building reusable tools to boost HarmonyOS app development efficiency. Helping migrate existing Android/iOS codebases to HarmonyOS.
             </p>
