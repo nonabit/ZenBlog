@@ -24,8 +24,8 @@ const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
     showOnHome: post.data.showOnHome === true,
   }
 }));
-// 仅取首页展示的最新3篇
-const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 3);
+// 仅取首页展示的最新5篇
+const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 ---
 
 <!doctype html>
