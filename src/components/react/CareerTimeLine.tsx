@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
+import { useRef } from 'react';
 
 const EXPERIENCES = [
   {
@@ -29,32 +30,53 @@ const EXPERIENCES = [
 ];
 
 export default function CareerTimeline() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end center"]
+  });
+
+  // 动态高度：根据滚动进度，线从 0% 增长到 100%
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <div className="relative border-l border-zinc-200 dark:border-zinc-800 ml-3 space-y-12 py-4">
+    <div ref={containerRef} className="relative ml-3 space-y-12 py-4">
+      {/* 静态背景线 */}
+      <div className="absolute left-0 top-0 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800" />
+
+      {/* 动态进度线 (高亮色) */}
+      <motion.div
+        style={{ height: lineHeight }}
+        className="absolute left-0 top-0 w-px bg-gradient-to-b from-orange-400 to-amber-600 origin-top"
+      />
+
       {EXPERIENCES.map((item, index) => (
-        <motion.div 
+        <motion.div
           key={item.id}
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
           transition={{ delay: index * 0.2, duration: 0.5 }}
           className="relative pl-8 group"
         >
           {/* Timeline Dot (像电路节点一样) */}
-          <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-200 dark:bg-zinc-800 border border-white dark:border-black group-hover:scale-150 group-hover:bg-zinc-900 dark:group-hover:bg-zinc-100 transition-all duration-300 shadow-[0_0_0_4px_white] dark:shadow-[0_0_0_4px_black]" />
-          
+          <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 z-10 transition-all duration-300 group-hover:scale-125 group-hover:border-orange-500 group-hover:bg-orange-50">
+            {/* 选中时的中心点 */}
+            <div className="absolute inset-0.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-zinc-100">
+            <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
               {item.role}
             </h3>
-            <span className="text-xs font-mono text-zinc-400 flex items-center gap-1 shrink-0">
-              <Calendar size={12} />
+            <span className="text-xs font-mono text-zinc-400 flex items-center gap-1 shrink-0 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md">
+              <Calendar size={11} />
               {item.period}
             </span>
           </div>
 
           <div className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">
-            {item.type === 'work' ? <Briefcase size={14} /> : <GraduationCap size={14} />}
+            {item.type === 'work' ? <Briefcase size={14} className="text-zinc-400" /> : <GraduationCap size={14} className="text-zinc-400" />}
             <span>{item.company}</span>
           </div>
 

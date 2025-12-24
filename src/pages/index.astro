@@ -1,28 +1,29 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import FusionHeader from '../components/react/FusionHeader';
-import FusionHome from '../components/react/FusionHome';
-import FusionFooterCTA from '../components/react/FusionFooterCTA';
-import FusionFooter from '../components/react/FusionFooter';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
+import BaseHead from "../components/BaseHead.astro";
+import FusionHeader from "../components/react/FusionHeader";
+import FusionHome from "../components/react/FusionHome";
+import FusionFooter from "../components/react/FusionFooter";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
 // 1. 导入类型定义
-import type { CollectionEntry } from 'astro:content';
-import type { BlogListItem } from '../types/content';
+import type { CollectionEntry } from "astro:content";
+import type { BlogListItem } from "../types/content";
 
 // 获取最新文章并按发布时间倒序
-const allPosts = (await getCollection('blog'))
-  .sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = (await getCollection("blog")).sort(
+	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 // 3. 为 map 函数的参数 post 添加显式类型
-const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<'blog'>) => ({
-  slug: post.id,
-  data: {
-    title: post.data.title,
-    description: post.data.description,
-    pubDate: post.data.pubDate,
-    showOnHome: post.data.showOnHome === true,
-  }
+const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
+	slug: post.id,
+	data: {
+		title: post.data.title,
+		description: post.data.description,
+		pubDate: post.data.pubDate,
+		showOnHome: post.data.showOnHome === true,
+	},
 }));
 // 仅取首页展示的最新5篇
 const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
@@ -35,34 +36,34 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 		<!-- 解决暗色模式闪屏 (FOUC) 的小脚本 -->
 		<script is:inline>
 			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
+				if (
+					typeof localStorage !== "undefined" &&
+					localStorage.getItem("theme")
+				) {
+					return localStorage.getItem("theme");
 				}
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+					return "dark";
 				}
-				return 'light';
+				return "light";
 			})();
-			if (theme === 'dark') {
-				document.documentElement.classList.add('dark');
+			if (theme === "dark") {
+				document.documentElement.classList.add("dark");
 			} else {
-				document.documentElement.classList.remove('dark');
+				document.documentElement.classList.remove("dark");
 			}
 		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
-		
 		<!-- Header: 使用 client:load 指令，因为它需要立即响应交互 (Cmd+K) -->
 		<FusionHeader client:load transition:persist />
 
 		<main>
 			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
-            <FusionHome client:load posts={homePosts} />
+			<FusionHome client:load posts={homePosts} />
 		</main>
 
-		<!-- 首页：同时显示 CTA 区域和 Footer -->
-        <FusionFooterCTA client:visible />
-        <FusionFooter client:visible />
-
+		<!-- 首页：仅显示 Footer，移除 CTA 区域 -->
+		<FusionFooter client:visible />
 	</body>
 </html>

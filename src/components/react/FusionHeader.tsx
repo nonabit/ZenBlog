@@ -14,14 +14,14 @@ const CmdKModal: React.FC<CmdKModalProps> = ({ isOpen, onClose }) => (
   <AnimatePresence>
     {isOpen && (
       <>
-        <motion.div 
-          initial={{ opacity: 0 }} 
-          animate={{ opacity: 1 }} 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
           className="fixed inset-0 bg-black/20 dark:bg-black/60 backdrop-blur-sm z-50"
         />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -29,9 +29,9 @@ const CmdKModal: React.FC<CmdKModalProps> = ({ isOpen, onClose }) => (
         >
           <div className="flex items-center px-4 py-3 border-b border-zinc-100 dark:border-zinc-800">
             <Search className="w-5 h-5 text-zinc-400 mr-3" />
-            <input 
-              type="text" 
-              placeholder="Type a command or search..." 
+            <input
+              type="text"
+              placeholder="Type a command or search..."
               className="w-full bg-transparent outline-none text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 font-mono text-sm"
               autoFocus
             />
@@ -58,7 +58,7 @@ export default function FusionHeader() {
   const [cmdKOpen, setCmdKOpen] = useState(false);
 
   useEffect(() => {
-    const isDark = localStorage.getItem('theme') === 'dark' || 
+    const isDark = localStorage.getItem('theme') === 'dark' ||
       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDarkMode(isDark);
     if (isDark) document.documentElement.classList.add('dark');
@@ -90,14 +90,23 @@ export default function FusionHeader() {
   return (
     <>
       <CmdKModal isOpen={cmdKOpen} onClose={() => setCmdKOpen(false)} />
-      <header className="sticky top-0 z-40 w-full border-b border-transparent transition-all duration-300 bg-white/70 dark:bg-black/70 backdrop-blur-lg supports-backdrop-filter:bg-white/60">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      {/* 
+        修改：更硬朗的黑色线条 (border-zinc-900/10 用于浅色模式，保持锐利但不过分突兀； dark:border-zinc-100/10 用于深色)
+        或者如果用户想要极致的黑线，可以用 border-black 搭配 opacity-5
+      */}
+      <header className="sticky top-0 z-40 w-full border-b border-zinc-900/80 dark:border-zinc-50/20 transition-all duration-300">
+        {/* 背景处理：毛玻璃 + 噪点 + 饱和度提升 */}
+        <div className="absolute inset-0 bg-white/70 dark:bg-black/70 backdrop-blur-xl backdrop-saturate-150 supports-backdrop-filter:bg-white/60"></div>
+        {/* 噪点纹理层 - 可选，这里用 CSS pattern 模拟 subtle noise */}
+        <div className="absolute inset-0 opacity-[0.2] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E")' }}></div>
+
+        <div className="relative max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo 也可以加上轻微磁吸，但通常 Logo 保持稳重 */}
           <a href="/" className="font-serif font-bold text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
             <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse translate-y-[-2px]"></span>
             9Byte.Dev
           </a>
-          
+
           <nav className="flex items-center gap-6">
             <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-zinc-500 dark:text-zinc-400">
               {/* 改造 1：给导航链接加上 Magnetic 包裹 */}
@@ -111,11 +120,11 @@ export default function FusionHeader() {
                 </Magnetic>
               ))}
             </div>
-            
+
             <div className="flex items-center gap-3 border-l border-zinc-200 dark:border-zinc-800 pl-6">
               <Magnetic>
-                <a 
-                  href="/rss.xml" 
+                <a
+                  href="/rss.xml"
                   target="_blank"
                   className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-orange-500 transition-colors"
                   aria-label="RSS Feed"
@@ -125,7 +134,7 @@ export default function FusionHeader() {
               </Magnetic>
               {/* 改造 2：给按钮加上 Magnetic 包裹 */}
               <Magnetic>
-                <button 
+                <button
                   onClick={() => setCmdKOpen(true)}
                   className="hidden sm:flex items-center gap-2 px-2 py-1.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-500 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
                 >

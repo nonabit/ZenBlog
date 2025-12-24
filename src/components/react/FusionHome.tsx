@@ -10,12 +10,19 @@ interface FusionHomeProps {
 }
 
 // 动画变体
+// 动画变体 - 更加自然的 Spring 物理效果
 const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6 }
+    filter: 'blur(0px)',
+    transition: {
+      type: "spring",
+      damping: 25,
+      stiffness: 100,
+      mass: 0.5
+    }
   }
 };
 
@@ -23,7 +30,10 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 }
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1
+    }
   }
 };
 
@@ -31,10 +41,17 @@ const staggerContainer = {
 const BentoItem: React.FC<{ className?: string; children: React.ReactNode }> = ({ className = "", children }) => (
   <motion.div
     variants={fadeInUp}
-    whileHover={{ y: -2, transition: { duration: 0.2 } }}
-    className={`bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 relative overflow-hidden group ${className}`}
+    whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
+    className={`
+      bg-white/80 dark:bg-zinc-900/60 backdrop-blur-md 
+      border border-zinc-200/60 dark:border-zinc-800/60 
+      rounded-3xl p-6 relative overflow-hidden group 
+      shadow-sm hover:shadow-2xl hover:shadow-zinc-200/50 dark:hover:shadow-black/50
+      transition-all duration-500
+      ${className}
+    `}
   >
-    <div className="absolute inset-0 bg-linear-to-tr from-white/0 via-white/0 to-zinc-100/50 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-zinc-100/40 dark:to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
     {children}
   </motion.div>
 );
@@ -133,13 +150,13 @@ const TechDeck = ({ group, delay = 0 }: { group: typeof STACK_GROUPS[0], delay?:
         <AnimatePresence mode="wait">
           <motion.div
             key={currentTech}
-            initial={{ y: 10, opacity: 0, scale: 0.95 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -10, opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl flex items-center justify-center shadow-sm z-10 select-none cursor-default"
+            initial={{ y: 20, opacity: 0, scale: 0.9, rotateX: -15 }}
+            animate={{ y: 0, opacity: 1, scale: 1, rotateX: 0 }}
+            exit={{ y: -20, opacity: 0, scale: 0.9, rotateX: 15 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="absolute inset-0 bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-700/50 rounded-2xl flex items-center justify-center shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] dark:shadow-black/40 z-10 select-none cursor-default"
           >
-            <span className="font-mono font-bold text-zinc-700 dark:text-zinc-200 text-sm">
+            <span className="font-mono font-bold text-zinc-700 dark:text-zinc-200 text-sm tracking-tight">
               {currentTech}
             </span>
             {/* 状态指示灯 */}
@@ -180,9 +197,9 @@ const TimeDisplay = () => {
   }, []);
 
   // 初始渲染占位，防止布局跳动
-  if (!time) return <span className="opacity-0">00:00 PM</span>;
+  if (!time) return <span className="opacity-0 font-mono">00:00 PM</span>;
 
-  return <span>{time}</span>;
+  return <span className="font-mono tabular-nums tracking-wider">{time}</span>;
 };
 
 export default function FusionHome({ posts }: FusionHomeProps) {
@@ -193,13 +210,13 @@ export default function FusionHome({ posts }: FusionHomeProps) {
         initial="hidden"
         animate="visible"
         variants={staggerContainer}
-        className="mb-24"
+        className="mb-32"
       >
-        <motion.h1 variants={fadeInUp} className="font-serif text-5xl sm:text-7xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-8 leading-[1.1]">
-          Backend Roots. <br /> <span className="italic text-zinc-400 dark:text-zinc-600">AI-Driven</span> Mindset.
+        <motion.h1 variants={fadeInUp} className="font-serif text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
+          Backend Roots. <br /> <span className="italic text-zinc-400/80 dark:text-zinc-600 bg-clip-text">AI-Driven</span> Mindset.
         </motion.h1>
-        <motion.p variants={fadeInUp} className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed font-light">
-          A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle. This is the trace of my existence.
+        <motion.p variants={fadeInUp} className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide">
+          A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle.
         </motion.p>
       </motion.section>
 
@@ -226,11 +243,11 @@ export default function FusionHome({ posts }: FusionHomeProps) {
           ></div>
 
           <div>
-            <div className="flex items-center gap-2 text-zinc-400 mb-4 text-xs font-bold font-mono uppercase tracking-widest">
+            <div className="flex items-center gap-2 text-zinc-400 mb-4 text-xs font-bold font-mono uppercase tracking-widest opacity-80">
               <Cpu size={14} />
               <span>Building</span>
             </div>
-            <h3 className="text-2xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10">AI-Powered HarmonyOS Migration</h3>
+            <h3 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">AI-Powered HarmonyOS Migration</h3>
           </div>
           <div className="mt-4 relative z-10 w-full sm:w-full">
             <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
@@ -305,10 +322,10 @@ export default function FusionHome({ posts }: FusionHomeProps) {
 
           <div className="relative z-10 mt-4">
             {/* 你可以手动更新这首歌，或者后续接入 Spotify API */}
-            <div className="font-serif text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate">
+            <div className="font-serif text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate tracking-tight">
               Cornfield Chase
             </div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
+            <div className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-1 font-medium tracking-wide">
               Hans Zimmer • Interstellar
             </div>
           </div>
@@ -345,7 +362,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
             >
               <a href={`/blog/${post.slug}`} className="block no-underline">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:underline decoration-zinc-300 underline-offset-4 decoration-1 transition-all">
+                  <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
                     {post.data.title}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 shrink-0 mt-1 sm:mt-0">

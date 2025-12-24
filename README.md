@@ -1,62 +1,35 @@
-# Astro Starter Kit: Blog
+# ZenBlog
 
-```sh
-npm create astro@latest -- --template blog
+这是一个基于 Astro 构建的个人博客与作品集项目，专注于极简体验与高性能。
+
+## 🧞 本地开发
+
+所有命令在项目根目录下运行：
+
+| 命令 | 说明 |
+| :--- | :--- |
+| `npm install` | 安装依赖 |
+| `npm run dev` | 启动本地开发服务器 (`localhost:4321`) |
+| `npm run build` | 构建生产环境代码到 `./dist/` |
+| `npm run preview` | 预览构建后的生产环境代码 |
+| `npm run new:post "标题"` | 创建新博客文章 (e.g. `npm run new:post "Hello World"`) |
+| `npm run new:project "标题"` | 创建新项目 (e.g. `npm run new:project "My Cool App"`) |
+| `npm run astro ...` | 运行 Astro CLI 命令 (如 `astro add`, `astro check`) |
+
+## 🚀 部署
+
+本项目是静态站点，可以部署到任何支持静态托管的平台（如 Vercel, Netlify, GitHub Pages 等）。
+
+### Vercel 部署（推荐）
+
+1.  安装 Vercel CLI 或直接关联 GitHub 仓库。
+2.  默认构建命令为 `npm run build`。
+3.  输出目录为 `dist`。
+
+### 手动构建
+
+构建生成的静态文件位于 `dist/` 目录中，你可以将其上传到任何静态文件服务器（Nginx, Apache, COS/OSS 等）。
+
+```bash
+npm run build
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
