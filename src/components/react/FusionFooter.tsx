@@ -19,7 +19,7 @@ export default function FusionFooter() {
         {/* Left: Copyright & Status */}
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
-            <span>© {new Date().getFullYear()} 9Byte.Dev</span>
+            <span>© {new Date().getFullYear()} Silicon Universe</span>
             <span className="text-zinc-300 dark:text-zinc-700">/</span>
             <span className="flex items-center gap-1.5">
               <span className="relative flex h-2 w-2">

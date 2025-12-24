@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import FusionHeader from "../components/react/FusionHeader";
 import FusionFooter from "../components/react/FusionFooter";
 import ScrollProgress from "../components/react/ScrollProgress";
+import SiliconBackground from "../components/react/SiliconBackground";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
 type Props = CollectionEntry<"blog">["data"];
@@ -51,13 +52,14 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
     <body
         class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans"
     >
+        <SiliconBackground client:load />
         <!-- 1. 进度条 -->
         <ScrollProgress client:load />
 
         <!-- 2. 全局导航 (保留你的 transition:persist) -->
         <FusionHeader client:load transition:persist />
 
-        <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20">
+        <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20 relative z-10">
             <!-- 3. 文章头部 (Hero) -->
             <article
                 class="animate-in fade-in slide-in-from-bottom-4 duration-700"

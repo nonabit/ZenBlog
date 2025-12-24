@@ -2,6 +2,7 @@
 import BaseHead from "../components/BaseHead.astro";
 import FusionHeader from "../components/react/FusionHeader.tsx";
 import FusionFooter from "../components/react/FusionFooter.tsx";
+import SiliconBackground from "../components/react/SiliconBackground.tsx";
 import NowContent from "../components/react/NowContent.tsx";
 import { SITE_TITLE } from "../consts";
 ---
@@ -31,9 +32,10 @@ import { SITE_TITLE } from "../consts";
     </script>
   </head>
   <body class="bg-white dark:bg-black transition-colors duration-500">
+    <SiliconBackground client:load />
     <FusionHeader client:load transition:persist />
 
-    <main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20">
+    <main class="max-w-screen-md mx-auto px-6 py-12 sm:py-20 relative z-10">
       <NowContent client:load />
     </main>
 

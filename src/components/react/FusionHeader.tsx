@@ -104,7 +104,7 @@ export default function FusionHeader() {
           {/* Logo 也可以加上轻微磁吸，但通常 Logo 保持稳重 */}
           <a href="/" className="font-serif font-bold text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
             <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse translate-y-[-2px]"></span>
-            9Byte.Dev
+            Silicon Universe
           </a>
 
           <nav className="flex items-center gap-6">
