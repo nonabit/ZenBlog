@@ -3,8 +3,8 @@ import Magnetic from './Magnetic';
 
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/99byte", label: "GitHub" },
-  { icon: Twitter, href: "https://twitter.com/0x9byte", label: "Twitter" },
-  { icon: Mail, href: "mailto:9byte.ai@gmail.com", label: "Email" },
+  { icon: Twitter, href: "https://twitter.com/ninthbit_ai", label: "Twitter" },
+  { icon: Mail, href: "mailto:oldmeatovo@gmail.com", label: "Email" },
 ];
 
 export default function FusionFooter() {

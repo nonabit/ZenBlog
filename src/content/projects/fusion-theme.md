@@ -5,7 +5,7 @@ order: 1
 heroImage: "../../assets/blog-placeholder-1.jpg"
 stack: ["Astro", "React", "Tailwind", "Framer Motion"]
 github: "https://github.com/99byte/ZenBlog"
-demo: "https://9byte.xyz"
+demo: "https://ninthbit.org"
 ---
 
 Here is a detailed breakdown of how I built this theme...
