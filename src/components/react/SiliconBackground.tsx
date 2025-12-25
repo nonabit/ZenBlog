@@ -46,8 +46,8 @@ export default function SiliconBackground() {
                     size: Math.random() * 4 + 2, // 再次增大尺寸
                     speedX: (Math.random() - 0.5) * 0.4,
                     speedY: (Math.random() - 0.5) * 0.4,
-                    opacity: Math.random() * 0.5 + 0.1,
-                    targetOpacity: Math.random() * 0.5 + 0.1,
+                    opacity: Math.random() * 0.3 + 0.05,
+                    targetOpacity: Math.random() * 0.3 + 0.05,
                     rotation: Math.random() * Math.PI * 2,
                     rotationSpeed: (Math.random() - 0.5) * 0.02
                 });
@@ -67,7 +67,7 @@ export default function SiliconBackground() {
                 if (p.y < 0 || p.y > height) p.speedY *= -1;
 
                 if (Math.abs(p.opacity - p.targetOpacity) < 0.01) {
-                    p.targetOpacity = Math.random() * 0.6 + 0.1;
+                    p.targetOpacity = Math.random() * 0.3 + 0.05;
                 }
                 const opacityDiff = p.targetOpacity - p.opacity;
                 p.opacity += opacityDiff * 0.05;

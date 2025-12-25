@@ -120,7 +120,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
 
     const png: Buffer = await sharp(Buffer.from(svg)).png().toBuffer();
 
-    return new Response(png as unknown as BodyInit, {
+    return new Response(png.buffer as ArrayBuffer, {
       headers: {
         'Content-Type': 'image/png',
       },

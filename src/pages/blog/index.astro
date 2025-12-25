@@ -16,7 +16,7 @@ const allPosts = (await getCollection("blog")).sort(
 
 // 2. 数据清洗：确保传给 React 的是纯净的 JSON 对象
 const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
-	slug: post.id,
+	slug: post.id.replace(/\.[^/.]+$/, ""),
 	data: {
 		title: post.data.title,
 		description: post.data.description,
