@@ -1,0 +1,137 @@
+---
+/**
+ * 文章列表页
+ */
+
+import { listBlogPosts } from "../../../lib/cms/fs-manager";
+import CMSLayout from "../../../components/cms/CMSLayout";
+import { Plus, Edit, Trash2, Eye, FileText, Calendar } from "lucide-react";
+
+// 仅在开发环境可用
+if (import.meta.env.PROD) {
+  return Astro.redirect("/");
+}
+
+const posts = await listBlogPosts();
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文章管理 - ZenBlog CMS</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+    <CMSLayout title="文章管理" client:load>
+      <div class="space-y-6">
+        <!-- 顶部操作栏 -->
+        <div class="flex items-center justify-between">
+          <p class="text-zinc-500 dark:text-zinc-400">
+            共 <span class="font-medium text-zinc-900 dark:text-zinc-100">{posts.length}</span> 篇文章
+          </p>
+          <a
+            href="/admin/posts/new"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors"
+          >
+            <Plus size={18} />
+            新建文章
+          </a>
+        </div>
+
+        <!-- 文章列表 -->
+        <div class="space-y-4">
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="flex flex-col sm:flex-row">
+                  {/* 封面图 */}
+                  {post.heroImage && (
+                    <div class="sm:w-48 h-32 sm:h-auto shrink-0">
+                      <img
+                        src={post.heroImage}
+                        alt={post.title}
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+
+                  {/* 内容 */}
+                  <div class="flex-1 p-5">
+                    <div class="flex items-start justify-between gap-4">
+                      <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-2">
+                          {post.showOnHome && (
+                            <span class="text-xs px-2 py-0.5 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded font-medium">
+                              首页
+                            </span>
+                          )}
+                          <span class="text-xs text-zinc-400 font-mono flex items-center gap-1">
+                            <Calendar size={12} />
+                            {post.pubDate}
+                          </span>
+                        </div>
+                        <h3 class="font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                          {post.title}
+                        </h3>
+                        <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-1">
+                          {post.description}
+                        </p>
+                      </div>
+
+                      {/* 操作按钮 */}
+                      <div class="flex items-center gap-1 shrink-0">
+                        <a
+                          href={`/blog/${post.slug}`}
+                          target="_blank"
+                          class="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                          title="预览"
+                        >
+                          <Eye size={18} />
+                        </a>
+                        <a
+                          href={`/admin/posts/${post.slug}`}
+                          class="p-2 text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+                          title="编辑"
+                        >
+                          <Edit size={18} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-12 text-center">
+              <div class="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                <FileText size={32} class="text-zinc-400" />
+              </div>
+              <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
+                还没有文章
+              </h3>
+              <p class="text-zinc-500 dark:text-zinc-400 mb-4">
+                创建你的第一篇文章开始写作
+              </p>
+              <a
+                href="/admin/posts/new"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors"
+              >
+                <Plus size={18} />
+                新建文章
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </CMSLayout>
+
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>

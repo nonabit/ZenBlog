@@ -1,0 +1,71 @@
+---
+/**
+ * 编辑文章页
+ */
+
+import { readBlogPost, listBlogPosts } from "../../../lib/cms/fs-manager";
+import CMSLayout from "../../../components/cms/CMSLayout";
+import PostForm from "../../../components/cms/PostForm";
+
+// 生成静态路径
+export async function getStaticPaths() {
+  // 生产环境不生成这些页面
+  if (import.meta.env.PROD) {
+    return [];
+  }
+
+  const posts = await listBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return Astro.redirect("/admin/posts");
+}
+
+const post = await readBlogPost(slug);
+
+if (!post) {
+  return Astro.redirect("/admin/posts");
+}
+
+// 准备初始数据
+const initialData = {
+  title: post.title,
+  description: post.description,
+  pubDate: post.pubDate,
+  heroImage: post.heroImage || "",
+  showOnHome: post.showOnHome,
+  content: post.content,
+};
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>编辑: {post.title} - ZenBlog CMS</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+    <CMSLayout
+      title={`编辑: ${post.title}`}
+      showBackButton
+      backUrl="/admin/posts"
+      client:load
+    >
+      <PostForm mode="edit" slug={slug} initialData={initialData} client:load />
+    </CMSLayout>
+
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+---
+/**
+ * 新建项目页
+ */
+
+import CMSLayout from "../../../components/cms/CMSLayout";
+import ProjectForm from "../../../components/cms/ProjectForm";
+
+// 仅在开发环境可用
+if (import.meta.env.PROD) {
+  return Astro.redirect("/");
+}
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新建项目 - ZenBlog CMS</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+    <CMSLayout title="新建项目" showBackButton backUrl="/admin/projects" client:load>
+      <ProjectForm mode="create" client:load />
+    </CMSLayout>
+
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>

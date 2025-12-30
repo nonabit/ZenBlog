@@ -1,0 +1,150 @@
+---
+/**
+ * 项目列表页
+ */
+
+import { listProjects } from "../../../lib/cms/fs-manager";
+import CMSLayout from "../../../components/cms/CMSLayout";
+import { Plus, Edit, ExternalLink, Github, Folder } from "lucide-react";
+
+// 仅在开发环境可用
+if (import.meta.env.PROD) {
+  return Astro.redirect("/");
+}
+
+const projects = await listProjects();
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目管理 - ZenBlog CMS</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
+    <CMSLayout title="项目管理" client:load>
+      <!-- 顶部操作栏 -->
+      <div class="flex items-center justify-between mb-6">
+        <p class="text-zinc-500 dark:text-zinc-400">
+          共 {projects.length} 个项目
+        </p>
+        <a
+          href="/admin/projects/new"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors"
+        >
+          <Plus size={18} />
+          新建项目
+        </a>
+      </div>
+
+      <!-- 项目列表 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+              {project.heroImage ? (
+                <img
+                  src={project.heroImage}
+                  alt={project.title}
+                  class="w-full h-40 object-cover"
+                />
+              ) : (
+                <div class="w-full h-40 bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                  <Folder size={48} class="text-zinc-300 dark:text-zinc-600" />
+                </div>
+              )}
+              <div class="p-4">
+                <div class="flex items-start justify-between mb-2">
+                  <h3 class="font-semibold text-zinc-900 dark:text-zinc-100">
+                    {project.title}
+                  </h3>
+                  <span class="text-xs px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-500 rounded">
+                    #{project.order}
+                  </span>
+                </div>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 mb-3">
+                  {project.description}
+                </p>
+
+                {/* 技术栈 */}
+                {project.stack.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mb-4">
+                    {project.stack.slice(0, 4).map((tech) => (
+                      <span class="text-xs px-2 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.stack.length > 4 && (
+                      <span class="text-xs text-zinc-400">+{project.stack.length - 4}</span>
+                    )}
+                  </div>
+                )}
+
+                {/* 操作按钮 */}
+                <div class="flex items-center justify-between pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                  <div class="flex items-center gap-2">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        class="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                        title="GitHub"
+                      >
+                        <Github size={16} />
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        class="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                        title="Demo"
+                      >
+                        <ExternalLink size={16} />
+                      </a>
+                    )}
+                  </div>
+                  <a
+                    href={`/admin/projects/${project.slug}`}
+                    class="inline-flex items-center gap-1 px-3 py-1.5 text-sm text-orange-500 hover:text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-lg transition-colors"
+                  >
+                    <Edit size={14} />
+                    编辑
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div class="col-span-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-12 text-center">
+            <div class="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Folder size={32} class="text-zinc-400" />
+            </div>
+            <h3 class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-2">
+              还没有项目
+            </h3>
+            <p class="text-zinc-500 dark:text-zinc-400 mb-4">
+              添加你的第一个项目
+            </p>
+            <a
+              href="/admin/projects/new"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-medium transition-colors"
+            >
+              <Plus size={18} />
+              新建项目
+            </a>
+          </div>
+        )}
+      </div>
+    </CMSLayout>
+
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </body>
+</html>
