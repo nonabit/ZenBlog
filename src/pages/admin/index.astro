@@ -1,12 +1,13 @@
 ---
 /**
  * CMS 仪表盘页面
- * 显示文章和项目统计
+ * Backstage 风格 - 简约统计展示
  */
 
-import { listBlogPosts, listProjects } from "../../lib/cms/fs-manager";
+import { listBlogPosts } from "../../lib/cms/fs-manager";
 import CMSLayout from "../../components/cms/CMSLayout";
-import { FileText, FolderKanban, Plus, ArrowRight } from "lucide-react";
+import HeaderBar from "../../components/cms/HeaderBar";
+import { FileText, Plus, ArrowRight } from "lucide-react";
 
 // 仅在开发环境可用
 if (import.meta.env.PROD) {
@@ -15,7 +16,7 @@ if (import.meta.env.PROD) {
 
 // 获取数据
 const posts = await listBlogPosts();
-const projects = await listProjects();
+const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }));
 ---
 
 <!DOCTYPE html>
@@ -23,87 +24,108 @@ const projects = await listProjects();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>仪表盘 - ZenBlog CMS</title>
+    <title>Dashboard - Silicon Universe</title>
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
-  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
-    <CMSLayout title="仪表盘" client:load>
-      <div class="space-y-8">
-        <!-- 统计卡片 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- 文章统计 -->
-          <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
-                <FileText size={24} class="text-blue-600 dark:text-blue-400" />
-              </div>
-              <a
-                href="/admin/posts/new"
-                class="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
-                title="新建文章"
-              >
-                <Plus size={20} />
-              </a>
-            </div>
-            <div class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-1">
-              {posts.length}
-            </div>
-            <p class="text-zinc-500 dark:text-zinc-400">篇文章</p>
-            <a
-              href="/admin/posts"
-              class="mt-4 flex items-center gap-1 text-sm text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              查看全部 <ArrowRight size={14} />
-            </a>
-          </div>
+  <body class="bg-white text-zinc-900">
+    <CMSLayout recentPosts={recentPosts} client:load>
+      <HeaderBar greeting="Hi, Admin." client:load />
 
-          <!-- 项目统计 -->
-          <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center">
-                <FolderKanban size={24} class="text-orange-600 dark:text-orange-400" />
+      <div class="p-6">
+        <!-- 统计概览 -->
+        <div class="mb-8">
+          <h2 class="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-4">
+            Overview
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- 文章统计 -->
+            <div class="p-6 border border-zinc-200 rounded-lg">
+              <div class="flex items-center justify-between mb-4">
+                <FileText size={20} className="text-zinc-400" />
+                <a
+                  href="/admin/posts/new"
+                  class="p-1.5 text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 rounded transition-colors"
+                >
+                  <Plus size={16} />
+                </a>
               </div>
-              <a
-                href="/admin/projects/new"
-                class="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
-                title="新建项目"
-              >
-                <Plus size={20} />
-              </a>
+              <div class="text-3xl font-bold text-zinc-900 mb-1">
+                {posts.length}
+              </div>
+              <p class="text-sm text-zinc-500">Total posts</p>
             </div>
-            <div class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-1">
-              {projects.length}
+
+            <!-- 最近发布 -->
+            <div class="p-6 border border-zinc-200 rounded-lg">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-zinc-400 text-sm">Latest</span>
+              </div>
+              {posts.length > 0 ? (
+                <div>
+                  <p class="font-medium text-zinc-900 truncate mb-1">
+                    {posts[0].title}
+                  </p>
+                  <p class="text-sm text-zinc-500">{posts[0].pubDate}</p>
+                </div>
+              ) : (
+                <p class="text-zinc-400">No posts yet</p>
+              )}
             </div>
-            <p class="text-zinc-500 dark:text-zinc-400">个项目</p>
-            <a
-              href="/admin/projects"
-              class="mt-4 flex items-center gap-1 text-sm text-orange-600 dark:text-orange-400 hover:underline"
-            >
-              查看全部 <ArrowRight size={14} />
-            </a>
+
+            <!-- 快捷操作 -->
+            <div class="p-6 border border-zinc-200 rounded-lg">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-zinc-400 text-sm">Quick actions</span>
+              </div>
+              <div class="space-y-2">
+                <a
+                  href="/admin/posts/new"
+                  class="flex items-center gap-2 text-sm text-zinc-600 hover:text-zinc-900 transition-colors"
+                >
+                  <Plus size={14} />
+                  <span>New post</span>
+                </a>
+                <a
+                  href="/admin/posts"
+                  class="flex items-center gap-2 text-sm text-zinc-600 hover:text-zinc-900 transition-colors"
+                >
+                  <ArrowRight size={14} />
+                  <span>All posts</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- 最近文章 -->
+        <!-- 最近文章列表 -->
         {posts.length > 0 && (
-          <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden">
-            <div class="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-              <h2 class="font-medium text-zinc-900 dark:text-zinc-100">最近文章</h2>
-              <a href="/admin/posts" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-                查看全部
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-sm font-medium text-zinc-400 uppercase tracking-wider">
+                Recent Posts
+              </h2>
+              <a
+                href="/admin/posts"
+                class="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+              >
+                View all
               </a>
             </div>
-            <div class="divide-y divide-zinc-200 dark:divide-zinc-800">
-              {posts.slice(0, 5).map((post) => (
+            <div class="border border-zinc-200 rounded-lg overflow-hidden">
+              {posts.slice(0, 5).map((post, index) => (
                 <a
                   href={`/admin/posts/${post.slug}`}
-                  class="flex items-center justify-between px-6 py-4 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors"
+                  class={`flex items-center justify-between px-4 py-3 hover:bg-zinc-50 transition-colors ${
+                    index !== 0 ? "border-t border-zinc-100" : ""
+                  }`}
                 >
-                  <div>
-                    <h3 class="font-medium text-zinc-900 dark:text-zinc-100">{post.title}</h3>
-                    <p class="text-sm text-zinc-500 dark:text-zinc-400">{post.pubDate}</p>
+                  <div class="flex items-center gap-3 min-w-0">
+                    <FileText size={16} className="text-zinc-400 shrink-0" />
+                    <span class="truncate text-zinc-900">{post.title}</span>
                   </div>
-                  <ArrowRight size={16} class="text-zinc-400" />
+                  <span class="text-sm text-zinc-400 shrink-0 ml-4">
+                    {post.pubDate}
+                  </span>
                 </a>
               ))}
             </div>
@@ -111,13 +133,5 @@ const projects = await listProjects();
         )}
       </div>
     </CMSLayout>
-
-    <script>
-      // 主题初始化
-      const theme = localStorage.getItem("theme");
-      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.documentElement.classList.add("dark");
-      }
-    </script>
   </body>
 </html>

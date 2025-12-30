@@ -14,7 +14,7 @@ const turndown = new TurndownService({
 // 自定义规则：保留图片 alt 和 src
 turndown.addRule("images", {
   filter: "img",
-  replacement: (content, node) => {
+  replacement: (_content, node) => {
     const img = node as HTMLImageElement;
     const alt = img.alt || "";
     const src = img.src || "";

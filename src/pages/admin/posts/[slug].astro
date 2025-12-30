@@ -1,6 +1,7 @@
 ---
 /**
  * 编辑文章页
+ * Backstage 风格
  */
 
 import { readBlogPost, listBlogPosts } from "../../../lib/cms/fs-manager";
@@ -32,6 +33,10 @@ if (!post) {
   return Astro.redirect("/admin/posts");
 }
 
+// 获取最近文章用于侧边栏
+const posts = await listBlogPosts();
+const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }));
+
 // 准备初始数据
 const initialData = {
   title: post.title,
@@ -48,24 +53,12 @@ const initialData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>编辑: {post.title} - ZenBlog CMS</title>
+    <title>{post.title} - Silicon Universe</title>
     <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
-  <body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
-    <CMSLayout
-      title={`编辑: ${post.title}`}
-      showBackButton
-      backUrl="/admin/posts"
-      client:load
-    >
+  <body class="bg-white text-zinc-900">
+    <CMSLayout recentPosts={recentPosts} currentSlug={slug} client:load>
       <PostForm mode="edit" slug={slug} initialData={initialData} client:load />
     </CMSLayout>
-
-    <script>
-      const theme = localStorage.getItem("theme");
-      if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.documentElement.classList.add("dark");
-      }
-    </script>
   </body>
 </html>

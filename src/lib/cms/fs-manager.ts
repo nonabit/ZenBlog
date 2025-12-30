@@ -364,7 +364,7 @@ const ALLOWED_EXTENSIONS = ["jpg", "jpeg", "png", "gif", "webp", "svg"];
  */
 export async function saveUploadedImage(
   file: File,
-  type: "blog" | "project" = "blog"
+  _type: "blog" | "project" = "blog"
 ): Promise<string> {
   // 确保上传目录存在
   if (!existsSync(UPLOADS_DIR)) {
