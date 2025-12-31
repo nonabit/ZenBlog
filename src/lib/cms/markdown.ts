@@ -41,7 +41,7 @@ export function markdownToHtml(markdown: string): string {
     return "";
   }
 
-  // 基础转换规则
+  // 基础转换规则（注意：图片必须在链接之前处理，否则会被链接正则错误匹配）
   let html = markdown
     // 代码块
     .replace(/```(\w*)\n([\s\S]*?)```/g, "<pre><code>$2</code></pre>")
@@ -55,10 +55,10 @@ export function markdownToHtml(markdown: string): string {
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     // 斜体
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
+    // 图片（必须在链接之前！）
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
     // 链接
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    // 图片
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
     // 无序列表
     .replace(/^- (.+)$/gm, "<li>$1</li>")
     // 引用

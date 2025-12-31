@@ -1,14 +1,12 @@
 /**
  * 文章编辑表单组件
- * Backstage 风格 - Content/Metadata 标签切换布局
+ * 简化布局 - 单行顶部操作栏
  */
 
 import { useState } from "react";
-import { Save, ExternalLink, Trash2, Loader2 } from "lucide-react";
+import { Save, ExternalLink, Trash2, Loader2, FileText, Settings } from "lucide-react";
 import Editor from "./Editor";
-import TabSwitcher from "./TabSwitcher";
 import MetadataPanel from "./MetadataPanel";
-import HeaderBar from "./HeaderBar";
 
 interface PostFormData {
   title: string;
@@ -122,66 +120,93 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
     }
   };
 
-  // 操作按钮组
-  const ActionButtons = (
-    <>
-      {mode === "edit" && (
-        <a
-          href={`/blog/${slug}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2
-                     border border-zinc-300 rounded-md
-                     text-sm font-medium text-zinc-700
-                     hover:bg-zinc-50 transition-colors"
-        >
-          <ExternalLink size={16} />
-          <span>View</span>
-        </a>
-      )}
-      <button
-        onClick={handleSave}
-        disabled={saving}
-        className="inline-flex items-center gap-2 px-4 py-2
-                   bg-zinc-900 rounded-md
-                   text-sm font-medium text-white
-                   hover:bg-zinc-800 transition-colors
-                   disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {saving ? (
-          <Loader2 size={16} className="animate-spin" />
-        ) : (
-          <Save size={16} />
-        )}
-        <span>Save</span>
-      </button>
-      {mode === "edit" && (
-        <button
-          onClick={handleDelete}
-          disabled={deleting}
-          className="inline-flex items-center gap-2 px-3 py-2
-                     text-zinc-400 hover:text-red-600
-                     transition-colors
-                     disabled:opacity-50 disabled:cursor-not-allowed"
-          title="Delete post"
-        >
-          {deleting ? (
-            <Loader2 size={16} className="animate-spin" />
-          ) : (
-            <Trash2 size={16} />
-          )}
-        </button>
-      )}
-    </>
-  );
+  // 标签配置
+  const tabs = [
+    { id: "content" as const, label: "Content", icon: FileText },
+    { id: "metadata" as const, label: "Metadata", icon: Settings },
+  ];
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 顶部操作栏 */}
-      <HeaderBar
-        greeting="Hi, Admin."
-        actions={ActionButtons}
-      />
+      {/* 单行顶部操作栏：标签 + slug + 按钮 */}
+      <div className="flex items-center justify-between px-6 py-3 border-b border-zinc-200 bg-white">
+        {/* 左侧：标签切换 */}
+        <div className="flex items-center gap-1">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`
+                relative flex items-center gap-2 px-4 py-2 text-sm font-medium
+                transition-colors rounded-md
+                ${activeTab === tab.id
+                  ? "text-zinc-900 bg-zinc-100"
+                  : "text-zinc-400 hover:text-zinc-600 hover:bg-zinc-50"
+                }
+              `}
+            >
+              <tab.icon size={16} />
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
+
+        {/* 中间：slug（仅编辑模式显示） */}
+        {slug && (
+          <span className="text-sm text-zinc-400 font-mono">{slug}</span>
+        )}
+
+        {/* 右侧：操作按钮 */}
+        <div className="flex items-center gap-2">
+          {mode === "edit" && (
+            <a
+              href={`/blog/${slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2
+                         border border-zinc-300 rounded-md
+                         text-sm font-medium text-zinc-700
+                         hover:bg-zinc-50 transition-colors"
+            >
+              <ExternalLink size={16} />
+              <span>View</span>
+            </a>
+          )}
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="inline-flex items-center gap-2 px-4 py-2
+                       bg-zinc-900 rounded-md
+                       text-sm font-medium text-white
+                       hover:bg-zinc-800 transition-colors
+                       disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {saving ? (
+              <Loader2 size={16} className="animate-spin" />
+            ) : (
+              <Save size={16} />
+            )}
+            <span>Save</span>
+          </button>
+          {mode === "edit" && (
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="inline-flex items-center gap-2 px-3 py-2
+                         text-zinc-400 hover:text-red-600
+                         transition-colors
+                         disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Delete post"
+            >
+              {deleting ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Trash2 size={16} />
+              )}
+            </button>
+          )}
+        </div>
+      </div>
 
       {/* 消息提示 */}
       {(error || success) && (
@@ -196,39 +221,15 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
         </div>
       )}
 
-      {/* 标签切换 */}
-      <div className="px-6">
-        <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
-      </div>
-
       {/* 内容区域 */}
       <div className="flex-1">
         {activeTab === "content" ? (
-          <div className="flex-1 flex flex-col">
-            {/* 文章信息摘要 */}
-            {slug && (
-              <div className="px-8 py-4 border-b border-zinc-100">
-                <div className="max-w-3xl mx-auto">
-                  <div className="flex items-center gap-3 text-sm text-zinc-400 mb-1">
-                    <span className="font-mono">{slug}</span>
-                  </div>
-                  <h1 className="text-2xl font-bold text-zinc-900">
-                    {formData.title || "Untitled"}
-                  </h1>
-                </div>
-              </div>
-            )}
-
-            {/* 编辑器 - 全宽居中 */}
-            <div className="flex-1">
-              <Editor
-                initialContent={formData.content}
-                onChange={(content) => handleChange("content", content)}
-                placeholder="Start writing..."
-                minHeight="calc(100vh - 280px)"
-              />
-            </div>
-          </div>
+          <Editor
+            initialContent={formData.content}
+            onChange={(content) => handleChange("content", content)}
+            placeholder="Start writing..."
+            minHeight="calc(100vh - 120px)"
+          />
         ) : (
           <MetadataPanel
             formData={formData}
