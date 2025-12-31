@@ -1,6 +1,6 @@
 /**
  * Tiptap 富文本编辑器
- * 支持基础格式、图片上传、Markdown互转
+ * 现代居中布局，参考 TipTap Simple Editor
  */
 
 import { useEditor, EditorContent } from "@tiptap/react";
@@ -25,14 +25,14 @@ interface EditorProps {
   onChange?: (markdown: string) => void;
   /** 占位符文本 */
   placeholder?: string;
-  /** 编辑器高度 */
+  /** 编辑器最小高度 */
   minHeight?: string;
 }
 
 export default function Editor({
   initialContent = "",
   onChange,
-  placeholder = "开始写作...",
+  placeholder = "Start writing...",
   minHeight = "400px",
 }: EditorProps) {
   const [showImageUploader, setShowImageUploader] = useState(false);
@@ -55,11 +55,12 @@ export default function Editor({
       Link.configure({
         openOnClick: false,
         HTMLAttributes: {
-          class: "text-blue-600 dark:text-blue-400 underline",
+          class: "text-blue-600 underline hover:text-blue-800",
         },
       }),
       Placeholder.configure({
         placeholder,
+        emptyEditorClass: "is-editor-empty",
       }),
       CodeBlockLowlight.configure({
         lowlight,
@@ -71,8 +72,7 @@ export default function Editor({
     content: markdownToHtml(initialContent),
     editorProps: {
       attributes: {
-        class: `prose prose-zinc dark:prose-invert max-w-none focus:outline-none p-4`,
-        style: `min-height: ${minHeight}`,
+        class: "outline-none",
       },
     },
     onUpdate: ({ editor }) => {
@@ -181,16 +181,18 @@ export default function Editor({
   }, [editor]);
 
   return (
-    <div>
-      {/* 工具栏 */}
-      <EditorMenuBar
-        editor={editor}
-        onImageUpload={() => setShowImageUploader(true)}
-      />
+    <div className="flex flex-col bg-white">
+      {/* 工具栏 - 固定在顶部 */}
+      <div className="sticky top-0 z-10 bg-white border-b border-zinc-200">
+        <EditorMenuBar
+          editor={editor}
+          onImageUpload={() => setShowImageUploader(true)}
+        />
+      </div>
 
       {/* 图片上传弹窗 */}
       {showImageUploader && (
-        <div className="border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50">
+        <div className="border-b border-zinc-200 bg-zinc-50">
           <ImageUploader
             onUploadSuccess={handleImageUpload}
             onClose={() => setShowImageUploader(false)}
@@ -199,8 +201,30 @@ export default function Editor({
         </div>
       )}
 
-      {/* 编辑器内容 */}
-      <EditorContent editor={editor} />
+      {/* 编辑器内容 - 居中布局 */}
+      <div
+        className="flex-1 overflow-y-auto bg-white"
+        style={{ minHeight }}
+      >
+        <div className="max-w-3xl mx-auto px-8 py-8">
+          <EditorContent
+            editor={editor}
+            className="prose prose-zinc max-w-none
+              prose-headings:font-semibold prose-headings:text-zinc-900
+              prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4
+              prose-h2:text-2xl prose-h2:mt-6 prose-h2:mb-3
+              prose-h3:text-xl prose-h3:mt-5 prose-h3:mb-2
+              prose-p:text-zinc-700 prose-p:leading-relaxed
+              prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+              prose-blockquote:border-l-zinc-300 prose-blockquote:text-zinc-600
+              prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-zinc-800 prose-code:before:content-none prose-code:after:content-none
+              prose-pre:bg-zinc-900 prose-pre:text-zinc-100
+              prose-img:rounded-lg prose-img:shadow-md
+              [&_.is-editor-empty:first-child]:before:content-[attr(data-placeholder)] [&_.is-editor-empty:first-child]:before:text-zinc-400 [&_.is-editor-empty:first-child]:before:float-left [&_.is-editor-empty:first-child]:before:h-0 [&_.is-editor-empty:first-child]:before:pointer-events-none
+            "
+          />
+        </div>
+      </div>
     </div>
   );
 }

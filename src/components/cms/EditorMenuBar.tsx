@@ -1,6 +1,6 @@
 /**
  * Tiptap 编辑器菜单栏
- * 提供富文本格式化工具
+ * 现代简约风格，参考 TipTap Simple Editor
  */
 
 import type { Editor } from "@tiptap/react";
@@ -9,9 +9,6 @@ import {
   Italic,
   Strikethrough,
   Code,
-  Heading1,
-  Heading2,
-  Heading3,
   List,
   ListOrdered,
   Quote,
@@ -21,7 +18,10 @@ import {
   Link,
   Image,
   Code2,
+  Heading,
+  ChevronDown,
 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
 interface EditorMenuBarProps {
   editor: Editor | null;
@@ -29,7 +29,7 @@ interface EditorMenuBarProps {
 }
 
 // 工具栏按钮组件
-function MenuButton({
+function ToolbarButton({
   onClick,
   isActive = false,
   disabled = false,
@@ -49,12 +49,12 @@ function MenuButton({
       disabled={disabled}
       title={title}
       className={`
-        p-2 rounded-md transition-colors
+        p-1.5 rounded transition-colors
         ${isActive
-          ? "bg-zinc-200 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100"
-          : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+          ? "bg-zinc-200 text-zinc-900"
+          : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-700"
         }
-        ${disabled ? "opacity-50 cursor-not-allowed" : ""}
+        ${disabled ? "opacity-30 cursor-not-allowed" : ""}
       `}
     >
       {children}
@@ -64,7 +64,93 @@ function MenuButton({
 
 // 分隔线组件
 function Divider() {
-  return <div className="w-px h-6 bg-zinc-200 dark:bg-zinc-700 mx-1" />;
+  return <div className="w-px h-5 bg-zinc-200 mx-1" />;
+}
+
+// 标题下拉菜单
+function HeadingDropdown({ editor }: { editor: Editor }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // 点击外部关闭
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const getCurrentHeading = () => {
+    if (editor.isActive("heading", { level: 1 })) return "H1";
+    if (editor.isActive("heading", { level: 2 })) return "H2";
+    if (editor.isActive("heading", { level: 3 })) return "H3";
+    return "H";
+  };
+
+  const headingOptions = [
+    { level: 1, label: "Heading 1", shortcut: "H1" },
+    { level: 2, label: "Heading 2", shortcut: "H2" },
+    { level: 3, label: "Heading 3", shortcut: "H3" },
+  ];
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`
+          flex items-center gap-1 px-2 py-1.5 rounded transition-colors
+          ${editor.isActive("heading")
+            ? "bg-zinc-200 text-zinc-900"
+            : "text-zinc-500 hover:bg-zinc-100 hover:text-zinc-700"
+          }
+        `}
+      >
+        <Heading size={16} />
+        <span className="text-xs font-medium">{getCurrentHeading()}</span>
+        <ChevronDown size={14} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-1 bg-white border border-zinc-200 rounded-lg shadow-lg py-1 min-w-[140px] z-50">
+          {headingOptions.map((option) => (
+            <button
+              key={option.level}
+              type="button"
+              onClick={() => {
+                editor.chain().focus().toggleHeading({ level: option.level as 1 | 2 | 3 }).run();
+                setIsOpen(false);
+              }}
+              className={`
+                w-full flex items-center justify-between px-3 py-2 text-sm
+                ${editor.isActive("heading", { level: option.level })
+                  ? "bg-zinc-100 text-zinc-900"
+                  : "text-zinc-600 hover:bg-zinc-50"
+                }
+              `}
+            >
+              <span>{option.label}</span>
+              <span className="text-xs text-zinc-400">{option.shortcut}</span>
+            </button>
+          ))}
+          <div className="border-t border-zinc-100 my-1" />
+          <button
+            type="button"
+            onClick={() => {
+              editor.chain().focus().setParagraph().run();
+              setIsOpen(false);
+            }}
+            className="w-full flex items-center px-3 py-2 text-sm text-zinc-600 hover:bg-zinc-50"
+          >
+            Paragraph
+          </button>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function EditorMenuBar({ editor, onImageUpload }: EditorMenuBarProps) {
@@ -75,11 +161,9 @@ export default function EditorMenuBar({ editor, onImageUpload }: EditorMenuBarPr
   // 添加链接
   const addLink = () => {
     const previousUrl = editor.getAttributes("link").href;
-    const url = window.prompt("输入链接地址", previousUrl);
+    const url = window.prompt("Enter URL", previousUrl);
 
-    if (url === null) {
-      return;
-    }
+    if (url === null) return;
 
     if (url === "") {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
@@ -90,136 +174,116 @@ export default function EditorMenuBar({ editor, onImageUpload }: EditorMenuBarPr
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-1 p-2 border-b border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50">
+    <div className="flex items-center justify-center gap-0.5 py-2 px-4 border-b border-zinc-200 bg-white">
       {/* 撤销/重做 */}
-      <MenuButton
+      <ToolbarButton
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().undo()}
-        title="撤销"
+        title="Undo"
       >
-        <Undo size={18} />
-      </MenuButton>
-      <MenuButton
+        <Undo size={16} />
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().redo()}
-        title="重做"
+        title="Redo"
       >
-        <Redo size={18} />
-      </MenuButton>
+        <Redo size={16} />
+      </ToolbarButton>
 
       <Divider />
 
-      {/* 标题 */}
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        isActive={editor.isActive("heading", { level: 1 })}
-        title="一级标题"
-      >
-        <Heading1 size={18} />
-      </MenuButton>
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        isActive={editor.isActive("heading", { level: 2 })}
-        title="二级标题"
-      >
-        <Heading2 size={18} />
-      </MenuButton>
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        isActive={editor.isActive("heading", { level: 3 })}
-        title="三级标题"
-      >
-        <Heading3 size={18} />
-      </MenuButton>
-
-      <Divider />
-
-      {/* 文本格式 */}
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        isActive={editor.isActive("bold")}
-        title="粗体"
-      >
-        <Bold size={18} />
-      </MenuButton>
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        isActive={editor.isActive("italic")}
-        title="斜体"
-      >
-        <Italic size={18} />
-      </MenuButton>
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-        isActive={editor.isActive("strike")}
-        title="删除线"
-      >
-        <Strikethrough size={18} />
-      </MenuButton>
-      <MenuButton
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        isActive={editor.isActive("code")}
-        title="行内代码"
-      >
-        <Code size={18} />
-      </MenuButton>
+      {/* 标题下拉 */}
+      <HeadingDropdown editor={editor} />
 
       <Divider />
 
       {/* 列表 */}
-      <MenuButton
+      <ToolbarButton
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         isActive={editor.isActive("bulletList")}
-        title="无序列表"
+        title="Bullet list"
       >
-        <List size={18} />
-      </MenuButton>
-      <MenuButton
+        <List size={16} />
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         isActive={editor.isActive("orderedList")}
-        title="有序列表"
+        title="Numbered list"
       >
-        <ListOrdered size={18} />
-      </MenuButton>
+        <ListOrdered size={16} />
+      </ToolbarButton>
+
+      <Divider />
+
+      {/* 文本格式 */}
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleBold().run()}
+        isActive={editor.isActive("bold")}
+        title="Bold"
+      >
+        <Bold size={16} />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleItalic().run()}
+        isActive={editor.isActive("italic")}
+        title="Italic"
+      >
+        <Italic size={16} />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleStrike().run()}
+        isActive={editor.isActive("strike")}
+        title="Strikethrough"
+      >
+        <Strikethrough size={16} />
+      </ToolbarButton>
+      <ToolbarButton
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        isActive={editor.isActive("code")}
+        title="Inline code"
+      >
+        <Code size={16} />
+      </ToolbarButton>
 
       <Divider />
 
       {/* 块级元素 */}
-      <MenuButton
+      <ToolbarButton
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         isActive={editor.isActive("blockquote")}
-        title="引用"
+        title="Quote"
       >
-        <Quote size={18} />
-      </MenuButton>
-      <MenuButton
+        <Quote size={16} />
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         isActive={editor.isActive("codeBlock")}
-        title="代码块"
+        title="Code block"
       >
-        <Code2 size={18} />
-      </MenuButton>
-      <MenuButton
+        <Code2 size={16} />
+      </ToolbarButton>
+      <ToolbarButton
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
-        title="分割线"
+        title="Divider"
       >
-        <Minus size={18} />
-      </MenuButton>
+        <Minus size={16} />
+      </ToolbarButton>
 
       <Divider />
 
       {/* 链接和图片 */}
-      <MenuButton
+      <ToolbarButton
         onClick={addLink}
         isActive={editor.isActive("link")}
-        title="插入链接"
+        title="Insert link"
       >
-        <Link size={18} />
-      </MenuButton>
+        <Link size={16} />
+      </ToolbarButton>
       {onImageUpload && (
-        <MenuButton onClick={onImageUpload} title="插入图片">
-          <Image size={18} />
-        </MenuButton>
+        <ToolbarButton onClick={onImageUpload} title="Insert image">
+          <Image size={16} />
+        </ToolbarButton>
       )}
     </div>
   );

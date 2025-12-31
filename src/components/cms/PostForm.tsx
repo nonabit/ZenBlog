@@ -204,26 +204,28 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
       {/* 内容区域 */}
       <div className="flex-1">
         {activeTab === "content" ? (
-          <div className="p-6">
+          <div className="flex-1 flex flex-col">
             {/* 文章信息摘要 */}
             {slug && (
-              <div className="mb-6 space-y-1">
-                <div className="flex items-center gap-3 text-sm text-zinc-400">
-                  <span className="font-mono">{slug}</span>
+              <div className="px-8 py-4 border-b border-zinc-100">
+                <div className="max-w-3xl mx-auto">
+                  <div className="flex items-center gap-3 text-sm text-zinc-400 mb-1">
+                    <span className="font-mono">{slug}</span>
+                  </div>
+                  <h1 className="text-2xl font-bold text-zinc-900">
+                    {formData.title || "Untitled"}
+                  </h1>
                 </div>
-                <h1 className="text-2xl font-bold text-zinc-900">
-                  {formData.title || "Untitled"}
-                </h1>
               </div>
             )}
 
-            {/* 编辑器 */}
-            <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden">
+            {/* 编辑器 - 全宽居中 */}
+            <div className="flex-1">
               <Editor
                 initialContent={formData.content}
                 onChange={(content) => handleChange("content", content)}
                 placeholder="Start writing..."
-                minHeight="500px"
+                minHeight="calc(100vh - 280px)"
               />
             </div>
           </div>
