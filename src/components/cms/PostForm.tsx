@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Save, ExternalLink, Trash2, Loader2, FileText, Settings } from "lucide-react";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import MetadataPanel from "./MetadataPanel";
+import { generateSlug } from "@/lib/cms/slug";
 
 interface PostFormData {
   title: string;
@@ -15,10 +16,11 @@ interface PostFormData {
   heroImage: string;
   showOnHome: boolean;
   content: string;
+  slug: string;
 }
 
 interface PostFormProps {
-  initialData?: PostFormData;
+  initialData?: Omit<PostFormData, "slug">;
   slug?: string;
   mode: "create" | "edit";
 }
@@ -32,6 +34,7 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
     heroImage: initialData?.heroImage || "",
     showOnHome: initialData?.showOnHome || false,
     content: initialData?.content || "",
+    slug: slug || "", // 编辑模式使用传入的 slug，创建模式为空
   });
 
   // UI 状态
@@ -40,12 +43,50 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   // 处理表单字段变化
   const handleChange = (field: keyof PostFormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setError(null);
     setSuccess(null);
+  };
+
+  // 自动生成 slug（从标题）
+  const handleAutoGenerateSlug = () => {
+    if (formData.title.trim()) {
+      const newSlug = generateSlug(formData.title);
+      handleChange("slug", newSlug);
+    }
+  };
+
+  // AI 翻译生成 slug
+  const handleTranslateSlug = async () => {
+    if (!formData.title.trim()) return;
+
+    setIsTranslating(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/admin/translate-slug", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: formData.title }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.slug) {
+        handleChange("slug", data.slug);
+        setSuccess("Slug 翻译成功！");
+      } else {
+        setError(data.error || "AI 翻译失败");
+      }
+    } catch (err) {
+      setError("AI 翻译服务不可用");
+    } finally {
+      setIsTranslating(false);
+    }
   };
 
   // 保存文章
@@ -61,13 +102,44 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
       return;
     }
 
+    // 创建模式下，如果没有 slug 则自动生成
+    let slugToUse = formData.slug.trim();
+    if (mode === "create" && !slugToUse) {
+      slugToUse = generateSlug(formData.title);
+    }
+
+    // 验证 slug
+    if (!slugToUse) {
+      setActiveTab("metadata");
+      setError("Please enter a slug");
+      return;
+    }
+
     setSaving(true);
     setError(null);
 
     try {
       const url = "/api/admin/posts";
       const method = mode === "create" ? "POST" : "PUT";
-      const body = mode === "create" ? formData : { slug, ...formData };
+
+      // 构建请求体
+      let body;
+      if (mode === "create") {
+        body = { ...formData, slug: slugToUse };
+      } else {
+        // 编辑模式：检查 slug 是否变更
+        const slugChanged = formData.slug !== slug;
+        body = {
+          slug, // 原始 slug
+          ...(slugChanged ? { newSlug: formData.slug } : {}), // 新 slug（如果变更）
+          title: formData.title,
+          description: formData.description,
+          pubDate: formData.pubDate,
+          heroImage: formData.heroImage,
+          showOnHome: formData.showOnHome,
+          content: formData.content,
+        };
+      }
 
       const response = await fetch(url, {
         method,
@@ -79,7 +151,14 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
 
       if (response.ok) {
         setSuccess(mode === "create" ? "Post created!" : "Changes saved!");
+
+        // 处理页面跳转
         if (mode === "create" && data.slug) {
+          setTimeout(() => {
+            window.location.href = `/admin/posts/${data.slug}`;
+          }, 1000);
+        } else if (mode === "edit" && data.renamed && data.slug) {
+          // slug 变更后跳转到新地址
           setTimeout(() => {
             window.location.href = `/admin/posts/${data.slug}`;
           }, 1000);
@@ -232,8 +311,12 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
         ) : (
           <MetadataPanel
             formData={formData}
-            slug={slug}
+            originalSlug={slug}
+            mode={mode}
             onChange={handleChange}
+            onAutoGenerateSlug={handleAutoGenerateSlug}
+            onTranslateSlug={handleTranslateSlug}
+            isTranslating={isTranslating}
           />
         )}
       </div>

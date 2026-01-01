@@ -2,12 +2,16 @@
 /**
  * CMS 仪表盘页面
  * Backstage 风格 - 简约统计展示
+ * 使用 SSR 模式以支持动态内容
  */
 
 import { listBlogPosts } from "../../lib/cms/fs-manager";
 import CMSLayout from "../../components/cms/CMSLayout";
 import HeaderBar from "../../components/cms/HeaderBar";
 import { FileText, Plus, ArrowRight } from "lucide-react";
+
+// 禁用预渲染，使用 SSR 模式
+export const prerender = false;
 
 // 仅在开发环境可用
 if (import.meta.env.PROD) {

@@ -2,11 +2,15 @@
 /**
  * 文章列表页
  * Backstage 风格 - 简约表格列表
+ * 使用 SSR 模式以支持动态内容更新
  */
 
 import { listBlogPosts } from "../../../lib/cms/fs-manager";
 import CMSLayout from "../../../components/cms/CMSLayout";
 import { Plus, Edit, ExternalLink, FileText, Home } from "lucide-react";
+
+// 禁用预渲染，使用 SSR 模式
+export const prerender = false;
 
 // 仅在开发环境可用
 if (import.meta.env.PROD) {

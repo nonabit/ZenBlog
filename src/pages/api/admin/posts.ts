@@ -70,6 +70,7 @@ export const GET: APIRoute = async ({ request }) => {
 
 /**
  * POST /api/admin/posts - 创建新文章
+ * 支持自定义 slug
  */
 export const POST: APIRoute = async ({ request }) => {
   const devCheck = checkDevEnv();
@@ -90,6 +91,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const slug = await createBlogPost({
+      slug: data.slug, // 可选：用户自定义 slug
       title: data.title,
       description: data.description,
       pubDate: data.pubDate || new Date().toISOString().split("T")[0],
@@ -104,8 +106,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     const message = error instanceof Error ? error.message : "创建失败";
+    // slug 冲突返回 409
+    const status = message.includes("已被使用") ? 409 : 400;
     return new Response(JSON.stringify({ error: message }), {
-      status: 400,
+      status,
       headers: { "Content-Type": "application/json" },
     });
   }
@@ -113,6 +117,7 @@ export const POST: APIRoute = async ({ request }) => {
 
 /**
  * PUT /api/admin/posts - 更新文章
+ * 支持 slug 变更（文件重命名）
  */
 export const PUT: APIRoute = async ({ request }) => {
   const devCheck = checkDevEnv();
@@ -128,7 +133,8 @@ export const PUT: APIRoute = async ({ request }) => {
       });
     }
 
-    await updateBlogPost(data.slug, {
+    const result = await updateBlogPost(data.slug, {
+      newSlug: data.newSlug, // 可选：新的 slug（用于重命名）
       title: data.title,
       description: data.description,
       pubDate: data.pubDate,
@@ -137,14 +143,23 @@ export const PUT: APIRoute = async ({ request }) => {
       content: data.content,
     });
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        slug: result.slug,
+        renamed: result.renamed,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error) {
     const message = error instanceof Error ? error.message : "更新失败";
+    // slug 冲突返回 409
+    const status = message.includes("已被使用") ? 409 : 400;
     return new Response(JSON.stringify({ error: message }), {
-      status: 400,
+      status,
       headers: { "Content-Type": "application/json" },
     });
   }
