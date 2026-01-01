@@ -36,3 +36,4 @@ Switch between light and dark modes, and tailor the editor's appearance with cus
 
 - [x] Test template
 - [ ] [Integrate the free template](https://tiptap.dev/docs/ui-components/templates/simple-editor)
+

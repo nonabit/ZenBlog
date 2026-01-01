@@ -2,24 +2,16 @@
 /**
  * 编辑文章页
  * Backstage 风格
+ * 使用 SSR 模式以支持动态 slug 路由
  */
 
 import { readBlogPost, listBlogPosts } from "../../../lib/cms/fs-manager";
 import CMSLayout from "../../../components/cms/CMSLayout";
 import PostForm from "../../../components/cms/PostForm";
 
-// 生成静态路径
-export async function getStaticPaths() {
-  // 生产环境不生成这些页面
-  if (import.meta.env.PROD) {
-    return [];
-  }
-
-  const posts = await listBlogPosts();
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-  }));
-}
+// 禁用预渲染，使用 SSR 模式
+// 这样 slug 重命名后无需重启服务器
+export const prerender = false;
 
 const { slug } = Astro.params;
 

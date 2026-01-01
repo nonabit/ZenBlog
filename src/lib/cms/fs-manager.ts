@@ -7,7 +7,7 @@ import { readFile, writeFile, unlink, readdir, stat, mkdir, open } from "fs/prom
 import { join } from "path";
 import { existsSync } from "fs";
 import matter from "gray-matter";
-import { generateSlug, isValidSlug } from "./slug";
+import { generateSlug, isValidSlug, validateSlug } from "./slug";
 
 // 内容目录路径
 const CONTENT_DIR = join(process.cwd(), "src", "content");
@@ -94,6 +94,20 @@ async function findFilePath(dir: string, slug: string): Promise<string | null> {
 // ==================== Blog 操作 ====================
 
 /**
+ * 检查 slug 是否已存在
+ * @param slug 待检查的 slug
+ * @param excludeSlug 排除的 slug（编辑模式下排除当前文章）
+ */
+export async function slugExists(
+  slug: string,
+  excludeSlug?: string
+): Promise<boolean> {
+  if (slug === excludeSlug) return false;
+  const filePath = await findFilePath(BLOG_DIR, slug);
+  return filePath !== null;
+}
+
+/**
  * 获取所有博客文章列表
  */
 export async function listBlogPosts(): Promise<BlogPost[]> {
@@ -147,11 +161,20 @@ export async function readBlogPost(slug: string): Promise<BlogPost | null> {
 /**
  * 创建新博客文章
  * 使用原子操作确保文件创建的安全性
+ * @param data 文章数据，可包含自定义 slug
  */
 export async function createBlogPost(
-  data: Omit<BlogPost, "slug" | "createdAt" | "updatedAt">
+  data: Omit<BlogPost, "createdAt" | "updatedAt"> & { slug?: string }
 ): Promise<string> {
-  const slug = generateSlug(data.title);
+  // 使用用户提供的 slug，或从标题自动生成
+  const slug = data.slug?.trim() || generateSlug(data.title);
+
+  // 验证 slug 格式
+  const validation = validateSlug(slug);
+  if (!validation.valid) {
+    throw new Error(validation.error);
+  }
+
   const filePath = join(BLOG_DIR, `${slug}.md`);
 
   const frontmatter = {
@@ -171,7 +194,7 @@ export async function createBlogPost(
     await handle.close();
   } catch (error: unknown) {
     if ((error as NodeJS.ErrnoException).code === "EEXIST") {
-      throw new Error(`文章已存在: ${slug}`);
+      throw new Error(`slug "${slug}" 已被使用，请选择其他名称`);
     }
     throw error;
   }
@@ -181,19 +204,39 @@ export async function createBlogPost(
 
 /**
  * 更新博客文章
+ * 支持 slug 变更（文件重命名）
+ * @param originalSlug 原始 slug
+ * @param data 更新数据，可包含 newSlug 用于重命名
  */
 export async function updateBlogPost(
-  slug: string,
-  data: Partial<BlogPost>
-): Promise<void> {
-  const filePath = await findFilePath(BLOG_DIR, slug);
+  originalSlug: string,
+  data: Partial<BlogPost> & { newSlug?: string }
+): Promise<{ slug: string; renamed: boolean }> {
+  const filePath = await findFilePath(BLOG_DIR, originalSlug);
   if (!filePath) {
-    throw new Error(`文章不存在: ${slug}`);
+    throw new Error(`文章不存在: ${originalSlug}`);
   }
 
-  const existing = await readBlogPost(slug);
+  const existing = await readBlogPost(originalSlug);
   if (!existing) {
-    throw new Error(`文章不存在: ${slug}`);
+    throw new Error(`文章不存在: ${originalSlug}`);
+  }
+
+  // 检查是否需要重命名
+  const newSlug = data.newSlug?.trim();
+  const needsRename = newSlug && newSlug !== originalSlug;
+
+  if (needsRename) {
+    // 验证新 slug 格式
+    const validation = validateSlug(newSlug);
+    if (!validation.valid) {
+      throw new Error(validation.error);
+    }
+
+    // 检查新 slug 是否已存在
+    if (await slugExists(newSlug, originalSlug)) {
+      throw new Error(`slug "${newSlug}" 已被使用，请选择其他名称`);
+    }
   }
 
   const frontmatter = {
@@ -206,7 +249,31 @@ export async function updateBlogPost(
 
   const content = data.content ?? existing.content;
   const fileContent = matter.stringify(content, frontmatter);
-  await writeFile(filePath, fileContent, "utf-8");
+
+  if (needsRename) {
+    // 先创建新文件，再删除旧文件（安全起见）
+    const newFilePath = join(BLOG_DIR, `${newSlug}.md`);
+
+    try {
+      const handle = await open(newFilePath, "wx");
+      await handle.writeFile(fileContent, "utf-8");
+      await handle.close();
+    } catch (error: unknown) {
+      if ((error as NodeJS.ErrnoException).code === "EEXIST") {
+        throw new Error(`slug "${newSlug}" 已被使用`);
+      }
+      throw error;
+    }
+
+    // 删除旧文件
+    await unlink(filePath);
+
+    return { slug: newSlug!, renamed: true };
+  } else {
+    // 仅更新内容
+    await writeFile(filePath, fileContent, "utf-8");
+    return { slug: originalSlug, renamed: false };
+  }
 }
 
 /**

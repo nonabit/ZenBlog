@@ -26,6 +26,12 @@ export default defineConfig({
       alias: {
         '@': path.resolve(__dirname, './src')
       }
+    },
+    server: {
+      watch: {
+        // 忽略 content 目录的变化，防止 CMS 保存时触发 HMR 刷新
+        ignored: ['**/src/content/**']
+      }
     }
   }
 });

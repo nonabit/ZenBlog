@@ -2,11 +2,15 @@
 /**
  * 新建文章页
  * Backstage 风格
+ * 使用 SSR 模式以支持动态内容
  */
 
 import { listBlogPosts } from "../../../lib/cms/fs-manager";
 import CMSLayout from "../../../components/cms/CMSLayout";
 import PostForm from "../../../components/cms/PostForm";
+
+// 禁用预渲染，使用 SSR 模式
+export const prerender = false;
 
 // 仅在开发环境可用
 if (import.meta.env.PROD) {
