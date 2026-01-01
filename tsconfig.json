@@ -12,6 +12,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }

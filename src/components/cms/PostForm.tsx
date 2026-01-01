@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { Save, ExternalLink, Trash2, Loader2, FileText, Settings } from "lucide-react";
-import Editor from "./Editor";
+import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import MetadataPanel from "./MetadataPanel";
 
 interface PostFormData {
@@ -224,10 +224,9 @@ export default function PostForm({ initialData, slug, mode }: PostFormProps) {
       {/* 内容区域 */}
       <div className="flex-1">
         {activeTab === "content" ? (
-          <Editor
+          <SimpleEditor
             initialContent={formData.content}
             onChange={(content) => handleChange("content", content)}
-            placeholder="Start writing..."
             minHeight="calc(100vh - 120px)"
           />
         ) : (

@@ -3,12 +3,21 @@
  */
 
 import TurndownService from "turndown";
+import { marked } from "marked";
+
+// 配置 marked
+marked.setOptions({
+  gfm: true, // GitHub Flavored Markdown
+  breaks: false, // 不将单个换行转换为 <br>
+});
 
 // 创建 Turndown 实例，用于 HTML -> Markdown 转换
 const turndown = new TurndownService({
   headingStyle: "atx", // 使用 # 风格的标题
   codeBlockStyle: "fenced", // 使用 ``` 代码块
   bulletListMarker: "-", // 使用 - 作为列表标记
+  emDelimiter: "*", // 使用 * 作为斜体标记
+  strongDelimiter: "**", // 使用 ** 作为粗体标记
 });
 
 // 自定义规则：保留图片 alt 和 src
@@ -22,6 +31,34 @@ turndown.addRule("images", {
   },
 });
 
+// 自定义规则：处理任务列表
+turndown.addRule("taskListItem", {
+  filter: (node) => {
+    return (
+      node.nodeName === "LI" &&
+      node.getAttribute("data-type") === "taskItem"
+    );
+  },
+  replacement: (content, node) => {
+    const li = node as HTMLLIElement;
+    const checked = li.getAttribute("data-checked") === "true";
+    const checkbox = checked ? "[x]" : "[ ]";
+    return `- ${checkbox} ${content.trim()}\n`;
+  },
+});
+
+// 移除空白段落的规则
+turndown.addRule("emptyParagraph", {
+  filter: (node) => {
+    return (
+      node.nodeName === "P" &&
+      node.textContent?.trim() === "" &&
+      node.children.length === 0
+    );
+  },
+  replacement: () => "\n",
+});
+
 /**
  * 将 HTML 转换为 Markdown
  */
@@ -29,52 +66,40 @@ export function htmlToMarkdown(html: string): string {
   if (!html || html.trim() === "") {
     return "";
   }
-  return turndown.turndown(html);
+
+  // 清理 HTML 中的空白
+  let cleanHtml = html
+    // 移除段落之间的多余空白
+    .replace(/<\/p>\s*<p>/g, "</p><p>")
+    // 移除空段落
+    .replace(/<p>\s*<\/p>/g, "")
+    // 移除 <br> 后的空白
+    .replace(/<br\s*\/?>\s*/g, "<br>");
+
+  let markdown = turndown.turndown(cleanHtml);
+
+  // 清理转换后的 Markdown
+  markdown = markdown
+    // 移除多余的空行（保留最多2个连续换行）
+    .replace(/\n{3,}/g, "\n\n")
+    // 移除行尾空格
+    .replace(/[ \t]+$/gm, "")
+    // 移除开头和结尾的空白
+    .trim();
+
+  return markdown;
 }
 
 /**
- * 简单的 Markdown 转 HTML（用于编辑器初始化）
- * 注意：Tiptap 会自己处理 Markdown，这里只是基础转换
+ * 将 Markdown 转换为 HTML（用于编辑器初始化）
  */
 export function markdownToHtml(markdown: string): string {
   if (!markdown || markdown.trim() === "") {
     return "";
   }
 
-  // 基础转换规则（注意：图片必须在链接之前处理，否则会被链接正则错误匹配）
-  let html = markdown
-    // 代码块
-    .replace(/```(\w*)\n([\s\S]*?)```/g, "<pre><code>$2</code></pre>")
-    // 行内代码
-    .replace(/`([^`]+)`/g, "<code>$1</code>")
-    // 标题
-    .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-    .replace(/^# (.+)$/gm, "<h1>$1</h1>")
-    // 粗体
-    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    // 斜体
-    .replace(/\*(.+?)\*/g, "<em>$1</em>")
-    // 图片（必须在链接之前！）
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />')
-    // 链接
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    // 无序列表
-    .replace(/^- (.+)$/gm, "<li>$1</li>")
-    // 引用
-    .replace(/^> (.+)$/gm, "<blockquote>$1</blockquote>")
-    // 段落
-    .replace(/\n\n/g, "</p><p>")
-    // 换行
-    .replace(/\n/g, "<br />");
-
-  // 包装列表项
-  html = html.replace(/(<li>.*<\/li>)+/g, "<ul>$&</ul>");
-
-  // 包装在段落中
-  if (!html.startsWith("<")) {
-    html = `<p>${html}</p>`;
-  }
+  // 使用 marked 进行转换
+  const html = marked.parse(markdown, { async: false }) as string;
 
   return html;
 }
