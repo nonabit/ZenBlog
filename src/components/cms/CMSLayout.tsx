@@ -54,7 +54,7 @@ export default function CMSLayout({
           <div className="w-7 h-7 bg-zinc-900 rounded flex items-center justify-center">
             <Layers size={16} className="text-white" />
           </div>
-          <a href="/admin" className="text-lg font-semibold text-zinc-900 tracking-tight">
+          <a href="/admin" className="font-serif text-lg font-semibold text-zinc-900 tracking-tight">
             Silicon Universe
           </a>
         </div>

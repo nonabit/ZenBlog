@@ -369,7 +369,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
                     {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg">
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-serif">
                   {post.data.description}
                 </p>
                 <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">

@@ -33,12 +33,18 @@
   outline: none;
   caret-color: var(--tt-cursor-color);
 
-  // Paragraph spacing
-  p:not(:first-child):not(td p):not(th p) {
-    font-size: 1rem;
-    line-height: 1.6;
-    font-weight: normal;
-    margin-top: 20px;
+  // Paragraph styles - 所有段落统一样式
+  p:not(td p):not(th p) {
+    /* 段落使用衬线字体，与前台文章一致 */
+    font-family: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    font-weight: 500;
+
+    // 非首段添加上边距
+    &:not(:first-child) {
+      margin-top: 1.5em;
+    }
   }
 
   // Selection styles

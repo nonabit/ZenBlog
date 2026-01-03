@@ -5,9 +5,18 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-serif: "Newsreader", "LXGW WenKai", "Noto Serif SC", "PingFang SC", "Microsoft YaHei", serif;
-  --font-sans: "Inter", "LXGW WenKai", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --font-mono: "JetBrains Mono", "Noto Sans SC", monospace;
+  /* 界面字体 - 无衬线，用于导航、按钮、设置等 */
+  --font-ui: "Inter", "Noto Sans SC", -apple-system, system-ui, sans-serif;
+  /* 文章标题字体 - 衬线 */
+  --font-heading: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+  /* 文章正文字体 - 衬线 */
+  --font-body: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+  /* 代码字体 */
+  --font-mono: "JetBrains Mono", "Fira Code", Menlo, monospace;
+
+  /* Tailwind 映射 */
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-body);
 }
 
 @layer base {
@@ -26,18 +35,20 @@
   }
 
   body {
-    /* 整合了之前的 tracking-wide 优化和字体设置 */
-    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200 transition-colors duration-300 antialiased font-sans tracking-wide;
+    /* 界面默认使用无衬线字体 */
+    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200 transition-colors duration-300 antialiased font-sans;
+    letter-spacing: 0.01em;
   }
 
-  /* 标题样式：使用宋体，字重适中，字间距正常 */
+  /* 标题样式：使用衬线字体 */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-serif font-medium tracking-normal;
+    font-family: var(--font-heading);
+    @apply font-semibold tracking-normal;
   }
 
   /* 代码块使用等宽字体 */
@@ -58,6 +69,63 @@
 
 ::-webkit-scrollbar-thumb {
   @apply bg-zinc-300 dark:bg-zinc-700 rounded-full;
+}
+
+@layer components {
+  /* 文章正文样式 */
+  .prose {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.8;
+  }
+
+  .prose p {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    font-family: var(--font-heading);
+  }
+
+  .prose h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .prose h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .prose h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .prose h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  /* 行内代码样式 */
+  .prose code:not(pre code) {
+    @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300;
+    @apply border border-zinc-200 dark:border-zinc-700;
+    @apply rounded-md px-1.5 py-0.5;
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    font-weight: 400;
+    line-height: 1.4;
+  }
 }
 
 @layer utilities {
@@ -92,4 +160,21 @@
   .prose img:hover {
     @apply scale-[1.02];
   }
+}
+
+/* 移除 prose 中 inline code 前后的反引号（优先级需高于 typography 插件） */
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none !important;
+}
+
+/* 强制覆盖 typography 插件的字体设置，确保与 CMS 一致 */
+.prose {
+  font-family: "Source Serif 4", "Noto Serif SC", Georgia, serif !important;
+}
+
+.prose p,
+.prose li,
+.prose blockquote {
+  font-family: "Source Serif 4", "Noto Serif SC", Georgia, serif;
 }

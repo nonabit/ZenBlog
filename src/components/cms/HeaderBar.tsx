@@ -36,7 +36,7 @@ export default function HeaderBar({
         {title ? (
           <h1 className="text-lg font-medium text-zinc-900">{title}</h1>
         ) : (
-          <span className="text-zinc-600">{greeting}</span>
+          <span className="font-serif text-lg">{greeting}</span>
         )}
       </div>
 

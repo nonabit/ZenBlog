@@ -3,37 +3,120 @@ title: 测试 CMS 的页面
 description: 我打算为我的网站做一个 CMS 系统，暂时先做比较简单，也算是为以后的编辑器打基础。
 pubDate: '2026-01-01'
 heroImage: ''
-showOnHome: false
+showOnHome: true
 ---
-# Getting started
+# 写作、工具与注意力
 
-Welcome to the ==*Simple Editor*== template! This template integrates **open source** UI components and Tiptap extensions licensed under **MIT**.
+## Writing, Tools, and Attention
 
-Integrate it by following the [Tiptap UI Components docs](https://tiptap.dev/docs/ui-components/templates/simple-editor) or using our CLI tool.
+过去几年，我对 writing tools 的态度发生了很大的变化。
 
-```
-npx @tiptap/cli init
-```
+最早的时候，我会把精力放在工具本身：  
+用什么编辑器？Markdown 还是富文本？是不是要支持 LaTeX、Mermaid、甚至自定义 shortcodes？
 
-## Features
+后来我意识到，这些问题大多数时候并不重要。
 
-> *A fully responsive rich text editor with built-in support for common formatting and layout tools. Type markdown* `**` *or use keyboard shortcuts* `⌘+B` for ~~most~~ all common markdown marks. 🪄
+> 真正重要的不是 tool feature，而是 attention。
 
-Add images, customize alignment, and apply ==advanced formatting== to make your writing more engaging and professional.
+## 从工具崇拜到工具无感
 
-![placeholder-image](/images/tiptap-ui-placeholder-image.jpg "placeholder-image")
+我曾经非常着迷于各种“写作环境”的搭建。
 
-- **Superscript** (x2) and **Subscript** (H2O) for precision.
-- **Typographic conversion**: automatically convert to `->` an arrow **→**.
+- VS Code + Markdown Preview
+- Obsidian + 双链
+- Notion + Database
+- 自建 Blog + CMS + CI/CD
 
-*→* [Learn more](https://tiptap.dev/docs/ui-components/templates/simple-editor#features)
+每一套看起来都很 cool，也确实能提高一部分效率。但问题是：  
+**它们同时也在不断消耗注意力。**
 
----
+当你开始思考这些问题时：
 
-## Make it your own
+- 这一段该不该加一个 callout？
+- 这里用 `inline code` 还是 *italic*？
+- 中英文之间要不要手动加空格？
 
-Switch between light and dark modes, and tailor the editor's appearance with customizable CSS to match your style.
+你其实已经不在写作了，而是在做排版决策（layout decisions）。
 
-- [x] Test template
-- [ ] [Integrate the free template](https://tiptap.dev/docs/ui-components/templates/simple-editor)
+## 中英文混排是一种“真实负担”
 
+在中文语境下写技术内容，很难避免中英文混排。
+
+比如下面这些句子：
+
+- Claude Code 是我今年最推荐的 AI 产品之一
+- 它更像是一个 **general-purpose Agent**
+- 而不是一个 traditional coding assistant
+- 2024 年之后，这种工具会越来越常见
+
+如果字体系统处理不好，中英文之间会出现明显的问题：
+
+1. 英文显得过重，中文显得发虚
+2. 标点位置突兀
+3. 行距在段落切换时产生不稳定感
+
+这些问题单独看都不大，但**叠加起来会非常累眼睛**。
+
+## 阅读体验的核心不是“好看”
+
+很多人设计博客时，会优先追求“好看”。
+
+但阅读体验真正关注的是：
+
+- 视线是否自然向前流动
+- 大脑是否能在段落之间快速切换
+- 英文单词是否会突然“跳出来”打断节奏
+
+举个例子：
+
+> 当你在一段中文里突然看到 Agentic Workflow、Context Window、Token Budget 这样的词，如果字体不统一，注意力会被强行拉走。
+
+这也是为什么**衬线字体在长文中依然有不可替代的价值**。
+
+## 技术写作其实是“节奏控制”
+
+一篇技术文章，很少从头到尾都是高密度信息。
+
+它通常是这样的节奏：
+
+- 一小段背景说明
+- 一个明确的观点
+- 一些例子（examples）
+- 再回到总结性的判断
+
+比如：
+
+> 工具会不断进化，但写作的本质并没有变。  
+> 它依然是一个人，在有限的注意力下，试图把复杂的想法说清楚。
+
+在这种节奏下，**字体系统的稳定性** 比“设计感”重要得多。
+
+## 一个简单的判断标准
+
+如果你在读一篇文章时：
+
+- 不会注意到字体
+- 不会被中英文切换打断
+- 可以连续读 5–10 分钟而不疲劳
+
+那说明这套排版是成功的。
+
+反过来，如果你会频繁停下来想：
+
+> 这个地方看起来有点怪
+
+那问题通常不在内容，而在 typography。
+
+## 最后的一点个人偏好
+
+我越来越倾向于这样一种状态：
+
+- 写作时，不需要关心排版
+- 发布后，不需要反复微调
+- 读者也不会意识到字体的存在
+
+> 字体应该像空气一样：  
+> **不可或缺，但不被察觉。**
+
+如果一套 font system 能做到这一点，它就是合格的；  
+如果还能让中英文在同一行里显得自然，那就是非常优秀的。
