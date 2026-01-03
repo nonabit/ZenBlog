@@ -56,7 +56,7 @@ export default function BlogList({ posts }: { posts: BlogListItem[] }) {
                         {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </span>
                     </div>
-                    <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-prose">
+                    <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-prose font-serif">
                       {post.data.description}
                     </p>
                   </a>

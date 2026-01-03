@@ -104,11 +104,11 @@ export default function NowContent() {
           </span>
         </div>
 
-        <div className="prose prose-lg prose-zinc dark:prose-invert max-w-none">
-          <p className="font-serif text-2xl leading-relaxed text-zinc-700 dark:text-zinc-200">
+        <div className="space-y-4">
+          <p className="text-2xl leading-relaxed text-zinc-700 dark:text-zinc-200">
             Currently working as a Senior Frontend Engineer at Tech Corp. We are in the middle of a major migration to Next.js, which takes up most of my brain cycles during the week.
           </p>
-          <p className="text-zinc-500 dark:text-zinc-400 text-base mt-4 leading-loose">
+          <p className="text-zinc-500 dark:text-zinc-400 text-base leading-loose">
             On the side, I'm diving deep into <strong>Rust</strong>. It's frustrating but rewarding. I'm trying to build a small CLI tool for image optimization just to get my hands dirty. Simplicity is the ultimate sophistication.
           </p>
         </div>

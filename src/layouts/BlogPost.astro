@@ -67,9 +67,9 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
                 <div class="mb-10 text-center">
                     <a
                         href="/"
-                        class="inline-flex items-center gap-1 text-sm font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline"
+                        class="inline-flex items-center gap-1 text-lg font-medium text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors mb-8 no-underline"
                     >
-                        <ArrowLeft size={14} />
+                        <ArrowLeft size={15} />
                         <span>cd ..</span>
                     </a>
 
@@ -118,10 +118,8 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
                 -->
                 <div
                     class="prose prose-zinc dark:prose-invert max-w-none
-                    prose-headings:font-serif prose-headings:font-bold
                     prose-a:text-zinc-900 dark:prose-a:text-zinc-100 prose-a:no-underline prose-a:border-b prose-a:border-zinc-300 dark:prose-a:border-zinc-700 hover:prose-a:border-zinc-900 dark:hover:prose-a:border-zinc-100 hover:prose-a:transition-colors
-                    prose-img:rounded-xl
-                    prose-p:leading-normal text-justify"
+                    prose-img:rounded-xl text-justify text-xl"
                 >
                     <slot />
                 </div>

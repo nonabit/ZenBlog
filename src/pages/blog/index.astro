@@ -57,7 +57,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 		{/* 头部导航 */}
 		<FusionHeader client:load transition:persist />
 
-		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
+		<main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
 			{/* 博客列表组件 */}
 			<BlogList client:load posts={posts} />
 		</main>
