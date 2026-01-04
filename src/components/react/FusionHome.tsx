@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, type Variants, useInView } from 'framer-motion';
 import { ArrowUpRight, MapPin, Cpu, Disc, Clock, Code2, Server, PenTool } from 'lucide-react';
 import type { BlogListItem } from '../../types/content';
+import { Cover } from '../ui/cover';
 
 // 定义 Props 接口
 // 这里对应 index.astro 中 getCollection 返回的数据结构
@@ -213,7 +214,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
         className="mb-32"
       >
         <motion.h1 variants={fadeInUp} className="font-serif text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
-          Backend Roots. <br /> <span className="italic text-zinc-400/80 dark:text-zinc-600 bg-clip-text">AI-Driven</span> Mindset.
+          Backend Roots. <br /> <Cover shakeIntensity={1} scaleDuration={3}>AI-Driven</Cover> Mindset.
         </motion.h1>
         <motion.p variants={fadeInUp} className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide">
           A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle.
