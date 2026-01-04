@@ -5,11 +5,14 @@ import FusionHeader from "../components/react/FusionHeader";
 import FusionFooter from "../components/react/FusionFooter";
 import ScrollProgress from "../components/react/ScrollProgress";
 import SiliconBackground from "../components/react/SiliconBackground";
+import { ReadOnlyRenderer } from "../components/tiptap-templates/read-only";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
-type Props = CollectionEntry<"blog">["data"];
+interface Props extends CollectionEntry<"blog">["data"] {
+    markdownContent: string;
+}
 
-const { title, description, pubDate, heroImage } = Astro.props;
+const { title, description, pubDate, heroImage, markdownContent } = Astro.props;
 
 // 简单的日期格式化
 const formattedDate = pubDate.toLocaleDateString("en-US", {
@@ -28,29 +31,10 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
             description={description}
             image={`/og/${Astro.params.slug}.png`}
         />
-        <script is:inline>
-            const theme = (() => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
-                }
-                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                    return "dark";
-                }
-                return "light";
-            })();
-            if (theme === "dark") {
-                document.documentElement.classList.add("dark");
-            } else {
-                document.documentElement.classList.remove("dark");
-            }
-        </script>
     </head>
 
     <body
-        class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans"
+        class="bg-white text-zinc-800 transition-colors duration-500 antialiased font-sans"
     >
         <SiliconBackground client:load />
         <!-- 1. 进度条 -->
@@ -88,7 +72,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
                     </div>
 
                     <h1
-                        class="font-serif text-4xl sm:text-5xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight mb-6"
+                        class="font-serif text-[2rem] font-bold text-zinc-900 leading-[1.3] mb-6"
                     >
                         {title}
                     </h1>
@@ -109,19 +93,9 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 
                 <hr class="border-zinc-100 dark:border-zinc-800 mb-12" />
 
-                <!-- 4. Markdown 正文优化 -->
-                <!-- 
-                    优化点：
-                    1. prose-p:leading-relaxed: 将行高设置为 1.625，比 loose 紧凑，比 normal 宽松，最适合中文。
-                    2. text-justify: 让中文段落两端对齐，消除右侧参差不齐的缺口，增加块状感。
-                    3. prose-headings:font-bold: 标题加粗，提升层级对比度。
-                -->
-                <div
-                    class="prose prose-zinc dark:prose-invert max-w-none
-                    prose-a:text-zinc-900 dark:prose-a:text-zinc-100 prose-a:no-underline prose-a:border-b prose-a:border-zinc-300 dark:prose-a:border-zinc-700 hover:prose-a:border-zinc-900 dark:hover:prose-a:border-zinc-100 hover:prose-a:transition-colors
-                    prose-img:rounded-xl text-justify text-xl"
-                >
-                    <slot />
+                <!-- 4. Markdown 正文 - 使用 Tiptap 只读渲染器，与 CMS 编辑器样式统一 -->
+                <div class="blog-content">
+                    <ReadOnlyRenderer client:load content={markdownContent} />
                 </div>
             </article>
         </main>
