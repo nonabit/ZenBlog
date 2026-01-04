@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Command, Search, ArrowUpRight, Moon, Sun, Rss } from 'lucide-react';
+import { Command, Search, ArrowUpRight, Rss } from 'lucide-react';
 import Magnetic from './Magnetic'; // 引入我们刚写的磁吸组件
 
 // 定义 Props 接口
@@ -54,27 +54,7 @@ const CmdKModal: React.FC<CmdKModalProps> = ({ isOpen, onClose }) => (
 );
 
 export default function FusionHeader() {
-  const [darkMode, setDarkMode] = useState(false);
   const [cmdKOpen, setCmdKOpen] = useState(false);
-
-  useEffect(() => {
-    const isDark = localStorage.getItem('theme') === 'dark' ||
-      (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    setDarkMode(isDark);
-    if (isDark) document.documentElement.classList.add('dark');
-  }, []);
-
-  const toggleTheme = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -140,12 +120,6 @@ export default function FusionHeader() {
                 >
                   <Command size={12} />
                   <span>K</span>
-                </button>
-              </Magnetic>
-
-              <Magnetic>
-                <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 transition-colors">
-                  {darkMode ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
               </Magnetic>
             </div>

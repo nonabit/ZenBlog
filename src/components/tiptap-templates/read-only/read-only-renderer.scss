@@ -1,0 +1,41 @@
+/* 只读渲染器样式 - 与编辑器共享基础排版配置 */
+/* CSS 变量已在 global.css 中通过 _variables.scss 定义，无需重复导入 */
+
+.read-only-content {
+  width: 100%;
+}
+
+/* 只读渲染器的 Tiptap 编辑器样式 */
+.read-only-content .tiptap.ProseMirror.read-only-renderer {
+  /* 正文使用衬线字体，与编辑器一致 */
+  font-family: "Source Serif 4", "Noto Serif SC", Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.8;
+
+  /* 移除编辑器的轮廓线 */
+  outline: none;
+
+  /* 禁用光标 */
+  caret-color: transparent;
+
+  /* 两端对齐，适合中文阅读 */
+  text-align: justify;
+}
+
+/* 确保只读模式下不显示编辑相关的 UI */
+.read-only-content .ProseMirror-gapcursor,
+.read-only-content .ProseMirror-trailingBreak {
+  display: none;
+}
+
+/* 只读模式下选中文本的样式 - 使用更高对比度的颜色 */
+.read-only-content .tiptap.ProseMirror ::selection {
+  background-color: rgba(251, 146, 60, 0.35); /* 橙色，更明显 */
+  color: inherit;
+}
+
+.dark .read-only-content .tiptap.ProseMirror ::selection {
+  background-color: rgba(251, 146, 60, 0.4); /* 暗色模式下稍微更亮 */
+  color: inherit;
+}
