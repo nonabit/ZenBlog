@@ -55,7 +55,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 	<body class="bg-white dark:bg-black transition-colors duration-500">
 		<SiliconBackground client:load />
 		{/* 头部导航 */}
-		<FusionHeader client:load transition:persist />
+		<FusionHeader client:load currentPath="/blog" />
 
 		<main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
 			{/* 博客列表组件 */}

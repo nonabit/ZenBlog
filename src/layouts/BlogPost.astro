@@ -41,7 +41,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
         <ScrollProgress client:load />
 
         <!-- 2. 全局导航 (保留你的 transition:persist) -->
-        <FusionHeader client:load transition:persist />
+        <FusionHeader client:load currentPath="/blog" />
 
         <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20 relative z-10">
             <!-- 3. 文章头部 (Hero) -->

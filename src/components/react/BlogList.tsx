@@ -32,8 +32,8 @@ export default function BlogList({ posts }: { posts: BlogListItem[] }) {
       <div className="space-y-24">
         {years.map((year, yearIndex) => (
           <section key={year} className="relative">
-            {/* 年份标签 (Sticky) */}
-            <h2 className="font-mono text-sm font-bold text-zinc-400 mb-8 sticky top-24 bg-white/80 dark:bg-black/80 backdrop-blur-sm py-2 z-10">
+            {/* 年份标签 */}
+            <h2 className="font-mono text-sm font-bold text-zinc-400 mb-8">
               {year}
             </h2>
 
