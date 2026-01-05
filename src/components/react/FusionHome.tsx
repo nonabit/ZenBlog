@@ -37,15 +37,15 @@ const staggerContainer = {
   }
 };
 
-// ... (保留 BentoItem 组件) ...
+// BentoItem 组件
 const BentoItem: React.FC<{ className?: string; children: React.ReactNode }> = ({ className = "", children }) => (
   <motion.div
     variants={fadeInUp}
     whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
     className={`
-      bg-white/80 dark:bg-zinc-900/60 backdrop-blur-md 
-      border border-zinc-200/60 dark:border-zinc-800/60 
-      rounded-3xl p-6 relative overflow-hidden group 
+      bg-white/80 dark:bg-zinc-900/60 backdrop-blur-md
+      border border-zinc-200/60 dark:border-zinc-800/60
+      rounded-3xl p-6 relative overflow-hidden group
       shadow-sm hover:shadow-2xl hover:shadow-zinc-200/50 dark:hover:shadow-black/50
       transition-all duration-500
       ${className}

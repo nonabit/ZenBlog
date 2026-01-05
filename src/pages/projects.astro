@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import FusionHeader from "../components/react/FusionHeader";
-import ProjectCard from "../components/react/ProjectCard";
+import { BentoGridDemo } from "../components/react/BentoGrid";
 import FusionFooter from "../components/react/FusionFooter";
 import SiliconBackground from "../components/react/SiliconBackground";
 import { SITE_TITLE } from "../consts";
@@ -63,7 +63,7 @@ const projects: ProjectListItem[] = allProjects.map(
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
         <SiliconBackground client:load />
-        <FusionHeader client:load />
+        <FusionHeader client:load currentPath="/projects" />
 
         <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
             <div class="mb-16 max-w-2xl">
@@ -82,14 +82,8 @@ const projects: ProjectListItem[] = allProjects.map(
                 </p>
             </div>
 
-            <!-- Projects Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {
-                    projects.map((project) => (
-                        <ProjectCard client:load project={project} />
-                    ))
-                }
-            </div>
+            <!-- Bento Grid 占位布局 -->
+            <BentoGridDemo client:load />
 
             {
                 projects.length === 0 && (
