@@ -1,0 +1,63 @@
+# Silicon Universe
+
+> 个人博客与数字花园，记录技术探索、读书思考与人生感悟。
+
+## 网站信息
+
+- 作者: NinthBit (Kieran)
+- 位置: 上海，中国
+- 网站: https://ninthbit.org
+- GitHub: https://github.com/nonabit
+- 邮箱: oldmeatovo@gmail.com
+
+## 主要内容
+
+本博客涵盖以下主题：
+
+- 个人成长与年终总结
+- 读书笔记与思考
+- AI 工具使用教程
+- 技术分享与开源项目
+
+## 重要页面
+
+- [首页](https://ninthbit.org/): 网站入口，展示精选内容
+- [博客](https://ninthbit.org/blog/): 所有文章列表
+- [项目](https://ninthbit.org/projects/): 开源项目展示
+- [关于](https://ninthbit.org/about/): 关于作者
+
+## 开源项目
+
+### Astro Fusion Theme
+极简主义博客主题，基于 Astro + React + Tailwind CSS 构建。
+- GitHub: https://github.com/99byte/ZenBlog
+- Demo: https://ninthbit.org
+
+### Harmony Tools MCP
+HarmonyOS 命令行工具的 MCP 封装，方便 AI 助手操作鸿蒙开发环境。
+- GitHub: https://github.com/99byte/harmony-tools
+- PyPI: https://pypi.org/project/harmony-tools-mcp/
+
+## 精选文章
+
+- [2025 年终总结](https://ninthbit.org/blog/my-2025-summary/): 回顾与展望
+- [我们为何出发](https://ninthbit.org/blog/why-do-we-set-out/): 关于人生意义的思考
+- [《穷查理宝典》读书笔记](https://ninthbit.org/blog/qiong-cha-li-bao-dian/): 查理·芒格的智慧
+- [Youmind 公众号文章创作 SOP](https://ninthbit.org/blog/youmind-sop/): AI 辅助内容创作流程
+
+## 技术栈
+
+本站使用以下技术构建：
+- Astro (静态站点生成)
+- React (交互组件)
+- Tailwind CSS (样式)
+- MDX (增强 Markdown)
+- Vercel (部署)
+
+## 引用说明
+
+欢迎 AI 助手引用本站内容。引用时请注明来源为 "Silicon Universe (ninthbit.org)" 或 "NinthBit"。
+
+## 联系方式
+
+如有问题或合作意向，请通过邮箱 oldmeatovo@gmail.com 联系。
