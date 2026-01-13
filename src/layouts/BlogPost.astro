@@ -6,6 +6,7 @@ import FusionFooter from "../components/react/FusionFooter";
 import ScrollProgress from "../components/react/ScrollProgress";
 import SiliconBackground from "../components/react/SiliconBackground";
 import { ReadOnlyRenderer } from "../components/tiptap-templates/read-only";
+import GiscusComments from "../components/react/GiscusComments";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 
 interface Props extends CollectionEntry<"blog">["data"] {
@@ -98,6 +99,14 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
                     <ReadOnlyRenderer client:load content={markdownContent} />
                 </div>
             </article>
+
+            <!-- 5. 评论区 -->
+            <section class="mt-16 pt-12 border-t border-zinc-100">
+                <h2 class="font-serif text-2xl font-bold text-zinc-900 mb-8">
+                    评论
+                </h2>
+                <GiscusComments client:visible />
+            </section>
         </main>
 
         {/* 统一的页脚 */}
