@@ -15,7 +15,7 @@ export default function GiscusComments() {
       inputPosition="bottom"
       theme="light"
       lang="zh-CN"
-      loading="lazy"
+      loading="eager"
     />
   );
 }
