@@ -6,6 +6,7 @@
  */
 
 import { listBlogPosts } from "../../lib/cms/fs-manager";
+import { getCommentsStats } from "../../lib/cms/discussions";
 import CMSLayout from "../../components/cms/CMSLayout";
 import HeaderBar from "../../components/cms/HeaderBar";
 import { FileText, Plus, ArrowRight, MessageSquare } from "lucide-react";
@@ -21,6 +22,14 @@ if (import.meta.env.PROD) {
 // 获取数据
 const posts = await listBlogPosts();
 const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }));
+
+// 获取评论统计（失败时使用默认值）
+let commentsStats = { totalDiscussions: 0, totalComments: 0 };
+try {
+  commentsStats = await getCommentsStats();
+} catch (e) {
+  // Token 未配置时静默失败
+}
 ---
 
 <!DOCTYPE html>
@@ -49,7 +58,7 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
             Overview
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <!-- 文章统计 -->
+            <!-- 1. 文章统计 -->
             <div class="p-6 border border-zinc-200 rounded-lg">
               <div class="flex items-center justify-between mb-4">
                 <FileText size={20} className="text-zinc-400" />
@@ -66,7 +75,24 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
               <p class="text-sm text-zinc-500">Total posts</p>
             </div>
 
-            <!-- 最近发布 -->
+            <!-- 2. 评论统计 -->
+            <div class="p-6 border border-zinc-200 rounded-lg">
+              <div class="flex items-center justify-between mb-4">
+                <MessageSquare size={20} className="text-zinc-400" />
+                <a
+                  href="/admin/comments"
+                  class="p-1.5 text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 rounded transition-colors"
+                >
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+              <div class="text-3xl font-bold text-zinc-900 mb-1">
+                {commentsStats.totalDiscussions}
+              </div>
+              <p class="text-sm text-zinc-500">Total discussions</p>
+            </div>
+
+            <!-- 3. 最近更新 -->
             <div class="p-6 border border-zinc-200 rounded-lg">
               <div class="flex items-center justify-between mb-4">
                 <span class="text-zinc-400 text-sm">Latest</span>
@@ -83,7 +109,7 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
               )}
             </div>
 
-            <!-- 快捷操作 -->
+            <!-- 4. 快捷操作 -->
             <div class="p-6 border border-zinc-200 rounded-lg">
               <div class="flex items-center justify-between mb-4">
                 <span class="text-zinc-400 text-sm">Quick actions</span>
@@ -104,26 +130,6 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
                   <span>All posts</span>
                 </a>
               </div>
-            </div>
-
-            <!-- 评论入口卡片 -->
-            <div class="p-6 border border-zinc-200 rounded-lg">
-              <div class="flex items-center justify-between mb-4">
-                <MessageSquare size={20} className="text-zinc-400" />
-                <a
-                  href="/admin/comments"
-                  class="p-1.5 text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 rounded transition-colors"
-                >
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-              <div class="text-3xl font-bold text-zinc-900 mb-1">
-                —
-              </div>
-              <p class="text-sm text-zinc-500">Total comments</p>
-              <p class="text-xs text-zinc-400 mt-2">
-                View in Comments page
-              </p>
             </div>
           </div>
         </div>
