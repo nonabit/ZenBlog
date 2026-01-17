@@ -10,6 +10,7 @@ import {
   Plus,
   ArrowLeft,
   Layers,
+  MessageSquare,
 } from "lucide-react";
 import RecentPosts from "./RecentPosts";
 
@@ -28,6 +29,7 @@ interface CMSLayoutProps {
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/posts", label: "Posts", icon: FileText },
+  { href: "/admin/comments", label: "Comments", icon: MessageSquare },
 ];
 
 export default function CMSLayout({
