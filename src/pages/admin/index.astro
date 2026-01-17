@@ -8,7 +8,7 @@
 import { listBlogPosts } from "../../lib/cms/fs-manager";
 import CMSLayout from "../../components/cms/CMSLayout";
 import HeaderBar from "../../components/cms/HeaderBar";
-import { FileText, Plus, ArrowRight } from "lucide-react";
+import { FileText, Plus, ArrowRight, MessageSquare } from "lucide-react";
 
 // 禁用预渲染，使用 SSR 模式
 export const prerender = false;
@@ -48,7 +48,7 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
           <h2 class="text-sm font-medium text-zinc-400 uppercase tracking-wider mb-4">
             Overview
           </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <!-- 文章统计 -->
             <div class="p-6 border border-zinc-200 rounded-lg">
               <div class="flex items-center justify-between mb-4">
@@ -104,6 +104,26 @@ const recentPosts = posts.slice(0, 8).map(p => ({ slug: p.slug, title: p.title }
                   <span>All posts</span>
                 </a>
               </div>
+            </div>
+
+            <!-- 评论入口卡片 -->
+            <div class="p-6 border border-zinc-200 rounded-lg">
+              <div class="flex items-center justify-between mb-4">
+                <MessageSquare size={20} className="text-zinc-400" />
+                <a
+                  href="/admin/comments"
+                  class="p-1.5 text-zinc-400 hover:text-zinc-600 hover:bg-zinc-100 rounded transition-colors"
+                >
+                  <ArrowRight size={16} />
+                </a>
+              </div>
+              <div class="text-3xl font-bold text-zinc-900 mb-1">
+                —
+              </div>
+              <p class="text-sm text-zinc-500">Total comments</p>
+              <p class="text-xs text-zinc-400 mt-2">
+                View in Comments page
+              </p>
             </div>
           </div>
         </div>
