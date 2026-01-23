@@ -1,15 +1,15 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import FusionHeader from "../../components/react/FusionHeader";
-import BlogList from "../../components/react/BlogList";
-import FusionFooter from "../../components/react/FusionFooter";
-import SiliconBackground from "../../components/react/SiliconBackground";
-import { SITE_TITLE } from "../../consts";
+import BaseHead from "../../../components/BaseHead.astro";
+import FusionHeader from "../../../components/react/FusionHeader";
+import BlogList from "../../../components/react/BlogList";
+import FusionFooter from "../../../components/react/FusionFooter";
+import SiliconBackground from "../../../components/react/SiliconBackground";
+import { SITE_TITLE } from "../../../consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { translations } from "@/i18n/translations";
 
-const lang = 'en';
+const lang = 'zh';
 const t = translations[lang];
 
 // 1. 获取原始数据并排序
@@ -30,7 +30,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 	<head>
 		<BaseHead
 			title={`${t['nav.blog']} | ${SITE_TITLE}`}
@@ -59,7 +59,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 	<body class="bg-white dark:bg-black transition-colors duration-500">
 		<SiliconBackground client:load />
 		{/* 头部导航 */}
-		<FusionHeader client:load currentPath="/blog" lang={lang} translations={t} />
+		<FusionHeader client:load currentPath="/zh/blog" lang={lang} translations={t} />
 
 		<main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
 			{/* 博客列表组件 */}
