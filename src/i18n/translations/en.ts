@@ -10,6 +10,16 @@ export const en = {
   'home.latest': 'Latest Posts',
   'home.viewAll': 'View All',
   'home.readMore': 'Read More',
+  'home.hero.title1': 'Backend Roots.',
+  'home.hero.title2': 'AI-Driven',
+  'home.hero.title3': 'Mindset.',
+  'home.hero.subtitle': 'A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle.',
+  'home.building': 'Building',
+  'home.building.title': 'AI-Powered HarmonyOS Migration',
+  'home.building.desc': 'Building reusable tools to boost HarmonyOS app development efficiency. Helping migrate existing Android/iOS codebases to HarmonyOS.',
+  'home.location': 'Shanghai, CN',
+  'home.music': 'Music',
+  'home.writing': 'Selected Writing',
 
   // About
   'about.title': 'About Me',

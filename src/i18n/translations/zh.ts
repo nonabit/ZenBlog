@@ -10,6 +10,16 @@ export const zh = {
   'home.latest': '最新文章',
   'home.viewAll': '查看全部',
   'home.readMore': '阅读更多',
+  'home.hero.title1': '后端根基。',
+  'home.hero.title2': 'AI 驱动',
+  'home.hero.title3': '思维。',
+  'home.hero.subtitle': '一位 5 年后端老兵，正在进化为 AI 原生全栈工程师。我记录将好奇心转化为生产力的旅程，同时探索数字游民生活方式。',
+  'home.building': '正在构建',
+  'home.building.title': 'AI 驱动的 HarmonyOS 迁移',
+  'home.building.desc': '构建可复用工具以提升 HarmonyOS 应用开发效率。帮助将现有 Android/iOS 代码库迁移到 HarmonyOS。',
+  'home.location': '上海，中国',
+  'home.music': '音乐',
+  'home.writing': '精选文章',
 
   // 关于页
   'about.title': '关于我',
