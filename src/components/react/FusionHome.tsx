@@ -8,6 +8,7 @@ import { Cover } from '../ui/cover';
 // 这里对应 index.astro 中 getCollection 返回的数据结构
 interface FusionHomeProps {
   posts: BlogListItem[];
+  translations?: Record<string, string>;
 }
 
 // 动画变体
@@ -203,7 +204,9 @@ const TimeDisplay = () => {
   return <span className="font-mono tabular-nums tracking-wider">{time}</span>;
 };
 
-export default function FusionHome({ posts }: FusionHomeProps) {
+export default function FusionHome({ posts, translations = {} }: FusionHomeProps) {
+  const t = (key: string) => translations[key] || key;
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
       {/* Hero Section */}
