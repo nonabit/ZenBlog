@@ -22,17 +22,29 @@ export default function LanguageSwitcher({ currentLang, currentPath }: LanguageS
     return path;
   };
 
-  // 获取另一种语言
-  const otherLang = currentLang === 'en' ? 'zh' : 'en';
-  const otherLangLabel = currentLang === 'en' ? '中' : 'EN';
-
   return (
-    <a
-      href={getLocalizedPath(otherLang)}
-      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors text-sm font-medium no-underline"
-      aria-label={`Switch to ${languages[otherLang]}`}
-    >
-      <span className="font-mono">{otherLangLabel}</span>
-    </a>
+    <div className="flex items-center gap-2 text-sm font-medium">
+      <a
+        href={getLocalizedPath('en')}
+        className={`no-underline transition-colors ${
+          currentLang === 'en'
+            ? 'text-zinc-900 dark:text-zinc-100 font-bold'
+            : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400'
+        }`}
+      >
+        EN
+      </a>
+      <span className="text-zinc-300 dark:text-zinc-700">/</span>
+      <a
+        href={getLocalizedPath('zh')}
+        className={`no-underline transition-colors ${
+          currentLang === 'zh'
+            ? 'text-zinc-900 dark:text-zinc-100 font-bold'
+            : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400'
+        }`}
+      >
+        ZH
+      </a>
+    </div>
   );
 }
