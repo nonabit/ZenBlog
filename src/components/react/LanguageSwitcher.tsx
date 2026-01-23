@@ -1,4 +1,3 @@
-import { Languages } from 'lucide-react';
 import { languages, type Language } from '@/i18n/config';
 
 interface LanguageSwitcherProps {
@@ -23,30 +22,17 @@ export default function LanguageSwitcher({ currentLang, currentPath }: LanguageS
     return path;
   };
 
-  return (
-    <div className="relative group">
-      <button
-        className="flex items-center justify-center w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-        aria-label="Switch Language"
-      >
-        <Languages size={18} />
-      </button>
+  // 获取另一种语言
+  const otherLang = currentLang === 'en' ? 'zh' : 'en';
+  const otherLangLabel = currentLang === 'en' ? '中' : 'EN';
 
-      <div className="absolute right-0 top-full mt-2 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[120px]">
-        {Object.entries(languages).map(([lang, label]) => (
-          <a
-            key={lang}
-            href={getLocalizedPath(lang as Language)}
-            className={`block px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors no-underline ${
-              currentLang === lang
-                ? 'text-zinc-900 dark:text-zinc-100 font-medium'
-                : 'text-zinc-600 dark:text-zinc-400'
-            }`}
-          >
-            {label}
-          </a>
-        ))}
-      </div>
-    </div>
+  return (
+    <a
+      href={getLocalizedPath(otherLang)}
+      className="flex items-center gap-1.5 px-3 py-1.5 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors text-sm font-medium no-underline"
+      aria-label={`Switch to ${languages[otherLang]}`}
+    >
+      <span className="font-mono">{otherLangLabel}</span>
+    </a>
   );
 }
