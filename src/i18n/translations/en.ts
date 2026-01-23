@@ -36,6 +36,10 @@ export const en = {
   // Projects
   'projects.title': 'Projects',
   'projects.description': 'Some of my projects and works',
+  'projects.header.title': 'Selected Works',
+  'projects.header.subtitle1': 'A curated selection of side projects, open source contributions, and experiments.',
+  'projects.header.subtitle2': 'Building things is the best way to learn.',
+  'projects.empty': 'No projects found. Start building!',
 
   // Footer
   'footer.rights': 'All rights reserved',

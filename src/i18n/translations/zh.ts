@@ -36,6 +36,10 @@ export const zh = {
   // 项目页
   'projects.title': '项目',
   'projects.description': '我的一些项目和作品',
+  'projects.header.title': '精选作品',
+  'projects.header.subtitle1': '精心挑选的副业项目、开源贡献和实验。',
+  'projects.header.subtitle2': '构建是最好的学习方式。',
+  'projects.empty': '未找到项目。开始构建吧！',
 
   // 页脚
   'footer.rights': '版权所有',
