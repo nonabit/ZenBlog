@@ -8,6 +8,7 @@ import { Cover } from '../ui/cover';
 // 这里对应 index.astro 中 getCollection 返回的数据结构
 interface FusionHomeProps {
   posts: BlogListItem[];
+  translations?: Record<string, string>;
 }
 
 // 动画变体
@@ -203,7 +204,9 @@ const TimeDisplay = () => {
   return <span className="font-mono tabular-nums tracking-wider">{time}</span>;
 };
 
-export default function FusionHome({ posts }: FusionHomeProps) {
+export default function FusionHome({ posts, translations = {} }: FusionHomeProps) {
+  const t = (key: string) => translations[key] || key;
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
       {/* Hero Section */}
@@ -214,10 +217,10 @@ export default function FusionHome({ posts }: FusionHomeProps) {
         className="mb-32"
       >
         <motion.h1 variants={fadeInUp} className="font-serif text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
-          Backend Roots. <br /> <Cover shakeIntensity={1} scaleDuration={3}>AI-Driven</Cover> Mindset.
+          {t('home.hero.title1')} <br /> <Cover shakeIntensity={1} scaleDuration={3}>{t('home.hero.title2')}</Cover> {t('home.hero.title3')}
         </motion.h1>
         <motion.p variants={fadeInUp} className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide">
-          A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle.
+          {t('home.hero.subtitle')}
         </motion.p>
       </motion.section>
 
@@ -246,13 +249,13 @@ export default function FusionHome({ posts }: FusionHomeProps) {
           <div>
             <div className="flex items-center gap-2 text-zinc-400 mb-4 text-xs font-bold font-mono uppercase tracking-widest opacity-80">
               <Cpu size={14} />
-              <span>Building</span>
+              <span>{t('home.building')}</span>
             </div>
-            <h3 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">AI-Powered HarmonyOS Migration</h3>
+            <h3 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">{t('home.building.title')}</h3>
           </div>
           <div className="mt-4 relative z-10 w-full sm:w-full">
             <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
-              Building reusable tools to boost HarmonyOS app development efficiency. Helping migrate existing Android/iOS codebases to HarmonyOS.
+              {t('home.building.desc')}
             </p>
           </div>
         </BentoItem>
@@ -270,7 +273,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
             <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-2">
               <MapPin size={20} className="text-zinc-600 dark:text-zinc-300" />
             </div>
-            <div className="font-medium text-zinc-900 dark:text-zinc-100">Shanghai, CN</div>
+            <div className="font-medium text-zinc-900 dark:text-zinc-100">{t('home.location')}</div>
             {/* 实时时钟显示 */}
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/50 px-2 py-1 rounded-md">
               <Clock size={10} />
@@ -294,7 +297,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
               >
                 <Disc size={14} />
               </motion.div>
-              <span>Music</span>
+              <span>{t('home.music')}</span>
             </div>
             {/* 动态波形 (Audio Visualizer Animation) */}
             <div className="flex items-end gap-0.5 h-4">
@@ -347,8 +350,8 @@ export default function FusionHome({ posts }: FusionHomeProps) {
       {/* --- Writings List --- */}
       <section className="max-w-2xl mb-32">
         <div className="flex items-baseline justify-between mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <h2 className="font-serif text-3xl text-zinc-900 dark:text-zinc-100">Selected Writing</h2>
-          <a href="/blog" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">View All</a>
+          <h2 className="font-serif text-3xl text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
+          <a href="/blog" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
         </div>
 
         <div className="space-y-8">

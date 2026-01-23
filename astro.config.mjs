@@ -15,6 +15,13 @@ export default defineConfig({
   // 静态模式，适用于纯静态站点
   output: 'static',
   adapter: vercel(),
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   integrations: [
     mdx(),
     sitemap(),

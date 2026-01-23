@@ -1,26 +1,23 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import SiliconBackground from "../components/react/SiliconBackground";
-import FusionHeader from "../components/react/FusionHeader";
-import FusionHome from "../components/react/FusionHome";
-import FusionFooter from "../components/react/FusionFooter";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import BaseHead from "../../components/BaseHead.astro";
+import SiliconBackground from "../../components/react/SiliconBackground";
+import FusionHeader from "../../components/react/FusionHeader";
+import FusionHome from "../../components/react/FusionHome";
+import FusionFooter from "../../components/react/FusionFooter";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-// 1. 导入类型定义
 import type { CollectionEntry } from "astro:content";
-import type { BlogListItem } from "../types/content";
+import type { BlogListItem } from "../../types/content";
 import { translations } from "@/i18n/translations";
 
-const lang = 'en';
+const lang = 'zh';
 const t = translations[lang];
 
-// 获取最新文章并按发布时间倒序
 const allPosts = (await getCollection("blog")).sort(
 	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
 		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-// 3. 为 map 函数的参数 post 添加显式类型
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
 	slug: post.id.replace(/\.[^/.]+$/, ""),
 	data: {
@@ -30,15 +27,14 @@ const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
 		showOnHome: post.data.showOnHome === true,
 	},
 }));
-// 仅取首页展示的最新5篇
+
 const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<!-- 解决暗色模式闪屏 (FOUC) 的小脚本 -->
 		<script is:inline>
 			const theme = (() => {
 				if (
@@ -61,15 +57,12 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
 		<SiliconBackground client:load />
-		<!-- Header: 使用 client:load 指令，因为它需要立即响应交互 (Cmd+K) -->
-		<FusionHeader client:load currentPath="/" lang={lang} translations={t} />
+		<FusionHeader client:load currentPath="/zh" lang={lang} translations={t} />
 
 		<main class="relative z-10">
-			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
 			<FusionHome client:load posts={homePosts} translations={t} />
 		</main>
 
-		<!-- 首页：仅显示 Footer，移除 CTA 区域 -->
 		<FusionFooter client:visible translations={t} />
 	</body>
 </html>

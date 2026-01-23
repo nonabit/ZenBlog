@@ -7,7 +7,12 @@ const SOCIAL_LINKS = [
   { icon: Mail, href: "mailto:oldmeatovo@gmail.com", label: "Email" },
 ];
 
-export default function FusionFooter() {
+interface FusionFooterProps {
+  translations?: Record<string, string>;
+}
+
+export default function FusionFooter({ translations = {} }: FusionFooterProps) {
+  const t = (key: string) => translations[key] || key;
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
