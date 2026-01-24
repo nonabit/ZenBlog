@@ -1,23 +1,9 @@
+@import './typography.css';
 @import './_variables.scss';
 @import './_keyframe-animations.scss';
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-
-@theme {
-  /* 界面字体 - 无衬线，用于导航、按钮、设置等 */
-  --font-ui: "Inter", "Noto Sans SC", -apple-system, system-ui, sans-serif;
-  /* 文章标题字体 - 衬线 */
-  --font-heading: "Source Serif 4", "Noto Serif SC", Georgia, serif;
-  /* 文章正文字体 - 衬线 */
-  --font-body: "Source Serif 4", "Noto Serif SC", Georgia, serif;
-  /* 代码字体 */
-  --font-mono: "JetBrains Mono", "Fira Code", Menlo, monospace;
-
-  /* Tailwind 映射 */
-  --font-sans: var(--font-ui);
-  --font-serif: var(--font-body);
-}
 
 @layer base {
   :root {
@@ -36,8 +22,11 @@
 
   body {
     /* 界面默认使用无衬线字体 */
-    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200 transition-colors duration-300 antialiased font-sans;
-    letter-spacing: 0.01em;
+    font-family: var(--font-ui);
+    @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200
+           transition-colors duration-300 antialiased;
+    letter-spacing: var(--letter-spacing-normal);
+    line-height: var(--line-height-normal);
   }
 
   /* 标题样式：使用衬线字体 */
@@ -48,13 +37,16 @@
   h5,
   h6 {
     font-family: var(--font-heading);
-    @apply font-semibold tracking-normal;
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
   }
 
   /* 代码块使用等宽字体 */
   code,
   pre {
-    @apply font-mono;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-code);
   }
 }
 
