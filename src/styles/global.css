@@ -74,7 +74,7 @@
     font-weight: var(--font-weight-light);  /* 300 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
-    @apply text-zinc-700 dark:text-zinc-300;
+    @apply text-black dark:text-zinc-300;
   }
 
   /* 段落 */
@@ -87,7 +87,7 @@
   .prose strong,
   .prose b {
     font-weight: var(--font-weight-normal);  /* 400 */
-    @apply text-zinc-900 dark:text-zinc-100;
+    @apply text-black dark:text-zinc-100;
   }
 
   /* 文章大标题：衬线 + 粗体 */
@@ -96,7 +96,7 @@
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-bold);  /* 700 */
     line-height: var(--line-height-tight);
-    @apply text-zinc-900 dark:text-zinc-100 mt-0 mb-8;
+    @apply text-black dark:text-zinc-100 mt-0 mb-8;
   }
 
   /* 正文中的标题：无衬线 + 正常字重 */
@@ -105,7 +105,7 @@
     font-size: var(--font-size-prose-heading);
     font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-tight);
-    @apply text-zinc-900 dark:text-zinc-100 mt-12 mb-6;
+    @apply text-black dark:text-zinc-100 mt-12 mb-6;
   }
 
   .prose h3 {
@@ -113,7 +113,7 @@
     font-size: 1.25rem;  /* 20px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    @apply text-zinc-900 dark:text-zinc-100 mt-8 mb-4;
+    @apply text-black dark:text-zinc-100 mt-8 mb-4;
   }
 
   .prose h4 {
@@ -121,7 +121,7 @@
     font-size: 1.125rem;  /* 18px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    @apply text-zinc-900 dark:text-zinc-100 mt-6 mb-3;
+    @apply text-black dark:text-zinc-100 mt-6 mb-3;
   }
 
   /* 链接 */
@@ -226,7 +226,7 @@
   }
 
   .prose th {
-    @apply py-3 px-4 font-medium text-zinc-900 dark:text-zinc-100;
+    @apply py-3 px-4 font-medium text-black dark:text-zinc-100;
   }
 
   .prose td {
