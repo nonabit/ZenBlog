@@ -154,3 +154,9 @@
 .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
   content: none !important;
 }
+
+/* 正文加粗文字使用 400 字重（覆盖 typography 插件的默认 600/700） */
+.prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)),
+.prose :where(b):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-weight: var(--font-weight-normal) !important;  /* 400 */
+}
