@@ -160,3 +160,8 @@
 .prose :where(b):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   font-weight: var(--font-weight-normal) !important;  /* 400 */
 }
+
+/* 正文字号使用 17px（覆盖 typography 插件的默认 16px） */
+.prose {
+  font-size: var(--font-size-body) !important;  /* 17px */
+}
