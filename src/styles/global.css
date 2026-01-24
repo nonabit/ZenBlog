@@ -69,9 +69,15 @@
   .prose {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
-    font-weight: var(--font-weight-normal);  /* 400 */
+    font-weight: var(--font-weight-light);  /* 300 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
+  }
+
+  /* 正文中的加粗文字：使用 400 字重而非默认的 700 */
+  .prose strong,
+  .prose b {
+    font-weight: var(--font-weight-normal);  /* 400 */
   }
 
   .prose p {

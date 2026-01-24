@@ -29,6 +29,7 @@ src/
 | 文章大标题 (H1) | 衬线 | 40px | 700 | `font-article-title` |
 | 正文中的标题 (H2/H3/H4) | 无衬线 | 26px | 400 | `font-heading` |
 | 正文段落 | 无衬线 | 17px | 300 | `font-body` |
+| 正文加粗 (strong/b) | 无衬线 | 17px | 400 | - |
 | UI 元素 | 无衬线 | 14-16px | 400-500 | `font-ui` |
 | 代码 | 等宽 | 14px | 400 | `font-mono` |
 
