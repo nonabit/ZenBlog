@@ -4,6 +4,7 @@ description: 分享一下我用 YouMind 进行内容创作的工作流程
 pubDate: '2025-12-13'
 heroImage: ''
 showOnHome: true
+lang: zh
 ---
 ![YouMind公众号SOP-Chiikawa风格信息图](https://cdn.gooo.ai/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
 

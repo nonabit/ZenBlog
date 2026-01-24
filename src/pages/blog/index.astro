@@ -12,11 +12,13 @@ import { translations } from "@/i18n/translations";
 const lang = 'en';
 const t = translations[lang];
 
-// 1. 获取原始数据并排序
-const allPosts = (await getCollection("blog")).sort(
-	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// 1. 获取原始数据并按语言过滤，然后排序
+const allPosts = (await getCollection("blog"))
+	.filter((post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === lang)
+	.sort(
+		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
 
 // 2. 数据清洗：确保传给 React 的是纯净的 JSON 对象
 const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
@@ -63,7 +65,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 
 		<main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
 			{/* 博客列表组件 */}
-			<BlogList client:load posts={posts} />
+			<BlogList client:load posts={posts} lang={lang} translations={t} />
 		</main>
 
 		{/* 统一的页脚 */}

@@ -21,6 +21,10 @@ export const zh = {
   'home.music': '音乐',
   'home.writing': '精选文章',
 
+  // 博客页
+  'blog.title': '文章',
+  'blog.description': '分享关于后端架构、AI 全栈开发和新技术探索的思考。',
+
   // 关于页
   'about.title': '关于我',
   'about.name': '静水',

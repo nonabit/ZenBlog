@@ -4,6 +4,7 @@ description: '这不是投资指南，是一本告诉你如何在苦难里活下
 pubDate: '2025-11-22'
 heroImage: '../../assets/qiongchalibaodianpic.jpg'
 showOnHome: true
+lang: zh
 ---
 
 市面上关于《穷查理宝典》的解读已经够多了。

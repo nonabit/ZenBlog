@@ -14,11 +14,13 @@ import { translations } from "@/i18n/translations";
 const lang = 'en';
 const t = translations[lang];
 
-// 获取最新文章并按发布时间倒序
-const allPosts = (await getCollection("blog")).sort(
-	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// 获取最新文章并按语言过滤，然后按发布时间倒序
+const allPosts = (await getCollection("blog"))
+	.filter((post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === lang)
+	.sort(
+		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
 
 // 3. 为 map 函数的参数 post 添加显式类型
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
@@ -66,7 +68,7 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 
 		<main class="relative z-10">
 			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
-			<FusionHome client:load posts={homePosts} translations={t} />
+			<FusionHome client:load posts={homePosts} translations={t} lang={lang} />
 		</main>
 
 		<!-- 首页：仅显示 Footer，移除 CTA 区域 -->

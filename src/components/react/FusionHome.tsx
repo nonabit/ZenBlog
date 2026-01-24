@@ -9,6 +9,7 @@ import { Cover } from '../ui/cover';
 interface FusionHomeProps {
   posts: BlogListItem[];
   translations?: Record<string, string>;
+  lang?: 'en' | 'zh';
 }
 
 // 动画变体
@@ -204,8 +205,12 @@ const TimeDisplay = () => {
   return <span className="font-mono tabular-nums tracking-wider">{time}</span>;
 };
 
-export default function FusionHome({ posts, translations = {} }: FusionHomeProps) {
+export default function FusionHome({ posts, translations = {}, lang = 'en' }: FusionHomeProps) {
   const t = (key: string) => translations[key] || key;
+
+  // 根据语言生成博客链接
+  const getBlogUrl = (slug: string) => lang === 'zh' ? `/zh/blog/${slug}` : `/blog/${slug}`;
+  const getBlogListUrl = () => lang === 'zh' ? '/zh/blog' : '/blog';
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
@@ -351,7 +356,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
       <section className="max-w-2xl mb-32">
         <div className="flex items-baseline justify-between mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
           <h2 className="font-heading text-3xl text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
-          <a href="/blog" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
+          <a href={getBlogListUrl()} className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
         </div>
 
         <div className="space-y-8">
@@ -364,13 +369,13 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
               transition={{ delay: index * 0.1 }}
               className="group cursor-pointer"
             >
-              <a href={`/blog/${post.slug}`} className="block no-underline">
+              <a href={getBlogUrl(post.slug)} className="block no-underline">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
                   <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
                     {post.data.title}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 shrink-0 mt-1 sm:mt-0">
-                    {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    {new Date(post.data.pubDate).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
                 <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-heading">
