@@ -1,4 +1,4 @@
-import { cn } from "@/lib/tiptap-utils";
+import { cn } from "@/lib/utils";
 import {
   Clipboard,
   FileX,
