@@ -8,6 +8,7 @@ import SiliconBackground from "../components/react/SiliconBackground";
 import { ReadOnlyRenderer } from "../components/tiptap-templates/read-only";
 import GiscusComments from "../components/react/GiscusComments";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { translations } from "@/i18n/translations";
 
 interface Props extends CollectionEntry<"blog">["data"] {
     markdownContent: string;
@@ -15,8 +16,12 @@ interface Props extends CollectionEntry<"blog">["data"] {
 
 const { title, description, pubDate, heroImage, markdownContent } = Astro.props;
 
+// 检测语言：根据 URL 路径判断
+const lang = Astro.url.pathname.startsWith('/zh/') ? 'zh' : 'en';
+const t = translations[lang];
+
 // 简单的日期格式化
-const formattedDate = pubDate.toLocaleDateString("en-US", {
+const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -24,7 +29,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
 ---
 
 <!-- 优化 1: 将语言改为 zh-CN，有助于浏览器正确渲染中文字体 -->
-<html lang="zh-CN">
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
     <head>
         <!-- 保留你的 OG Image 逻辑 -->
         <BaseHead
@@ -42,7 +47,7 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
         <ScrollProgress client:load />
 
         <!-- 2. 全局导航 (保留你的 transition:persist) -->
-        <FusionHeader client:load currentPath="/blog" />
+        <FusionHeader client:load currentPath={lang === 'zh' ? '/zh/blog' : '/blog'} lang={lang} translations={t} />
 
         <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20 relative z-10">
             <!-- 3. 文章头部 (Hero) -->
@@ -110,6 +115,6 @@ const formattedDate = pubDate.toLocaleDateString("en-US", {
         </main>
 
         {/* 统一的页脚 */}
-        <FusionFooter client:visible />
+        <FusionFooter client:visible translations={t} />
     </body>
 </html>

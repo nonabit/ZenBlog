@@ -68,6 +68,7 @@
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "@types/turndown": "^5.0.6",
+    "baseline-browser-mapping": "^2.9.17",
     "sass-embedded": "^1.97.1",
     "tailwindcss": "^4.1.17"
   }
