@@ -10,6 +10,11 @@
     --background: 255 255 255;
     --foreground: 24 24 27;
     /* 字体变量已在 typography.css 的 @theme 中定义 */
+
+    /* 文字颜色系统（RGBA 方案，减少视觉疲劳） */
+    --color-text-primary: rgba(0, 0, 0, 0.87);    /* 正文、标题 */
+    --color-text-secondary: rgba(0, 0, 0, 0.6);   /* 次要文字 */
+    --color-text-disabled: rgba(0, 0, 0, 0.38);   /* 禁用文字 */
   }
 
   .dark {
@@ -74,7 +79,7 @@
     font-weight: var(--font-weight-light);  /* 300 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
-    @apply text-black dark:text-zinc-300;
+    color: var(--color-text-primary);  /* rgba(0,0,0,0.87) */
   }
 
   /* 段落 */
@@ -83,11 +88,11 @@
     margin-bottom: 1.5em;
   }
 
-  /* 加粗文字：400 字重 */
+  /* 加粗文字：400 字重，颜色稍深 */
   .prose strong,
   .prose b {
     font-weight: var(--font-weight-normal);  /* 400 */
-    @apply text-black dark:text-zinc-100;
+    color: rgba(0, 0, 0, 0.92);  /* 比正文稍深，突出强调 */
   }
 
   /* 文章大标题：衬线 + 粗体 */
@@ -96,7 +101,9 @@
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-bold);  /* 700 */
     line-height: var(--line-height-tight);
-    @apply text-black dark:text-zinc-100 mt-0 mb-8;
+    color: rgba(0, 0, 0, 0.92);
+    margin-top: 0;
+    margin-bottom: 2rem;
   }
 
   /* 正文中的标题：无衬线 + 正常字重 */
@@ -105,7 +112,9 @@
     font-size: var(--font-size-prose-heading);
     font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-tight);
-    @apply text-black dark:text-zinc-100 mt-12 mb-6;
+    color: rgba(0, 0, 0, 0.92);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
   }
 
   .prose h3 {
@@ -113,7 +122,9 @@
     font-size: 1.25rem;  /* 20px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    @apply text-black dark:text-zinc-100 mt-8 mb-4;
+    color: rgba(0, 0, 0, 0.92);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 
   .prose h4 {
@@ -121,13 +132,15 @@
     font-size: 1.125rem;  /* 18px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    @apply text-black dark:text-zinc-100 mt-6 mb-3;
+    color: rgba(0, 0, 0, 0.92);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 
   /* 链接 */
   .prose a {
-    @apply text-orange-600 dark:text-orange-400 underline underline-offset-2;
-    @apply hover:text-orange-700 dark:hover:text-orange-300 transition-colors;
+    @apply text-orange-600 underline underline-offset-2;
+    @apply hover:text-orange-700 transition-colors;
   }
 
   /* 无序列表 */
@@ -156,8 +169,8 @@
 
   /* 引用块 */
   .prose blockquote {
-    @apply border-l-4 border-zinc-300 dark:border-zinc-600 pl-4 my-6;
-    @apply italic text-zinc-600 dark:text-zinc-400;
+    @apply border-l-4 border-zinc-300 pl-4 my-6 italic;
+    color: var(--color-text-secondary);  /* rgba(0,0,0,0.6) */
   }
 
   .prose blockquote p {
@@ -166,18 +179,17 @@
 
   /* 水平线 */
   .prose hr {
-    @apply border-zinc-200 dark:border-zinc-800 my-12;
+    @apply border-zinc-200 my-12;
   }
 
   /* 行内代码 */
   .prose code:not(pre code) {
-    @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300;
-    @apply border border-zinc-200 dark:border-zinc-700;
-    @apply rounded-md px-1.5 py-0.5;
+    @apply bg-zinc-100 border border-zinc-200 rounded-md px-1.5 py-0.5;
     font-family: var(--font-mono);
     font-size: var(--font-size-code);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
   }
 
   /* 移除行内代码前后的反引号 */
@@ -188,15 +200,16 @@
 
   /* 代码块 */
   .prose pre {
-    @apply bg-zinc-50 dark:bg-zinc-900 overflow-x-auto;
+    @apply bg-zinc-50 overflow-x-auto;
     @apply relative pt-12 pb-4 px-4 rounded-xl;
-    @apply border border-zinc-200 dark:border-zinc-800 shadow-sm;
+    @apply border border-zinc-200 shadow-sm;
     @apply my-6;
   }
 
   .prose pre code {
     @apply bg-transparent border-0 p-0 rounded-none;
     font-size: var(--font-size-code);
+    color: var(--color-text-primary);
   }
 
   /* 代码块 Mac 窗口风格 - 红黄绿三个点 */
@@ -208,7 +221,7 @@
 
   /* 图片 */
   .prose img {
-    @apply rounded-lg border border-zinc-100 dark:border-zinc-800;
+    @apply rounded-lg border border-zinc-100;
     @apply shadow-lg transition-transform duration-500 my-8;
   }
 
@@ -222,15 +235,16 @@
   }
 
   .prose thead {
-    @apply border-b border-zinc-300 dark:border-zinc-700;
+    @apply border-b border-zinc-300;
   }
 
   .prose th {
-    @apply py-3 px-4 font-medium text-black dark:text-zinc-100;
+    @apply py-3 px-4 font-medium;
+    color: rgba(0, 0, 0, 0.92);
   }
 
   .prose td {
-    @apply py-3 px-4 border-b border-zinc-200 dark:border-zinc-800;
+    @apply py-3 px-4 border-b border-zinc-200;
   }
 
   .prose tbody tr:last-child td {
@@ -246,12 +260,13 @@
   /* 删除线 */
   .prose del,
   .prose s {
-    @apply line-through text-zinc-500;
+    @apply line-through;
+    color: var(--color-text-secondary);
   }
 
   /* 标记高亮 */
   .prose mark {
-    @apply bg-yellow-100 dark:bg-yellow-900/30 px-1 rounded;
+    @apply bg-yellow-100 px-1 rounded;
   }
 }
 
@@ -259,9 +274,5 @@
   /* 自定义选中文本颜色 */
   ::selection {
     @apply bg-orange-100 text-orange-900;
-  }
-
-  .dark ::selection {
-    @apply bg-orange-900/30 text-orange-100;
   }
 }
