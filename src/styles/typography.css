@@ -59,8 +59,12 @@
                "PingFang SC", "Microsoft YaHei", monospace;
 
   /* Tailwind 字体族映射 */
-  --font-sans: var(--font-ui);
-  --font-serif: var(--font-ui); /* 统一使用无衬线字体 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", "微软雅黑", sans-serif;
+  --font-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                "Microsoft YaHei", "微软雅黑", sans-serif; /* 统一使用无衬线字体 */
 
   /* ==================== 字体大小系统 ==================== */
 
