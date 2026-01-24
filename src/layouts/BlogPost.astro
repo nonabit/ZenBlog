@@ -5,16 +5,13 @@ import FusionHeader from "../components/react/FusionHeader";
 import FusionFooter from "../components/react/FusionFooter";
 import ScrollProgress from "../components/react/ScrollProgress";
 import SiliconBackground from "../components/react/SiliconBackground";
-import { ReadOnlyRenderer } from "../components/tiptap-templates/read-only";
 import GiscusComments from "../components/react/GiscusComments";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { translations } from "@/i18n/translations";
 
-interface Props extends CollectionEntry<"blog">["data"] {
-    markdownContent: string;
-}
+type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, heroImage, markdownContent } = Astro.props;
+const { title, description, pubDate, heroImage } = Astro.props;
 
 // 检测语言：根据 URL 路径判断
 const lang = Astro.url.pathname.startsWith('/zh/') ? 'zh' : 'en';
@@ -99,9 +96,9 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-U
 
                 <hr class="border-zinc-100 dark:border-zinc-800 mb-12" />
 
-                <!-- 4. Markdown 正文 - 使用 Tiptap 只读渲染器，与 CMS 编辑器样式统一 -->
-                <div class="blog-content">
-                    <ReadOnlyRenderer client:load content={markdownContent} />
+                <!-- 4. Markdown 正文 - 使用 Astro 原生渲染 -->
+                <div class="prose prose-zinc dark:prose-invert max-w-none">
+                    <slot />
                 </div>
             </article>
 
