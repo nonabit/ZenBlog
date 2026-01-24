@@ -78,7 +78,7 @@
   --font-size-ui-lg: 1.125rem;   /* 18px */
 
   /* 正文字体大小 */
-  --font-size-body: 1.125rem;    /* 18px - 文章正文 */
+  --font-size-body: 1.0625rem;   /* 17px - 文章正文 */
   --font-size-body-lg: 1.25rem;  /* 20px - 大号正文 */
 
   /* 代码字体大小 */
@@ -95,6 +95,7 @@
 
   /* ==================== 字重系统 ==================== */
 
+  --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;

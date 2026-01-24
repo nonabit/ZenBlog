@@ -71,7 +71,7 @@
 | 界面 SM | `--font-size-ui-sm` | 14px |
 | 界面 MD | `--font-size-ui-md` | 16px |
 | 界面 LG | `--font-size-ui-lg` | 18px |
-| 正文 | `--font-size-body` | 18px |
+| 正文 | `--font-size-body` | 17px |
 | 正文大号 | `--font-size-body-lg` | 20px |
 | 代码 | `--font-size-code` | 14px |
 | H1 | `--font-size-h1` | 40px |

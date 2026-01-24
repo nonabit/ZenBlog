@@ -12,8 +12,9 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-// 获取原始 Markdown 内容，传递给 ReadOnlyRenderer
-const markdownContent = post.body;
+const { Content } = await post.render();
 ---
 
-<BlogPost {...post.data} markdownContent={markdownContent} />
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>
