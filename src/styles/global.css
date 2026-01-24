@@ -3,7 +3,7 @@
 @import './_keyframe-animations.scss';
 
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
+/* 移除 @tailwindcss/typography 插件，使用自定义 prose 样式实现单一数据源 */
 
 @layer base {
   :root {
@@ -65,24 +65,29 @@
 }
 
 @layer components {
-  /* 文章正文样式 */
+  /* ==================== 文章正文样式（替代 @tailwindcss/typography）==================== */
+
+  /* 基础样式 */
   .prose {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
     font-weight: var(--font-weight-light);  /* 300 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
+    @apply text-zinc-700 dark:text-zinc-300;
   }
 
-  /* 正文中的加粗文字：使用 400 字重而非默认的 700 */
-  .prose strong,
-  .prose b {
-    font-weight: var(--font-weight-normal);  /* 400 */
-  }
-
+  /* 段落 */
   .prose p {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+  }
+
+  /* 加粗文字：400 字重 */
+  .prose strong,
+  .prose b {
+    font-weight: var(--font-weight-normal);  /* 400 */
+    @apply text-zinc-900 dark:text-zinc-100;
   }
 
   /* 文章大标题：衬线 + 粗体 */
@@ -91,19 +96,80 @@
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-bold);  /* 700 */
     line-height: var(--line-height-tight);
+    @apply text-zinc-900 dark:text-zinc-100 mt-0 mb-8;
   }
 
   /* 正文中的标题：无衬线 + 正常字重 */
-  .prose h2,
-  .prose h3,
-  .prose h4 {
+  .prose h2 {
     font-family: var(--font-heading);
     font-size: var(--font-size-prose-heading);
     font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-tight);
+    @apply text-zinc-900 dark:text-zinc-100 mt-12 mb-6;
   }
 
-  /* 行内代码样式 */
+  .prose h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;  /* 20px */
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-tight);
+    @apply text-zinc-900 dark:text-zinc-100 mt-8 mb-4;
+  }
+
+  .prose h4 {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;  /* 18px */
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-tight);
+    @apply text-zinc-900 dark:text-zinc-100 mt-6 mb-3;
+  }
+
+  /* 链接 */
+  .prose a {
+    @apply text-orange-600 dark:text-orange-400 underline underline-offset-2;
+    @apply hover:text-orange-700 dark:hover:text-orange-300 transition-colors;
+  }
+
+  /* 无序列表 */
+  .prose ul {
+    @apply list-disc pl-6 my-6;
+  }
+
+  .prose ul > li {
+    @apply my-2;
+  }
+
+  /* 有序列表 */
+  .prose ol {
+    @apply list-decimal pl-6 my-6;
+  }
+
+  .prose ol > li {
+    @apply my-2;
+  }
+
+  /* 嵌套列表 */
+  .prose li > ul,
+  .prose li > ol {
+    @apply my-2;
+  }
+
+  /* 引用块 */
+  .prose blockquote {
+    @apply border-l-4 border-zinc-300 dark:border-zinc-600 pl-4 my-6;
+    @apply italic text-zinc-600 dark:text-zinc-400;
+  }
+
+  .prose blockquote p {
+    @apply my-0;
+  }
+
+  /* 水平线 */
+  .prose hr {
+    @apply border-zinc-200 dark:border-zinc-800 my-12;
+  }
+
+  /* 行内代码 */
   .prose code:not(pre code) {
     @apply bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300;
     @apply border border-zinc-200 dark:border-zinc-700;
@@ -113,11 +179,84 @@
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
   }
+
+  /* 移除行内代码前后的反引号 */
+  .prose code::before,
+  .prose code::after {
+    content: none;
+  }
+
+  /* 代码块 */
+  .prose pre {
+    @apply bg-zinc-50 dark:bg-zinc-900 overflow-x-auto;
+    @apply relative pt-12 pb-4 px-4 rounded-xl;
+    @apply border border-zinc-200 dark:border-zinc-800 shadow-sm;
+    @apply my-6;
+  }
+
+  .prose pre code {
+    @apply bg-transparent border-0 p-0 rounded-none;
+    font-size: var(--font-size-code);
+  }
+
+  /* 代码块 Mac 窗口风格 - 红黄绿三个点 */
+  .prose pre::before {
+    content: "";
+    @apply absolute top-4 left-4 w-3 h-3 rounded-full bg-red-400;
+    box-shadow: 20px 0 0 #facc15, 40px 0 0 #4ade80;
+  }
+
+  /* 图片 */
+  .prose img {
+    @apply rounded-lg border border-zinc-100 dark:border-zinc-800;
+    @apply shadow-lg transition-transform duration-500 my-8;
+  }
+
+  .prose img:hover {
+    @apply scale-[1.02];
+  }
+
+  /* 表格 */
+  .prose table {
+    @apply w-full text-left my-8 text-sm;
+  }
+
+  .prose thead {
+    @apply border-b border-zinc-300 dark:border-zinc-700;
+  }
+
+  .prose th {
+    @apply py-3 px-4 font-medium text-zinc-900 dark:text-zinc-100;
+  }
+
+  .prose td {
+    @apply py-3 px-4 border-b border-zinc-200 dark:border-zinc-800;
+  }
+
+  .prose tbody tr:last-child td {
+    @apply border-b-0;
+  }
+
+  /* 斜体 */
+  .prose em,
+  .prose i {
+    @apply italic;
+  }
+
+  /* 删除线 */
+  .prose del,
+  .prose s {
+    @apply line-through text-zinc-500;
+  }
+
+  /* 标记高亮 */
+  .prose mark {
+    @apply bg-yellow-100 dark:bg-yellow-900/30 px-1 rounded;
+  }
 }
 
 @layer utilities {
-
-  /* 1. 自定义选中文本颜色 */
+  /* 自定义选中文本颜色 */
   ::selection {
     @apply bg-orange-100 text-orange-900;
   }
@@ -125,43 +264,4 @@
   .dark ::selection {
     @apply bg-orange-900/30 text-orange-100;
   }
-
-  /* 2. 代码块 Mac 窗口风格化 */
-  .prose pre {
-    @apply relative pt-12 pb-4 px-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm;
-  }
-
-  /* 伪元素绘制红黄绿三个点 */
-  .prose pre::before {
-    content: "";
-    @apply absolute top-4 left-4 w-3 h-3 rounded-full bg-red-400;
-    box-shadow: 20px 0 0 #facc15, 40px 0 0 #4ade80;
-  }
-
-  /* 3. 文章图片物理质感 */
-  .prose img {
-    @apply rounded-lg border border-zinc-100 dark:border-zinc-800 shadow-lg transition-transform duration-500;
-  }
-
-  /* 鼠标悬停图片时轻微上浮 */
-  .prose img:hover {
-    @apply scale-[1.02];
-  }
-}
-
-/* 移除 prose 中 inline code 前后的反引号（优先级需高于 typography 插件） */
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
-.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
-  content: none !important;
-}
-
-/* 正文加粗文字使用 400 字重（覆盖 typography 插件的默认 600/700） */
-.prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)),
-.prose :where(b):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  font-weight: var(--font-weight-normal) !important;  /* 400 */
-}
-
-/* 正文字号使用 17px（覆盖 typography 插件的默认 16px） */
-.prose {
-  font-size: var(--font-size-body) !important;  /* 17px */
 }

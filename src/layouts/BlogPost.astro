@@ -96,8 +96,8 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-U
 
                 <hr class="border-zinc-100 dark:border-zinc-800 mb-12" />
 
-                <!-- 4. Markdown 正文 - 使用 Astro 原生渲染 -->
-                <div class="prose prose-zinc dark:prose-invert max-w-none">
+                <!-- 4. Markdown 正文 - 使用自定义 prose 样式 -->
+                <div class="prose max-w-none">
                     <slot />
                 </div>
             </article>
