@@ -66,7 +66,7 @@ export default function CareerTimeline() {
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <h3 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
               {item.role}
             </h3>
             <span className="text-xs font-mono text-zinc-400 flex items-center gap-1 shrink-0 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md">

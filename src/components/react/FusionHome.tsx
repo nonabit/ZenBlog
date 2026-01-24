@@ -216,7 +216,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
         variants={staggerContainer}
         className="mb-32"
       >
-        <motion.h1 variants={fadeInUp} className="font-serif text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
+        <motion.h1 variants={fadeInUp} className="font-heading text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
           {t('home.hero.title1')} <br /> <Cover shakeIntensity={1} scaleDuration={3}>{t('home.hero.title2')}</Cover> {t('home.hero.title3')}
         </motion.h1>
         <motion.p variants={fadeInUp} className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide">
@@ -251,7 +251,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
               <Cpu size={14} />
               <span>{t('home.building')}</span>
             </div>
-            <h3 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">{t('home.building.title')}</h3>
+            <h3 className="text-3xl font-heading text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">{t('home.building.title')}</h3>
           </div>
           <div className="mt-4 relative z-10 w-full sm:w-full">
             <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
@@ -326,7 +326,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
 
           <div className="relative z-10 mt-4">
             {/* 你可以手动更新这首歌，或者后续接入 Spotify API */}
-            <div className="font-serif text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate tracking-tight">
+            <div className="font-heading text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate tracking-tight">
               Cornfield Chase
             </div>
             <div className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-1 font-medium tracking-wide">
@@ -350,7 +350,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
       {/* --- Writings List --- */}
       <section className="max-w-2xl mb-32">
         <div className="flex items-baseline justify-between mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <h2 className="font-serif text-3xl text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
+          <h2 className="font-heading text-3xl text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
           <a href="/blog" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
         </div>
 
@@ -373,7 +373,7 @@ export default function FusionHome({ posts, translations = {} }: FusionHomeProps
                     {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-serif">
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-heading">
                   {post.data.description}
                 </p>
                 <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">

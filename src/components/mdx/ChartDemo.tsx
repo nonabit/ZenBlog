@@ -16,7 +16,7 @@ export default function ChartDemo() {
       <div className="mb-6 flex items-center justify-between">
         <div>
             <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-1">Analytics</div>
-            <div className="text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-100">User Growth</div>
+            <div className="text-2xl font-heading font-bold text-zinc-900 dark:text-zinc-100">User Growth</div>
         </div>
         <div className="flex gap-2 items-center">
             <span className="flex h-2 w-2">

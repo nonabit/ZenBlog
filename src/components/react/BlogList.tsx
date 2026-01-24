@@ -21,7 +21,7 @@ export default function BlogList({ posts }: { posts: BlogListItem[] }) {
     <div className="max-w-2xl mx-auto">
       {/* Intro */}
       <div className="mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <h1 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6">
+        <h1 className="font-heading text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6">
           Writing
         </h1>
         <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
@@ -49,14 +49,14 @@ export default function BlogList({ posts }: { posts: BlogListItem[] }) {
                 >
                   <a href={`/blog/${post.slug}`} className="block focus:outline-none no-underline">
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
-                      <h3 className="font-serif text-xl text-zinc-900 dark:text-zinc-100 font-medium group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+                      <h3 className="font-heading text-xl text-zinc-900 dark:text-zinc-100 font-medium group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
                         {post.data.title}
                       </h3>
                       <span className="font-mono text-xs text-zinc-400 shrink-0">
                         {new Date(post.data.pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </span>
                     </div>
-                    <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-prose font-serif">
+                    <p className="text-base text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-prose font-heading">
                       {post.data.description}
                     </p>
                   </a>
