@@ -69,7 +69,7 @@
   .prose {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
-    font-weight: var(--font-weight-light);  /* 300 */
+    font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
   }
