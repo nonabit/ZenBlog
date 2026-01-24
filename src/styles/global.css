@@ -9,14 +9,7 @@
   :root {
     --background: 255 255 255;
     --foreground: 24 24 27;
-
-    /* 覆盖 Tailwind 默认字体，统一使用系统无衬线字体 */
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                 "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-                 "Microsoft YaHei", "微软雅黑", sans-serif;
-    --font-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                  "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-                  "Microsoft YaHei", "微软雅黑", sans-serif;
+    /* 字体变量已在 typography.css 的 @theme 中定义 */
   }
 
   .dark {
@@ -76,7 +69,7 @@
   .prose {
     font-family: var(--font-body);
     font-size: var(--font-size-body);
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-light);  /* 300 */
     line-height: var(--line-height-relaxed);
     letter-spacing: var(--letter-spacing-normal);
   }
@@ -86,34 +79,21 @@
     margin-bottom: 1.5em;
   }
 
-  .prose h1,
+  /* 文章大标题：衬线 + 粗体 */
+  .prose h1 {
+    font-family: var(--font-article-title);
+    font-size: var(--font-size-article-title);
+    font-weight: var(--font-weight-bold);  /* 700 */
+    line-height: var(--line-height-tight);
+  }
+
+  /* 正文中的标题：无衬线 + 正常字重 */
   .prose h2,
   .prose h3,
   .prose h4 {
     font-family: var(--font-heading);
-  }
-
-  .prose h1 {
-    font-size: var(--font-size-h1);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-  }
-
-  .prose h2 {
-    font-size: var(--font-size-h2);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-tight);
-  }
-
-  .prose h3 {
-    font-size: var(--font-size-h3);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-tight);
-  }
-
-  .prose h4 {
-    font-size: var(--font-size-h4);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-prose-heading);
+    font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-tight);
   }
 
