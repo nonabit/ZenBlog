@@ -9,6 +9,14 @@
   :root {
     --background: 255 255 255;
     --foreground: 24 24 27;
+
+    /* 覆盖 Tailwind 默认字体，统一使用系统无衬线字体 */
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                 "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                 "Microsoft YaHei", "微软雅黑", sans-serif;
+    --font-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                  "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                  "Microsoft YaHei", "微软雅黑", sans-serif;
   }
 
   .dark {
