@@ -221,7 +221,7 @@
 
   /* 图片 */
   .prose img {
-    @apply rounded-lg border border-zinc-100;
+    @apply border border-zinc-100;
     @apply shadow-lg transition-transform duration-500 my-8;
   }
 
