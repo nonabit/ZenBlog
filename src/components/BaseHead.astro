@@ -51,20 +51,8 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   src="https://cloud.umami.is/script.js"
   data-website-id="d7c290cc-3033-4ef1-8df1-f1a6484d9a08"></script>
 
-<!-- Fonts: 使用 Google Fonts (支持自动分包，加载中文更快) -->
-<!-- 引入:
-     1. Inter (界面字体 - 英文)
-     2. Noto Sans SC (界面字体 - 中文)
-     3. Source Serif 4 (文章字体 - 英文)
-     4. Noto Serif SC (文章字体 - 中文)
-     5. JetBrains Mono (代码字体)
--->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap"
-  rel="stylesheet"
-/>
+<!-- 字体系统：使用系统原生字体栈，零网络请求 -->
+<!-- 配置文件：src/styles/typography.css -->
 
 <!-- 2. 启用视图过渡路由 -->
 <ClientRouter />
