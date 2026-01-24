@@ -1,97 +1,57 @@
 /**
- * 系统字体栈配置
- * 使用各平台原生字体，零网络请求，原生体验
+ * 字体系统 - 单一数据源
+ * 使用 Tailwind CSS 4 @theme 指令
  */
 
-@layer theme {
-  /* ==================== 字体族定义 ==================== */
+@theme {
+  /* ==================== 基础字体栈 ==================== */
 
-  /**
-   * 界面字体（UI Font）- 用于导航、按钮、表单等 UI 元素
-   *
-   * 中文字体回退：
-   * - macOS/iOS: PingFang SC
-   * - Windows: Microsoft YaHei
-   * - Android/Linux: Noto Sans CJK SC
-   *
-   * 英文字体回退：
-   * - macOS/iOS: San Francisco (通过 -apple-system)
-   * - Windows: Segoe UI
-   * - Android/Linux: Roboto
-   */
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-             "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-             "Microsoft YaHei", "微软雅黑", sans-serif;
+  /* 无衬线字体栈 */
+  --font-sans-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                     "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                     "Microsoft YaHei", "微软雅黑", sans-serif;
 
-  /**
-   * 标题字体（Heading Font）- 用于文章标题和页面标题
-   *
-   * 策略：使用系统无衬线字体，保持现代感和一致性
-   * 与界面字体相同，确保整体视觉统一
-   */
-  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                  "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-                  "Microsoft YaHei", "微软雅黑", sans-serif;
+  /* 衬线字体栈（文章标题专用） */
+  --font-serif-stack: Georgia, "Noto Serif SC", "Source Han Serif SC",
+                      "PingFang SC", "Microsoft YaHei", serif;
 
-  /**
-   * 正文字体（Body Font）- 用于文章正文内容
-   *
-   * 策略：使用系统无衬线字体，保持阅读舒适性
-   * 与界面和标题字体统一，现代简洁风格
-   */
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-               "Microsoft YaHei", "微软雅黑", sans-serif;
+  /* 等宽字体栈 */
+  --font-mono-stack: ui-monospace, "SF Mono", Monaco, "Cascadia Code",
+                     Consolas, "Liberation Mono", "Courier New",
+                     "PingFang SC", "Microsoft YaHei", monospace;
 
-  /**
-   * 代码字体（Monospace Font）- 用于代码块和行内代码
-   *
-   * 中文字体回退：
-   * - 通用: PingFang SC, Microsoft YaHei (等宽显示)
-   *
-   * 英文字体回退：
-   * - macOS: SF Mono
-   * - Windows: Consolas
-   * - Linux: Liberation Mono
-   */
-  --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Code",
-               Consolas, "Liberation Mono", "Courier New",
-               "PingFang SC", "Microsoft YaHei", monospace;
+  /* ==================== 语义化字体族 ==================== */
 
-  /* Tailwind 字体族映射 */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-               "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-               "Microsoft YaHei", "微软雅黑", sans-serif;
-  --font-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-                "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
-                "Microsoft YaHei", "微软雅黑", sans-serif; /* 统一使用无衬线字体 */
+  --font-ui: var(--font-sans-stack);
+  --font-heading: var(--font-sans-stack);
+  --font-article-title: var(--font-serif-stack);
+  --font-body: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
 
-  /* ==================== 字体大小系统 ==================== */
+  /* Tailwind 映射 */
+  --font-sans: var(--font-sans-stack);
+  --font-serif: var(--font-serif-stack);
 
-  /* 基础字体大小 */
-  --font-size-base: 1rem;        /* 16px */
+  /* ==================== 字号系统 ==================== */
 
-  /* 界面字体大小 */
-  --font-size-ui-xs: 0.75rem;    /* 12px */
-  --font-size-ui-sm: 0.875rem;   /* 14px */
-  --font-size-ui-md: 1rem;       /* 16px */
-  --font-size-ui-lg: 1.125rem;   /* 18px */
+  /* 正文 */
+  --font-size-body: 1.0625rem;        /* 17px */
+  --font-size-body-lg: 1.25rem;       /* 20px */
 
-  /* 正文字体大小 */
-  --font-size-body: 1.0625rem;   /* 17px - 文章正文 */
-  --font-size-body-lg: 1.25rem;  /* 20px - 大号正文 */
+  /* 正文中的标题 */
+  --font-size-prose-heading: 1.625rem; /* 26px */
 
-  /* 代码字体大小 */
-  --font-size-code: 0.875rem;    /* 14px - 行内代码 */
-  --font-size-code-block: 0.875rem; /* 14px - 代码块 */
+  /* 文章大标题 */
+  --font-size-article-title: 2.5rem;   /* 40px */
 
-  /* 标题字体大小 */
-  --font-size-h1: 2.5rem;        /* 40px */
-  --font-size-h2: 2rem;          /* 32px */
-  --font-size-h3: 1.5rem;        /* 24px */
-  --font-size-h4: 1.25rem;       /* 20px */
-  --font-size-h5: 1.125rem;      /* 18px */
-  --font-size-h6: 1rem;          /* 16px */
+  /* UI 字号 */
+  --font-size-ui-xs: 0.75rem;          /* 12px */
+  --font-size-ui-sm: 0.875rem;         /* 14px */
+  --font-size-ui-md: 1rem;             /* 16px */
+  --font-size-ui-lg: 1.125rem;         /* 18px */
+
+  /* 代码字号 */
+  --font-size-code: 0.875rem;          /* 14px */
 
   /* ==================== 字重系统 ==================== */
 
@@ -103,10 +63,10 @@
 
   /* ==================== 行高系统 ==================== */
 
-  --line-height-tight: 1.25;     /* 标题 */
-  --line-height-normal: 1.5;     /* UI 元素 */
-  --line-height-relaxed: 1.75;   /* 正文 */
-  --line-height-loose: 2;        /* 诗歌、引用 */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
 
   /* ==================== 字间距系统 ==================== */
 
