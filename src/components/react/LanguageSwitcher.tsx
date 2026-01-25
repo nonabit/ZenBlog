@@ -1,4 +1,4 @@
-import { languages, type Language } from '@/i18n/config';
+import { type Language } from '@/i18n/config';
 
 interface LanguageSwitcherProps {
   currentLang: Language;

@@ -11,7 +11,8 @@ import { OG_FONTS, OG_FONT_PATHS } from '@/config/fonts';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.flatMap((post: CollectionEntry<'blog'>) => {
-    const cleanSlug = post.id.replace(/\.[^/.]+$/, "");
+    // 从 "en/my-2025-summary.md" 或 "zh/my-2025-summary.md" 提取 "my-2025-summary"
+    const cleanSlug = post.id.replace(/^(en|zh)\//, "").replace(/\.[^/.]+$/, "");
     return [
       { params: { slug: post.id }, props: post },
       { params: { slug: cleanSlug }, props: post }

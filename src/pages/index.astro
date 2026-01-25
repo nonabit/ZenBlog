@@ -13,9 +13,9 @@ import { translations } from "@/i18n/translations";
 const lang = 'en';
 const t = translations[lang];
 
-// 获取最新文章并按语言过滤，然后按发布时间倒序
+// 获取最新文章并按语言过滤（en/ 目录），然后按发布时间倒序
 const allPosts = (await getCollection("blog"))
-	.filter((post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === lang)
+	.filter((post: CollectionEntry<"blog">) => post.id.startsWith("en/"))
 	.sort(
 		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
 			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -23,7 +23,7 @@ const allPosts = (await getCollection("blog"))
 
 // 3. 为 map 函数的参数 post 添加显式类型
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
-	slug: post.id.replace(/\.[^/.]+$/, ""),
+	slug: post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, ""),
 	data: {
 		title: post.data.title,
 		description: post.data.description,

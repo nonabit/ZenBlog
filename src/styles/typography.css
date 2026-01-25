@@ -11,9 +11,12 @@
                      "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
                      "Microsoft YaHei", "微软雅黑", sans-serif;
 
-  /* 衬线字体栈（文章标题专用） */
+  /* 衬线字体栈（中文文章标题专用） */
   --font-serif-stack: "Noto Serif SC", "Source Han Serif SC", Georgia,
                       "Times New Roman", serif;
+
+  /* 英文衬线字体栈（英文文章标题专用） */
+  --font-serif-en-stack: "Shippori Mincho", Georgia, "Times New Roman", serif;
 
   /* 等宽字体栈 */
   --font-mono-stack: ui-monospace, "SF Mono", Monaco, "Cascadia Code",
@@ -25,12 +28,14 @@
   --font-ui: var(--font-sans-stack);
   --font-heading: var(--font-sans-stack);
   --font-article-title: var(--font-serif-stack);
+  --font-article-title-en: var(--font-serif-en-stack);
   --font-body: var(--font-sans-stack);
   --font-mono: var(--font-mono-stack);
 
   /* Tailwind 映射 */
   --font-sans: var(--font-sans-stack);
   --font-serif: var(--font-serif-stack);
+  --font-serif-en: var(--font-serif-en-stack);
 
   /* ==================== 字号系统 ==================== */
 

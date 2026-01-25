@@ -8,24 +8,34 @@ import GiscusComments from "../components/react/GiscusComments";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { translations } from "@/i18n/translations";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+    slug?: string;
+};
 
-const { title, description, pubDate, heroImage } = Astro.props;
+const { title, description, pubDate, heroImage, slug } = Astro.props;
 
 // 检测语言：根据 URL 路径判断
-const lang = Astro.url.pathname.startsWith('/zh/') ? 'zh' : 'en';
+const lang = Astro.url.pathname.startsWith("/zh/") ? "zh" : "en";
 const t = translations[lang];
 
+// 构建当前文章的完整路径
+const currentPath = slug
+    ? (lang === "zh" ? `/zh/blog/${slug}` : `/blog/${slug}`)
+    : (lang === "zh" ? "/zh/blog" : "/blog");
+
 // 简单的日期格式化
-const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-});
+const formattedDate = pubDate.toLocaleDateString(
+    lang === "zh" ? "zh-CN" : "en-US",
+    {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    },
+);
 ---
 
 <!-- 优化 1: 将语言改为 zh-CN，有助于浏览器正确渲染中文字体 -->
-<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+<html lang={lang === "zh" ? "zh" : "en"}>
     <head>
         <!-- 保留你的 OG Image 逻辑 -->
         <BaseHead
@@ -42,7 +52,12 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-U
         <ScrollProgress client:load />
 
         <!-- 2. 全局导航 (保留你的 transition:persist) -->
-        <FusionHeader client:load currentPath={lang === 'zh' ? '/zh/blog' : '/blog'} lang={lang} translations={t} />
+        <FusionHeader
+            client:load
+            currentPath={currentPath}
+            lang={lang}
+            translations={t}
+        />
 
         <main class="max-w-3xl mx-auto px-6 py-12 sm:py-20 relative z-10">
             <!-- 3. 文章头部 (Hero) -->
@@ -73,7 +88,8 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-U
                     </div>
 
                     <h1
-                        class="font-serif text-[2rem] font-bold text-zinc-900 dark:text-zinc-100 leading-[1.3] mb-6"
+                        class="text-[2rem] font-semibold text-zinc-900 dark:text-zinc-100 leading-[1.3] mb-6"
+                        style={lang === "zh" ? "font-family: var(--font-serif)" : "font-family: var(--font-serif-en)"}
                     >
                         {title}
                     </h1>
@@ -101,11 +117,16 @@ const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? "zh-CN" : "en-U
             </article>
 
             <!-- 5. 评论区 -->
-            <section class="mt-16 pt-12 border-t border-zinc-100 dark:border-zinc-800">
-                <h2 class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-8">
-                    评论
+            <section
+                class="mt-16 pt-12 border-t border-zinc-100 dark:border-zinc-800"
+            >
+                <h2
+                    class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-8"
+                    style={lang === "zh" ? "font-family: var(--font-serif)" : "font-family: var(--font-serif-en)"}
+                >
+                    {lang === "zh" ? "评论" : "Comments"}
                 </h2>
-                <GiscusComments client:load />
+                <GiscusComments client:load lang={lang} />
             </section>
         </main>
 

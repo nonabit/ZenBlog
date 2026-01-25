@@ -163,7 +163,7 @@ const TechDeck = ({ group, delay = 0 }: { group: typeof STACK_GROUPS[0], delay?:
               {currentTech}
             </span>
             {/* 状态指示灯 */}
-            <div className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full transition-colors duration-300 ${(!hasPlayedIntro || isHovering) ? 'bg-orange-500 animate-pulse' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
+            <div className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full transition-colors duration-300 ${(!hasPlayedIntro || isHovering) ? 'bg-zinc-500 dark:bg-zinc-400 animate-pulse' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -291,8 +291,8 @@ export default function FusionHome({ posts, translations = {}, lang = 'en' }: Fu
              展示最近在听的音乐，带有波形动画，增加生活气息和视觉律动
           */}
         <BentoItem className="sm:col-span-1 flex flex-col justify-between group overflow-hidden relative">
-          {/* 背景装饰：橙色光晕 */}
-          <div className="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-colors"></div>
+          {/* 背景装饰：光晕 */}
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-zinc-500/10 rounded-full blur-2xl group-hover:bg-zinc-500/20 transition-colors"></div>
 
           <div className="flex justify-between items-start">
             <div className="text-zinc-400 text-xs font-bold font-mono uppercase tracking-widest flex items-center gap-2">
@@ -307,22 +307,22 @@ export default function FusionHome({ posts, translations = {}, lang = 'en' }: Fu
             {/* 动态波形 (Audio Visualizer Animation) */}
             <div className="flex items-end gap-0.5 h-4">
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [4, 12, 6, 14, 4] }}
                 transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [8, 4, 14, 6, 8] }}
                 transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse", delay: 0.1 }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [6, 14, 4, 10, 6] }}
                 transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [12, 6, 10, 4, 12] }}
                 transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse", delay: 0.3 }}
               />
@@ -371,7 +371,7 @@ export default function FusionHome({ posts, translations = {}, lang = 'en' }: Fu
             >
               <a href={getBlogUrl(post.slug)} className="block no-underline">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="text-lg font-heading font-normal text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
+                  <h3 className="text-lg font-heading font-normal text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors tracking-tight">
                     {post.data.title}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 shrink-0 mt-1 sm:mt-0">

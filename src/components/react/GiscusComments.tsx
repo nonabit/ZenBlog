@@ -1,8 +1,12 @@
 import Giscus from "@giscus/react";
 import { useEffect, useState } from "react";
 
-// Giscus 评论组件 - 支持暗色模式
-export default function GiscusComments() {
+interface GiscusCommentsProps {
+  lang?: "zh" | "en";
+}
+
+// Giscus 评论组件 - 支持暗色模式和多语言
+export default function GiscusComments({ lang = "zh" }: GiscusCommentsProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export default function GiscusComments() {
       emitMetadata="0"
       inputPosition="bottom"
       theme={theme}
-      lang="zh-CN"
+      lang={lang === "zh" ? "zh-CN" : "en"}
       loading="eager"
     />
   );

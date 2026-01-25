@@ -12,16 +12,16 @@ import { translations } from "@/i18n/translations";
 const lang = 'zh';
 const t = translations[lang];
 
-// 获取最新文章并按语言过滤，然后按发布时间倒序
+// 获取最新文章并按语言过滤（zh/ 目录），然后按发布时间倒序
 const allPosts = (await getCollection("blog"))
-	.filter((post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === lang)
+	.filter((post: CollectionEntry<"blog">) => post.id.startsWith("zh/"))
 	.sort(
 		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
 			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 	);
 
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
-	slug: post.id.replace(/\.[^/.]+$/, ""),
+	slug: post.id.replace(/^zh\//, "").replace(/\.[^/.]+$/, ""),
 	data: {
 		title: post.data.title,
 		description: post.data.description,

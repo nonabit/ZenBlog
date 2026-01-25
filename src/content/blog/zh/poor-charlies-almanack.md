@@ -2,7 +2,7 @@
 title: '《穷查理宝典》：血泪铸就的智慧'
 description: '这不是投资指南，是一本告诉你如何在苦难里活下来、并且活得像个人的手册。'
 pubDate: '2025-11-22'
-heroImage: '../../assets/qiongchalibaodianpic.jpg'
+heroImage: '../../../assets/qiongchalibaodianpic.jpg'
 showOnHome: true
 lang: zh
 ---

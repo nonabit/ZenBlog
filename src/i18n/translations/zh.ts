@@ -2,7 +2,7 @@ export const zh = {
   // 导航
   'nav.blog': '博客',
   'nav.projects': '项目',
-  'nav.about': '关于',
+  'nav.about': '关于我',
 
   // 首页
   'home.title': 'Silicon Universe',
@@ -10,9 +10,9 @@ export const zh = {
   'home.latest': '最新文章',
   'home.viewAll': '查看全部',
   'home.readMore': '阅读更多',
-  'home.hero.title1': '软件工程师。',
-  'home.hero.title2': '独立开发者。',
-  'home.hero.title3': '探索者。',
+  'home.hero.title1': '软件工程师.',
+  'home.hero.title2': '独立开发者.',
+  'home.hero.title3': '探索者.',
   'home.hero.subtitle': '从金融学跨界而来，在代码世界探索五年余。从底层编译器到高性能后端，从 AI Native 到全栈开发。我信奉实用主义，追求"有用"与"好用"的平衡。用分享和表达让自己保持成长。',
   'home.building': '正在构建',
   'home.building.title': 'AI Native 应用探索',
@@ -27,12 +27,12 @@ export const zh = {
 
   // 关于页
   'about.title': '关于我',
-  'about.name': '静水',
+  'about.name': '静水深流',
   'about.motto': '天行健，君子以自强不息',
   'about.career': '职业经历',
   'about.gear': '装备与工具',
   'about.location': 'Shanghai, China',
-  'about.intro.title': '你好，我是静水',
+  'about.intro.title': '你好，我是静水深流',
   'about.intro.p1': '一名软件工程师、独立开发者，也是这个空间——"第九比特"的主理人。',
   'about.intro.p2': '从金融学专业跨界而来，一头扎进代码的世界已有五年余。这段旅程始于对底层技术的痴迷，从 C/C++ 到国产编程语言"仓颉"的编译器，再到高性能后端服务的多线程架构，我享受在复杂系统中抽丝剥茧、定位问题的乐趣。在华为的工作经历，让我有机会为 VS Code、力扣等平台构建语言服务，也让我深入鸿蒙生态，用 AI 和专家经验为飞书、抖音等头部应用"排忧解难"。',
   'about.intro.p3': '工作之外，我是一个停不下来的探索者。AI 浪潮涌来，我便以独立开发者的身份，一头扎进 AI Native 和 Agent 的世界。从改造智谱的 AutoGLM，到基于阿里 MAIUI 探索自动化测试的未来，我着迷于用代码将那些"奇思妙想"变为现实。这个过程让我从一个纯粹的后端开发者，成长为一名能够驾驭 React、Next.js 的全栈工程师。',

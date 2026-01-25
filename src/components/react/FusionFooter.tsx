@@ -49,7 +49,7 @@ export default function FusionFooter({ translations = {} }: FusionFooterProps) {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-zinc-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+                  className="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                   aria-label={link.label}
                 >
                   <link.icon size={20} />

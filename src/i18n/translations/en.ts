@@ -1,8 +1,8 @@
 export const en = {
   // Navigation
-  'nav.blog': 'Blog',
-  'nav.projects': 'Projects',
-  'nav.about': 'About',
+  'nav.blog': 'BLOG',
+  'nav.projects': 'PROJECTS',
+  'nav.about': 'ABOUT ME',
 
   // Home
   'home.title': 'Silicon Universe',

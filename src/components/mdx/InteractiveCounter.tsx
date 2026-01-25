@@ -15,14 +15,14 @@ export default function InteractiveCounter() {
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setCount(c => c - 1)}
-          className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-orange-500 transition-colors"
+          className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-500 transition-colors"
         >
           <Minus size={16} />
         </motion.button>
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setCount(c => c + 1)}
-          className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-orange-500 transition-colors"
+          className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-500 transition-colors"
         >
           <Plus size={16} />
         </motion.button>

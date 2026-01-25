@@ -2,7 +2,7 @@
 title: "Poor Charlie's Almanack: Wisdom Forged in Blood and Tears"
 description: "This isn't an investment guide—it's a manual on how to survive suffering and still live like a human being."
 pubDate: "2025-11-22"
-heroImage: "../../assets/qiongchalibaodianpic.jpg"
+heroImage: "../../../assets/qiongchalibaodianpic.jpg"
 showOnHome: true
 lang: en
 ---

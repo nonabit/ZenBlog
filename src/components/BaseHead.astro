@@ -19,8 +19,8 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 <!-- 品牌色定义 (移动端浏览器顶栏颜色) -->
-<!-- 使用你的品牌橙色 #f97316 (Tailwind orange-500) -->
-<meta name="theme-color" content="#f97316" />
+<!-- 使用中性灰色 #71717a (Tailwind zinc-500) -->
+<meta name="theme-color" content="#71717a" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -51,12 +51,14 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   src="https://cloud.umami.is/script.js"
   data-website-id="d7c290cc-3033-4ef1-8df1-f1a6484d9a08"></script>
 
-<!-- 字体系统：Noto Serif SC 用于文章标题 -->
+<!-- 字体系统 -->
+<!-- Noto Serif SC 用于中文文章标题 -->
+<!-- Shippori Mincho 用于英文文章标题 -->
 <!-- 配置文件：src/styles/typography.css -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Shippori+Mincho:wght@600&display=swap"
   rel="stylesheet"
 />
 

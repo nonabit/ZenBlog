@@ -3,21 +3,27 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-	// 只获取英文文章
+	// 只获取英文文章（en/ 目录下的文章）
 	const posts = (await getCollection("blog")).filter(
-		(post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === 'en'
+		(post: CollectionEntry<"blog">) => post.id.startsWith("en/")
 	);
-	return posts.map((post: CollectionEntry<"blog">) => ({
-		params: { slug: post.id.replace(/\.[^/.]+$/, "") },
-		props: post,
-	}));
+	return posts.map((post: CollectionEntry<"blog">) => {
+		// 从 "en/my-2025-summary.md" 提取 "my-2025-summary"
+		const slug = post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
+		return {
+			params: { slug },
+			props: post,
+		};
+	});
 }
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content } = await post.render();
+// 获取当前文章的 slug（不含语言前缀）
+const currentSlug = post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} slug={currentSlug}>
 	<Content />
 </BlogPost>
