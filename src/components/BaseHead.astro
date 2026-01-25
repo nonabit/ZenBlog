@@ -51,8 +51,14 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   src="https://cloud.umami.is/script.js"
   data-website-id="d7c290cc-3033-4ef1-8df1-f1a6484d9a08"></script>
 
-<!-- 字体系统：使用系统原生字体栈，零网络请求 -->
+<!-- 字体系统：Noto Serif SC 用于文章标题 -->
 <!-- 配置文件：src/styles/typography.css -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&display=swap"
+  rel="stylesheet"
+/>
 
 <!-- 2. 启用视图过渡路由 -->
 <ClientRouter />

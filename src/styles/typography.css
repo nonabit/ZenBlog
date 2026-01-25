@@ -12,8 +12,8 @@
                      "Microsoft YaHei", "微软雅黑", sans-serif;
 
   /* 衬线字体栈（文章标题专用） */
-  --font-serif-stack: Georgia, "Noto Serif SC", "Source Han Serif SC",
-                      "PingFang SC", "Microsoft YaHei", serif;
+  --font-serif-stack: "Noto Serif SC", "Source Han Serif SC", Georgia,
+                      "Times New Roman", serif;
 
   /* 等宽字体栈 */
   --font-mono-stack: ui-monospace, "SF Mono", Monaco, "Cascadia Code",

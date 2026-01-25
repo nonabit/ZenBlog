@@ -37,14 +37,14 @@ export default function FusionHeader({
       <div className="absolute inset-0 bg-white/80 dark:bg-black/80 backdrop-blur-md"></div>
 
       <div className="relative max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href={lang === 'zh' ? '/zh' : '/'} className="font-heading font-bold text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
+        <a href={lang === 'zh' ? '/zh' : '/'} className="font-heading font-normal text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none">
           <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse translate-y-[-2px]"></span>
           Silicon Universe
         </a>
 
         <nav className="flex items-center gap-6">
           {/* 桌面端导航 */}
-          <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+          <div className="hidden sm:flex items-center gap-6 text-sm font-normal text-zinc-500 dark:text-zinc-400">
             {navItems.map(item => {
               const active = isActive(item.key);
               const href = lang === 'zh' ? `/zh/${item.key}` : `/${item.key}`;
@@ -104,7 +104,7 @@ export default function FusionHeader({
                     key={item.key}
                     href={href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block px-6 py-4 rounded-2xl text-lg font-medium transition-colors no-underline ${
+                    className={`block px-6 py-4 rounded-2xl text-lg font-normal transition-colors no-underline ${
                       active
                         ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100'
                         : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-zinc-100'

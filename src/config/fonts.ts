@@ -9,15 +9,14 @@
 export const OG_FONTS = {
   // 界面/正文字体（英文）
   ui: 'Inter',
-  // 标题字体（英文，衬线）
-  heading: 'Newsreader',
-  // 中文字体
-  chinese: 'LXGW WenKai',
+  // 标题字体（衬线，与网站保持一致）
+  heading: 'Noto Serif SC',
+  // 中文字体（与 heading 相同，统一使用 Noto Serif SC）
+  chinese: 'Noto Serif SC',
 } as const;
 
 // OG 图片字体文件路径（相对于项目根目录）
 export const OG_FONT_PATHS = {
   inter: './public/fonts/Inter-Regular.ttf',
-  newsreader: './public/fonts/Newsreader-SemiBold.ttf',
-  wenkai: './public/fonts/LXGWWenKai-Regular.ttf',
+  notoSerifSC: './public/fonts/NotoSerifSC-SemiBold.ttf',
 } as const;
