@@ -1,6 +1,5 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import SiliconBackground from "../components/react/SiliconBackground";
 import FusionHeader from "../components/react/FusionHeader";
 import FusionHome from "../components/react/FusionHome";
 import FusionFooter from "../components/react/FusionFooter";
@@ -62,7 +61,6 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
-		<SiliconBackground client:load />
 		<!-- Header: 使用 client:load 指令，因为它需要立即响应交互 (Cmd+K) -->
 		<FusionHeader client:load currentPath="/" lang={lang} translations={t} />
 

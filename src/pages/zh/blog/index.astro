@@ -3,7 +3,6 @@ import BaseHead from "../../../components/BaseHead.astro";
 import FusionHeader from "../../../components/react/FusionHeader";
 import BlogList from "../../../components/react/BlogList";
 import FusionFooter from "../../../components/react/FusionFooter";
-import SiliconBackground from "../../../components/react/SiliconBackground";
 import { SITE_TITLE } from "../../../consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -59,7 +58,6 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
-		<SiliconBackground client:load />
 		{/* 头部导航 */}
 		<FusionHeader client:load currentPath="/zh/blog" lang={lang} translations={t} />
 

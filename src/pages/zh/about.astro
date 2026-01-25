@@ -3,7 +3,6 @@ import BaseHead from "../../components/BaseHead.astro";
 import FusionHeader from "../../components/react/FusionHeader";
 import FusionFooter from "../../components/react/FusionFooter";
 import CareerTimeline from "../../components/react/CareerTimeLine";
-import SiliconBackground from "../../components/react/SiliconBackground";
 import { SITE_TITLE } from "../../consts";
 import { MapPin, Mail, Link as LinkIcon } from "lucide-react";
 import Avatar from "../../assets/avatar.jpg";
@@ -41,7 +40,6 @@ const t = translations[lang];
         </script>
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
-        <SiliconBackground client:load />
         <FusionHeader
             client:load
             currentPath="/zh/about"
