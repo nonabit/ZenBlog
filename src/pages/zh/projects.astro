@@ -3,7 +3,6 @@ import BaseHead from "../../components/BaseHead.astro";
 import FusionHeader from "../../components/react/FusionHeader";
 import { BentoGridDemo } from "../../components/react/BentoGrid";
 import FusionFooter from "../../components/react/FusionFooter";
-import SiliconBackground from "../../components/react/SiliconBackground";
 import { SITE_TITLE } from "../../consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
@@ -66,7 +65,6 @@ const projects: ProjectListItem[] = allProjects.map(
         </script>
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
-        <SiliconBackground client:load />
         <FusionHeader client:load currentPath="/zh/projects" lang={lang} translations={t} />
 
         <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">

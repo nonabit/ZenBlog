@@ -1,6 +1,7 @@
-import { Rss, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
+import AnimatedThemeToggler from './AnimatedThemeToggler';
 import type { Language } from '@/i18n/config';
 
 interface FusionHeaderProps {
@@ -69,14 +70,10 @@ export default function FusionHeader({
 
           <div className="flex items-center gap-3 border-l border-zinc-200 dark:border-zinc-800 pl-6">
             <LanguageSwitcher currentLang={lang} currentPath={currentPath} />
-            <a
-              href="/rss.xml"
-              target="_blank"
+            <AnimatedThemeToggler
               className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-orange-500 transition-colors"
-              aria-label="RSS Feed"
-            >
-              <Rss size={18} />
-            </a>
+              aria-label="Toggle theme"
+            />
 
             {/* 移动端汉堡菜单按钮 */}
             <button

@@ -1,10 +1,11 @@
-import { Github, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { Github, Twitter, Mail, Rss, ArrowUp } from 'lucide-react';
 import Magnetic from './Magnetic';
 
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/99byte", label: "GitHub" },
   { icon: Twitter, href: "https://twitter.com/ninthbit_ai", label: "Twitter" },
   { icon: Mail, href: "mailto:oldmeatovo@gmail.com", label: "Email" },
+  { icon: Rss, href: "/rss.xml", label: "RSS Feed" },
 ];
 
 interface FusionFooterProps {

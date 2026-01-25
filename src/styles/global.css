@@ -3,7 +3,9 @@
 @import './_keyframe-animations.scss';
 
 @import "tailwindcss";
-/* 移除 @tailwindcss/typography 插件，使用自定义 prose 样式实现单一数据源 */
+
+/* Tailwind CSS 4: 使用 class 策略的暗色模式（基于 .dark 类） */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {
@@ -15,11 +17,18 @@
     --color-text-primary: rgba(0, 0, 0, 0.87);    /* 正文、标题 */
     --color-text-secondary: rgba(0, 0, 0, 0.6);   /* 次要文字 */
     --color-text-disabled: rgba(0, 0, 0, 0.38);   /* 禁用文字 */
+    --color-text-emphasis: rgba(0, 0, 0, 0.92);   /* 强调文字 */
   }
 
   .dark {
     --background: 9 9 11;
     --foreground: 250 250 250;
+
+    /* 暗色模式文字颜色 */
+    --color-text-primary: rgba(255, 255, 255, 0.87);
+    --color-text-secondary: rgba(255, 255, 255, 0.6);
+    --color-text-disabled: rgba(255, 255, 255, 0.38);
+    --color-text-emphasis: rgba(255, 255, 255, 0.92);
   }
 
   html {
@@ -99,7 +108,7 @@
   .prose strong,
   .prose b {
     font-weight: var(--font-weight-normal);  /* 400 */
-    color: rgba(0, 0, 0, 0.92);  /* 比正文稍深，突出强调 */
+    color: var(--color-text-emphasis);
   }
 
   /* 文章大标题：衬线 + 粗体 */
@@ -108,7 +117,7 @@
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-bold);  /* 700 */
     line-height: var(--line-height-tight);
-    color: rgba(0, 0, 0, 0.92);
+    color: var(--color-text-emphasis);
     margin-top: 0;
     margin-bottom: 2rem;
   }
@@ -119,7 +128,7 @@
     font-size: var(--font-size-prose-heading);
     font-weight: var(--font-weight-normal);  /* 400 */
     line-height: var(--line-height-tight);
-    color: rgba(0, 0, 0, 0.92);
+    color: var(--color-text-emphasis);
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
@@ -129,7 +138,7 @@
     font-size: 1.25rem;  /* 20px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    color: rgba(0, 0, 0, 0.92);
+    color: var(--color-text-emphasis);
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
@@ -139,7 +148,7 @@
     font-size: 1.125rem;  /* 18px */
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
-    color: rgba(0, 0, 0, 0.92);
+    color: var(--color-text-emphasis);
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
   }
@@ -176,8 +185,8 @@
 
   /* 引用块 */
   .prose blockquote {
-    @apply border-l-4 border-zinc-300 pl-4 my-6 italic;
-    color: var(--color-text-secondary);  /* rgba(0,0,0,0.6) */
+    @apply border-l-4 border-zinc-300 dark:border-zinc-600 pl-4 my-6 italic;
+    color: var(--color-text-secondary);
   }
 
   .prose blockquote p {
@@ -186,12 +195,12 @@
 
   /* 水平线 */
   .prose hr {
-    @apply border-zinc-200 my-12;
+    @apply border-zinc-200 dark:border-zinc-700 my-12;
   }
 
   /* 行内代码 */
   .prose code:not(pre code) {
-    @apply bg-zinc-100 border border-zinc-200 rounded-md px-1.5 py-0.5;
+    @apply bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md px-1.5 py-0.5;
     font-family: var(--font-mono);
     font-size: var(--font-size-code);
     font-weight: var(--font-weight-normal);
@@ -207,9 +216,9 @@
 
   /* 代码块 */
   .prose pre {
-    @apply bg-zinc-50 overflow-x-auto;
+    @apply bg-zinc-50 dark:bg-zinc-900 overflow-x-auto;
     @apply relative pt-12 pb-4 px-4 rounded-xl;
-    @apply border border-zinc-200 shadow-sm;
+    @apply border border-zinc-200 dark:border-zinc-700 shadow-sm;
     @apply my-6;
   }
 
@@ -228,12 +237,7 @@
 
   /* 图片 */
   .prose img {
-    @apply border border-zinc-100;
-    @apply shadow-lg transition-transform duration-500 my-8;
-  }
-
-  .prose img:hover {
-    @apply scale-[1.02];
+    @apply my-8;
   }
 
   /* 表格 */
@@ -242,16 +246,16 @@
   }
 
   .prose thead {
-    @apply border-b border-zinc-300;
+    @apply border-b border-zinc-300 dark:border-zinc-600;
   }
 
   .prose th {
     @apply py-3 px-4 font-medium;
-    color: rgba(0, 0, 0, 0.92);
+    color: var(--color-text-emphasis);
   }
 
   .prose td {
-    @apply py-3 px-4 border-b border-zinc-200;
+    @apply py-3 px-4 border-b border-zinc-200 dark:border-zinc-700;
   }
 
   .prose tbody tr:last-child td {
@@ -273,7 +277,7 @@
 
   /* 标记高亮 */
   .prose mark {
-    @apply bg-yellow-100 px-1 rounded;
+    @apply bg-yellow-100 dark:bg-yellow-900/50 px-1 rounded;
   }
 }
 
@@ -282,4 +286,11 @@
   ::selection {
     @apply bg-orange-100 text-orange-900;
   }
+}
+
+/* View Transitions API 样式（主题切换动画） */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }

@@ -62,3 +62,22 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 
 <!-- 2. 启用视图过渡路由 -->
 <ClientRouter />
+
+<!-- 主题初始化脚本：防止闪烁，在页面渲染前应用主题 -->
+<script is:inline>
+  // 应用主题的函数
+  function applyTheme() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // 页面加载时应用主题
+  applyTheme();
+
+  // Astro View Transitions: 页面切换后重新应用主题
+  document.addEventListener('astro:after-swap', applyTheme);
+</script>
