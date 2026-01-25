@@ -21,6 +21,10 @@ export const en = {
   'home.music': 'Music',
   'home.writing': 'Selected Writing',
 
+  // Blog
+  'blog.title': 'Writing',
+  'blog.description': 'Sharing thoughts and explorations on backend architecture, AI full-stack development, and new innovations.',
+
   // About
   'about.title': 'About Me',
   'about.name': 'Latens',

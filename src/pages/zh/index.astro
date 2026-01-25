@@ -13,10 +13,13 @@ import { translations } from "@/i18n/translations";
 const lang = 'zh';
 const t = translations[lang];
 
-const allPosts = (await getCollection("blog")).sort(
-	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+// 获取最新文章并按语言过滤，然后按发布时间倒序
+const allPosts = (await getCollection("blog"))
+	.filter((post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === lang)
+	.sort(
+		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
 
 const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
 	slug: post.id.replace(/\.[^/.]+$/, ""),
@@ -60,7 +63,7 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 		<FusionHeader client:load currentPath="/zh" lang={lang} translations={t} />
 
 		<main class="relative z-10">
-			<FusionHome client:load posts={homePosts} translations={t} />
+			<FusionHome client:load posts={homePosts} translations={t} lang={lang} />
 		</main>
 
 		<FusionFooter client:visible translations={t} />

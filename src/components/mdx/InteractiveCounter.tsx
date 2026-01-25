@@ -9,7 +9,7 @@ export default function InteractiveCounter() {
     <div className="p-6 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-between max-w-sm my-8">
       <div className="flex flex-col">
         <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">Interactive State</span>
-        <span className="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100">Count: {count}</span>
+        <span className="font-heading text-2xl font-bold text-zinc-900 dark:text-zinc-100">Count: {count}</span>
       </div>
       <div className="flex gap-2">
         <motion.button

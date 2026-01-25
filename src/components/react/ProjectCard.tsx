@@ -120,7 +120,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
       {/* 内容区域 */}
       <div className="p-6 flex flex-col grow relative z-10 bg-zinc-50/80 dark:bg-zinc-900/80 backdrop-blur-sm">
-        <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+        <h3 className="font-heading text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
           {data.title}
         </h3>
         <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 grow">

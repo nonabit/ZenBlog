@@ -4,6 +4,7 @@ description: "困于方寸的「笼中雀」。二零二五，于我而言，关
 pubDate: "2025-12-25"
 heroImage: ""
 showOnHome: true
+lang: zh
 ---
 
 **困于方寸的「笼中雀」**

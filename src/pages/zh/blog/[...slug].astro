@@ -1,11 +1,11 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
+import BlogPost from "../../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
-	// 只获取英文文章
+	// 只获取中文文章
 	const posts = (await getCollection("blog")).filter(
-		(post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === 'en'
+		(post: CollectionEntry<"blog">) => (post.data.lang || 'zh') === 'zh'
 	);
 	return posts.map((post: CollectionEntry<"blog">) => ({
 		params: { slug: post.id.replace(/\.[^/.]+$/, "") },

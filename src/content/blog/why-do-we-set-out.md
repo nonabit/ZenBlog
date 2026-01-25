@@ -3,6 +3,7 @@ title: '我们为何出发'
 description: '我们为何出发？ 不是为了抵达某处，而是为了在流逝中确认存在。 哪怕只是一个微小的原点，也是一切可能性的开端。'
 pubDate: '2025-12-04'
 showOnHome: true
+lang: zh
 ---
 
 

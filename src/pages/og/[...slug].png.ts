@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import fs from 'fs/promises';
 import type { CollectionEntry } from 'astro:content';
 import type { APIRoute } from 'astro';
+import { OG_FONTS, OG_FONT_PATHS } from '@/config/fonts';
 
 // 1. Define return type for getStaticPaths
 export async function getStaticPaths() {
@@ -53,16 +54,16 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
         <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
            <div style="display: flex; align-items: center; gap: 12px;">
               <div style="display: flex; width: 12px; height: 12px; background-color: #f97316; border-radius: 50%; box-shadow: 0 0 10px #f97316;"></div>
-              <div style="display: flex; font-size: 24px; color: #a1a1aa; font-family: 'Inter'; letter-spacing: 1px;">SILICON UNIVERSE</div>
+              <div style="display: flex; font-size: 24px; color: #a1a1aa; font-family: '${OG_FONTS.ui}'; letter-spacing: 1px;">SILICON UNIVERSE</div>
            </div>
         </div>
 
         <!-- Title Section -->
         <div style="display: flex; flex-direction: column; flex-grow: 1; justify-content: center; align-items: flex-start;">
-           <div style="display: flex; font-size: 72px; font-family: 'Newsreader', 'LXGW WenKai'; font-weight: 600; line-height: 1.1; color: #fafafa; margin-bottom: 24px; text-shadow: 0 0 30px rgba(255,255,255,0.1);">
+           <div style="display: flex; font-size: 72px; font-family: '${OG_FONTS.heading}', '${OG_FONTS.chinese}'; font-weight: 600; line-height: 1.1; color: #fafafa; margin-bottom: 24px; text-shadow: 0 0 30px rgba(255,255,255,0.1);">
                ${post.data.title}
            </div>
-           <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: 'Inter', 'LXGW WenKai'; line-height: 1.5; max-width: 900px;">
+           <div style="display: flex; font-size: 32px; color: #a1a1aa; font-family: '${OG_FONTS.ui}', '${OG_FONTS.chinese}'; line-height: 1.5; max-width: 900px;">
                ${post.data.description}
            </div>
         </div>
@@ -70,14 +71,14 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
         <!-- Footer -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%; border-top: 1px solid #27272a; padding-top: 30px;">
            <div style="display: flex; flex-direction: column;">
-               <div style="display: flex; font-size: 16px; color: #52525b; font-family: 'Inter'; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 2px;">Published</div>
-               <div style="display: flex; font-size: 24px; color: #d4d4d8; font-family: 'Inter';">
+               <div style="display: flex; font-size: 16px; color: #52525b; font-family: '${OG_FONTS.ui}'; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 2px;">Published</div>
+               <div style="display: flex; font-size: 24px; color: #d4d4d8; font-family: '${OG_FONTS.ui}';">
                   ${post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                </div>
            </div>
-           
+
            <div style="display: flex; align-items: center; gap: 8px;">
-              <div style="display: flex; font-size: 24px; color: #71717a; font-family: 'Inter';">
+              <div style="display: flex; font-size: 24px; color: #71717a; font-family: '${OG_FONTS.ui}';">
                   硅基宇宙
               </div>
            </div>
@@ -87,30 +88,29 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
     </div>
   ` as any;
 
-    // Load fonts from the public directory
-    // Ensure these files exist in your project at public/fonts/
-    const interFont = await fs.readFile('./public/fonts/Inter-Regular.ttf');
-    const newsreaderFont = await fs.readFile('./public/fonts/Newsreader-SemiBold.ttf');
-    const wenkaiFont = await fs.readFile('./public/fonts/LXGWWenKai-Regular.ttf');
+    // 加载字体文件（路径定义在 src/config/fonts.ts）
+    const interFont = await fs.readFile(OG_FONT_PATHS.inter);
+    const newsreaderFont = await fs.readFile(OG_FONT_PATHS.newsreader);
+    const wenkaiFont = await fs.readFile(OG_FONT_PATHS.wenkai);
 
     const svg: string = await satori(markup, {
       width: 1200,
       height: 630,
       fonts: [
         {
-          name: 'Inter',
+          name: OG_FONTS.ui,
           data: interFont,
           style: 'normal',
           weight: 400,
         },
         {
-          name: 'Newsreader',
+          name: OG_FONTS.heading,
           data: newsreaderFont,
           style: 'normal',
           weight: 600,
         },
         {
-          name: 'LXGW WenKai',
+          name: OG_FONTS.chinese,
           data: wenkaiFont,
           style: 'normal',
           weight: 400,

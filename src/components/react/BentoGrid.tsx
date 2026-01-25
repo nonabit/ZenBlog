@@ -54,10 +54,10 @@ export function BentoGridItem({
       {header}
       <div>
         {icon}
-        <div className="mt-2 mb-2 font-sans font-bold text-zinc-600 dark:text-zinc-200">
+        <div className="mt-2 mb-2 font-ui font-bold text-zinc-600 dark:text-zinc-200">
           {title}
         </div>
-        <div className="font-sans text-xs font-normal text-zinc-600 dark:text-zinc-300">
+        <div className="font-ui text-xs font-normal text-zinc-600 dark:text-zinc-300">
           {description}
         </div>
       </div>
