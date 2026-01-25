@@ -23,12 +23,12 @@ export default function LanguageSwitcher({ currentLang, currentPath }: LanguageS
   };
 
   return (
-    <div className="flex items-center gap-2 text-sm font-medium">
+    <div className="flex items-center gap-2 text-sm font-normal">
       <a
         href={getLocalizedPath('en')}
         className={`no-underline transition-colors ${
           currentLang === 'en'
-            ? 'text-zinc-900 dark:text-zinc-100 font-bold'
+            ? 'text-zinc-900 dark:text-zinc-100 font-normal'
             : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400'
         }`}
       >
@@ -39,7 +39,7 @@ export default function LanguageSwitcher({ currentLang, currentPath }: LanguageS
         href={getLocalizedPath('zh')}
         className={`no-underline transition-colors ${
           currentLang === 'zh'
-            ? 'text-zinc-900 dark:text-zinc-100 font-bold'
+            ? 'text-zinc-900 dark:text-zinc-100 font-normal'
             : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400'
         }`}
       >

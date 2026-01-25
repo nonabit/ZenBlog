@@ -30,9 +30,16 @@
     /* 界面默认使用无衬线字体 */
     font-family: var(--font-ui);
     @apply bg-white text-zinc-800 dark:bg-black dark:text-zinc-200
-           transition-colors duration-300 antialiased;
+           transition-colors duration-300;
     letter-spacing: var(--letter-spacing-normal);
     line-height: var(--line-height-normal);
+    /* 亚像素渲染让细字体更清晰饱满 */
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  /* 深色模式下使用默认渲染，避免彩边 */
+  .dark body {
+    -webkit-font-smoothing: auto;
   }
 
   /* 标题样式：使用无衬线字体 */
@@ -43,7 +50,7 @@
   h5,
   h6 {
     font-family: var(--font-heading);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-normal);
     line-height: var(--line-height-tight);
     letter-spacing: var(--letter-spacing-tight);
   }

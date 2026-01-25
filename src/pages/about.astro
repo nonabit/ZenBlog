@@ -9,7 +9,7 @@ import { MapPin, Mail, Link as LinkIcon } from "lucide-react";
 import Avatar from "../assets/avatar.jpg";
 import { translations } from "@/i18n/translations";
 
-const lang = 'en';
+const lang = "en";
 const t = translations[lang];
 ---
 
@@ -17,7 +17,7 @@ const t = translations[lang];
 <html lang="en">
     <head>
         <BaseHead
-            title={`${t['nav.about']} | ${SITE_TITLE}`}
+            title={`${t["nav.about"]} | ${SITE_TITLE}`}
             description="More about me and my journey."
         />
         <script is:inline>
@@ -42,7 +42,12 @@ const t = translations[lang];
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
         <SiliconBackground client:load />
-        <FusionHeader client:load currentPath="/about" lang={lang} translations={t} />
+        <FusionHeader
+            client:load
+            currentPath="/about"
+            lang={lang}
+            translations={t}
+        />
         <main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {/* 左侧：个人简介 (Sticky) */}
@@ -60,16 +65,16 @@ const t = translations[lang];
                         </div>
 
                         <h1
-                            class="font-serif text-3xl font-bold text-zinc-900 dark:text-zinc-100 mb-4"
+                            class="font-heading text-3xl font-normal text-zinc-900 dark:text-zinc-100 mb-4"
                         >
-                            {t['about.name']}
+                            {t["about.name"]}
                         </h1>
                         <div
                             class="text-zinc-500 dark:text-zinc-400 text-sm space-y-3 mb-8"
                         >
                             <div class="flex items-center gap-2">
                                 <MapPin size={16} />
-                                <span>{t['about.location']}</span>
+                                <span>{t["about.location"]}</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <Mail size={16} />
@@ -85,9 +90,9 @@ const t = translations[lang];
                         </div>
 
                         <p
-                            class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-serif"
+                            class="font-light text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6"
                         >
-                            {t['about.motto']}
+                            {t["about.motto"]}
                         </p>
                     </div>
                 </div>
@@ -96,43 +101,47 @@ const t = translations[lang];
                 <div class="md:col-span-2 space-y-16">
                     {/* Intro Section */}
                     <section>
-                        <h2 class="font-serif text-2xl font-bold mb-6 text-zinc-900 dark:text-zinc-100">
-                            {t['about.intro.title']}
+                        <h2
+                            class="font-heading text-2xl font-normal mb-6 text-zinc-900 dark:text-zinc-100"
+                        >
+                            {t["about.intro.title"]}
                         </h2>
-                        <div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                        <div
+                            class="font-light space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed"
+                        >
                             <p>
-                                {t['about.intro.p1']}
+                                {t["about.intro.p1"]}
                             </p>
                             <p>
-                                {t['about.intro.p2']}
+                                {t["about.intro.p2"]}
                             </p>
                             <p>
-                                {t['about.intro.p3']}
+                                {t["about.intro.p3"]}
                             </p>
                             <p>
-                                {t['about.intro.p4']}
+                                {t["about.intro.p4"]}
                             </p>
                             <p>
-                                {t['about.intro.p5']}
+                                {t["about.intro.p5"]}
                             </p>
                             <p>
-                                {t['about.intro.p6']}
+                                {t["about.intro.p6"]}
                             </p>
                             <p>
-                                {t['about.intro.p7']}
+                                {t["about.intro.p7"]}
                             </p>
-                            <blockquote class="border-l-4 border-zinc-300 dark:border-zinc-700 pl-4 italic text-zinc-500 dark:text-zinc-400 mt-6">
-                                {t['about.intro.quote']}
-                            </blockquote>
+                            <p>
+                                {t["about.intro.quote"]}
+                            </p>
                         </div>
                     </section>
 
                     {/* Timeline Section */}
                     <section>
                         <h2
-                            class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-8"
+                            class="font-heading text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-8"
                         >
-                            {t['about.career']}
+                            {t["about.career"]}
                         </h2>
                         <CareerTimeline client:visible />
                     </section>
@@ -140,9 +149,9 @@ const t = translations[lang];
                     {/* Gear / Uses Section (可选) */}
                     <section>
                         <h2
-                            class="font-serif text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6"
+                            class="font-heading text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-6"
                         >
-                            {t['about.gear']}
+                            {t["about.gear"]}
                         </h2>
                         <div class="grid grid-cols-2 gap-4">
                             <div
@@ -151,7 +160,7 @@ const t = translations[lang];
                                 <div
                                     class="text-xs font-mono text-zinc-400 mb-1"
                                 >
-                                    {t['about.gear.editor']}
+                                    {t["about.gear.editor"]}
                                 </div>
                                 <div class="font-medium">Zed + Neovim</div>
                             </div>
@@ -161,7 +170,7 @@ const t = translations[lang];
                                 <div
                                     class="text-xs font-mono text-zinc-400 mb-1"
                                 >
-                                    {t['about.gear.terminal']}
+                                    {t["about.gear.terminal"]}
                                 </div>
                                 <div class="font-medium">Warp / Ghostty</div>
                             </div>
@@ -171,7 +180,7 @@ const t = translations[lang];
                                 <div
                                     class="text-xs font-mono text-zinc-400 mb-1"
                                 >
-                                    {t['about.gear.hardware']}
+                                    {t["about.gear.hardware"]}
                                 </div>
                                 <div class="font-medium">
                                     MacBook Pro M4 16"

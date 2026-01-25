@@ -78,7 +78,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
            </div>
 
            <div style="display: flex; align-items: center; gap: 8px;">
-              <div style="display: flex; font-size: 24px; color: #71717a; font-family: '${OG_FONTS.ui}';">
+              <div style="display: flex; font-size: 24px; color: #71717a; font-family: '${OG_FONTS.heading}';">
                   硅基宇宙
               </div>
            </div>
@@ -90,8 +90,7 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
 
     // 加载字体文件（路径定义在 src/config/fonts.ts）
     const interFont = await fs.readFile(OG_FONT_PATHS.inter);
-    const newsreaderFont = await fs.readFile(OG_FONT_PATHS.newsreader);
-    const wenkaiFont = await fs.readFile(OG_FONT_PATHS.wenkai);
+    const notoSerifSCFont = await fs.readFile(OG_FONT_PATHS.notoSerifSC);
 
     const svg: string = await satori(markup, {
       width: 1200,
@@ -105,15 +104,9 @@ export const GET: APIRoute<CollectionEntry<'blog'>> = async ({ props }) => {
         },
         {
           name: OG_FONTS.heading,
-          data: newsreaderFont,
+          data: notoSerifSCFont,
           style: 'normal',
           weight: 600,
-        },
-        {
-          name: OG_FONTS.chinese,
-          data: wenkaiFont,
-          style: 'normal',
-          weight: 400,
         },
       ],
     });

@@ -40,7 +40,7 @@ export const en = {
   'about.intro.p5': '"Ninth Bit" is the digital identity I\'ve created for myself. In the world of computers, a byte consists of 8 bits, representing established rules and boundaries. The "ninth bit" symbolizes that "extra bit" beyond convention, exploring the unknown — it\'s creativity, imagination, and the persistence to not settle for "just good enough".',
   'about.intro.p6': 'In this space, I\'ll share my technical thoughts, project practices, and various insights about AI and the future. I also have a strong interest in traditional thoughts like Confucianism, Buddhism, Taoism, and Wang Yangming\'s philosophy of mind, so you might occasionally see some "not-so-technical" writings here.',
   'about.intro.p7': 'I believe in the power of language, whether it\'s code or words. For me, sharing and expression are the best ways to grow.',
-  'about.intro.quote': 'Growing through sharing and expression.',
+  'about.intro.quote': '「Growing through sharing and expression」',
   'about.gear.editor': 'Editor',
   'about.gear.terminal': 'Terminal',
   'about.gear.hardware': 'Hardware',

@@ -355,7 +355,7 @@ export default function FusionHome({ posts, translations = {}, lang = 'en' }: Fu
       {/* --- Writings List --- */}
       <section className="max-w-2xl mb-32">
         <div className="flex items-baseline justify-between mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <h2 className="font-heading text-3xl text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
+          <h2 className="font-heading text-3xl font-medium text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
           <a href={getBlogListUrl()} className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
         </div>
 
@@ -371,14 +371,14 @@ export default function FusionHome({ posts, translations = {}, lang = 'en' }: Fu
             >
               <a href={getBlogUrl(post.slug)} className="block no-underline">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
+                  <h3 className="text-lg font-heading font-normal text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
                     {post.data.title}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 shrink-0 mt-1 sm:mt-0">
                     {new Date(post.data.pubDate).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-heading">
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-light">
                   {post.data.description}
                 </p>
                 <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">
