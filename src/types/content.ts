@@ -1,12 +1,19 @@
 import type { ImageMetadata } from 'astro';
 
+export interface BlogAuthor {
+  name: string;
+  title?: string;
+  avatar?: string;
+}
+
 export interface BlogListItem {
   slug: string;
   data: {
     title: string;
     description: string;
     pubDate: Date;
-    heroImage?: ImageMetadata;
+    heroImage?: ImageMetadata | '';
+    author?: BlogAuthor;
     showOnHome?: boolean;
   };
 }

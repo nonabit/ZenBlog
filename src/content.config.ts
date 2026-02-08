@@ -6,7 +6,12 @@ const blog = defineCollection({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
-    heroImage: image().optional(),
+    heroImage: z.union([image(), z.literal('')]).optional(),
+    author: z.object({
+      name: z.string(),
+      title: z.string().optional(),
+      avatar: z.string().optional(),
+    }).optional(),
     showOnHome: z.boolean().optional(),
     lang: z.enum(['en', 'zh']).default('zh'),  // 语言标识，默认中文
   }),

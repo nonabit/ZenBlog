@@ -22,8 +22,25 @@ const post = Astro.props;
 const { Content } = await post.render();
 // 获取当前文章的 slug（不含语言前缀）
 const currentSlug = post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
+const rawText = post.body
+	.replace(/```[\s\S]*?```/g, " ")
+	.replace(/`[^`]*`/g, " ")
+	.replace(/!\[[^\]]*?\]\([^)]+\)/g, " ")
+	.replace(/\[[^\]]+]\([^)]+\)/g, " ")
+	.replace(/[>#*_~\-]+/g, " ")
+	.replace(/\s+/g, " ")
+	.trim();
+const wordCount = rawText ? rawText.split(" ").length : 0;
+const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 220));
+const fallbackHeroImage =
+	post.body.match(/!\[[^\]]*?\]\(([^)\s]+)(?:\s+"[^"]*")?\)/)?.[1] ?? "";
 ---
 
-<BlogPost {...post.data} slug={currentSlug}>
+<BlogPost
+	{...post.data}
+	slug={currentSlug}
+	readTimeMinutes={readTimeMinutes}
+	fallbackHeroImage={fallbackHeroImage}
+>
 	<Content />
 </BlogPost>
