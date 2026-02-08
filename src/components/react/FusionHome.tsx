@@ -2,11 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, type Variants, useInView } from 'framer-motion';
 import { ArrowUpRight, MapPin, Cpu, Disc, Clock, Code2, Server, PenTool } from 'lucide-react';
 import type { BlogListItem } from '../../types/content';
+import { Cover } from '../ui/cover';
 
 // 定义 Props 接口
 // 这里对应 index.astro 中 getCollection 返回的数据结构
 interface FusionHomeProps {
   posts: BlogListItem[];
+  translations?: Record<string, string>;
+  lang?: 'en' | 'zh';
 }
 
 // 动画变体
@@ -37,15 +40,15 @@ const staggerContainer = {
   }
 };
 
-// ... (保留 BentoItem 组件) ...
+// BentoItem 组件
 const BentoItem: React.FC<{ className?: string; children: React.ReactNode }> = ({ className = "", children }) => (
   <motion.div
     variants={fadeInUp}
     whileHover={{ y: -4, transition: { duration: 0.3, ease: "easeOut" } }}
     className={`
-      bg-white/80 dark:bg-zinc-900/60 backdrop-blur-md 
-      border border-zinc-200/60 dark:border-zinc-800/60 
-      rounded-3xl p-6 relative overflow-hidden group 
+      bg-white/80 dark:bg-zinc-900/60 backdrop-blur-md
+      border border-zinc-200/60 dark:border-zinc-800/60
+      rounded-3xl p-6 relative overflow-hidden group
       shadow-sm hover:shadow-2xl hover:shadow-zinc-200/50 dark:hover:shadow-black/50
       transition-all duration-500
       ${className}
@@ -160,7 +163,7 @@ const TechDeck = ({ group, delay = 0 }: { group: typeof STACK_GROUPS[0], delay?:
               {currentTech}
             </span>
             {/* 状态指示灯 */}
-            <div className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full transition-colors duration-300 ${(!hasPlayedIntro || isHovering) ? 'bg-orange-500 animate-pulse' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
+            <div className={`absolute top-2 right-2 w-1.5 h-1.5 rounded-full transition-colors duration-300 ${(!hasPlayedIntro || isHovering) ? 'bg-zinc-500 dark:bg-zinc-400 animate-pulse' : 'bg-zinc-200 dark:bg-zinc-800'}`}></div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -202,7 +205,13 @@ const TimeDisplay = () => {
   return <span className="font-mono tabular-nums tracking-wider">{time}</span>;
 };
 
-export default function FusionHome({ posts }: FusionHomeProps) {
+export default function FusionHome({ posts, translations = {}, lang = 'en' }: FusionHomeProps) {
+  const t = (key: string) => translations[key] || key;
+
+  // 根据语言生成博客链接
+  const getBlogUrl = (slug: string) => lang === 'zh' ? `/zh/blog/${slug}` : `/blog/${slug}`;
+  const getBlogListUrl = () => lang === 'zh' ? '/zh/blog' : '/blog';
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-16 sm:py-24">
       {/* Hero Section */}
@@ -212,11 +221,11 @@ export default function FusionHome({ posts }: FusionHomeProps) {
         variants={staggerContainer}
         className="mb-32"
       >
-        <motion.h1 variants={fadeInUp} className="font-serif text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
-          Backend Roots. <br /> <span className="italic text-zinc-400/80 dark:text-zinc-600 bg-clip-text">AI-Driven</span> Mindset.
+        <motion.h1 variants={fadeInUp} className="font-heading text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]">
+          {t('home.hero.title1')} <br /> <Cover shakeIntensity={1} scaleDuration={3}>{t('home.hero.title2')}</Cover> {t('home.hero.title3')}
         </motion.h1>
         <motion.p variants={fadeInUp} className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide">
-          A 5-year backend veteran evolving into an AI-native full stack engineer. I document my journey of turning curiosity into productivity while exploring the digital nomad lifestyle.
+          {t('home.hero.subtitle')}
         </motion.p>
       </motion.section>
 
@@ -245,13 +254,13 @@ export default function FusionHome({ posts }: FusionHomeProps) {
           <div>
             <div className="flex items-center gap-2 text-zinc-400 mb-4 text-xs font-bold font-mono uppercase tracking-widest opacity-80">
               <Cpu size={14} />
-              <span>Building</span>
+              <span>{t('home.building')}</span>
             </div>
-            <h3 className="text-3xl font-serif text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">AI-Powered HarmonyOS Migration</h3>
+            <h3 className="text-3xl font-heading text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">{t('home.building.title')}</h3>
           </div>
           <div className="mt-4 relative z-10 w-full sm:w-full">
             <p className="text-zinc-500 dark:text-zinc-400 text-base leading-relaxed">
-              Building reusable tools to boost HarmonyOS app development efficiency. Helping migrate existing Android/iOS codebases to HarmonyOS.
+              {t('home.building.desc')}
             </p>
           </div>
         </BentoItem>
@@ -269,7 +278,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
             <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-2">
               <MapPin size={20} className="text-zinc-600 dark:text-zinc-300" />
             </div>
-            <div className="font-medium text-zinc-900 dark:text-zinc-100">Shanghai, CN</div>
+            <div className="font-medium text-zinc-900 dark:text-zinc-100">{t('home.location')}</div>
             {/* 实时时钟显示 */}
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/50 px-2 py-1 rounded-md">
               <Clock size={10} />
@@ -282,8 +291,8 @@ export default function FusionHome({ posts }: FusionHomeProps) {
              展示最近在听的音乐，带有波形动画，增加生活气息和视觉律动
           */}
         <BentoItem className="sm:col-span-1 flex flex-col justify-between group overflow-hidden relative">
-          {/* 背景装饰：橙色光晕 */}
-          <div className="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl group-hover:bg-orange-500/20 transition-colors"></div>
+          {/* 背景装饰：光晕 */}
+          <div className="absolute -right-4 -top-4 w-24 h-24 bg-zinc-500/10 rounded-full blur-2xl group-hover:bg-zinc-500/20 transition-colors"></div>
 
           <div className="flex justify-between items-start">
             <div className="text-zinc-400 text-xs font-bold font-mono uppercase tracking-widest flex items-center gap-2">
@@ -293,27 +302,27 @@ export default function FusionHome({ posts }: FusionHomeProps) {
               >
                 <Disc size={14} />
               </motion.div>
-              <span>Music</span>
+              <span>{t('home.music')}</span>
             </div>
             {/* 动态波形 (Audio Visualizer Animation) */}
             <div className="flex items-end gap-0.5 h-4">
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [4, 12, 6, 14, 4] }}
                 transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [8, 4, 14, 6, 8] }}
                 transition={{ duration: 0.7, repeat: Infinity, repeatType: "reverse", delay: 0.1 }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [6, 14, 4, 10, 6] }}
                 transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse", delay: 0.2 }}
               />
               <motion.div
-                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-orange-500 transition-colors rounded-t-sm"
+                className="w-1 bg-zinc-300 dark:bg-zinc-700 group-hover:bg-zinc-500 dark:group-hover:bg-zinc-400 transition-colors rounded-t-sm"
                 animate={{ height: [12, 6, 10, 4, 12] }}
                 transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse", delay: 0.3 }}
               />
@@ -322,7 +331,7 @@ export default function FusionHome({ posts }: FusionHomeProps) {
 
           <div className="relative z-10 mt-4">
             {/* 你可以手动更新这首歌，或者后续接入 Spotify API */}
-            <div className="font-serif text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate tracking-tight">
+            <div className="font-heading text-lg font-medium text-zinc-900 dark:text-zinc-100 truncate tracking-tight">
               Cornfield Chase
             </div>
             <div className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-1 font-medium tracking-wide">
@@ -346,8 +355,8 @@ export default function FusionHome({ posts }: FusionHomeProps) {
       {/* --- Writings List --- */}
       <section className="max-w-2xl mb-32">
         <div className="flex items-baseline justify-between mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <h2 className="font-serif text-3xl text-zinc-900 dark:text-zinc-100">Selected Writing</h2>
-          <a href="/blog" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">View All</a>
+          <h2 className="font-heading text-3xl font-medium text-zinc-900 dark:text-zinc-100">{t('home.writing')}</h2>
+          <a href={getBlogListUrl()} className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors">{t('home.viewAll')}</a>
         </div>
 
         <div className="space-y-8">
@@ -360,16 +369,16 @@ export default function FusionHome({ posts }: FusionHomeProps) {
               transition={{ delay: index * 0.1 }}
               className="group cursor-pointer"
             >
-              <a href={`/blog/${post.slug}`} className="block no-underline">
+              <a href={getBlogUrl(post.slug)} className="block no-underline">
                 <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-                  <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors tracking-tight">
+                  <h3 className="text-lg font-heading font-normal text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors tracking-tight">
                     {post.data.title}
                   </h3>
                   <span className="text-xs font-mono text-zinc-400 shrink-0 mt-1 sm:mt-0">
-                    {new Date(post.data.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                    {new Date(post.data.pubDate).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg">
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed text-base max-w-lg font-light">
                   {post.data.description}
                 </p>
                 <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">

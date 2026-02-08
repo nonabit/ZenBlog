@@ -16,7 +16,7 @@ export default function ChartDemo() {
       <div className="mb-6 flex items-center justify-between">
         <div>
             <div className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-1">Analytics</div>
-            <div className="text-2xl font-serif font-bold text-zinc-900 dark:text-zinc-100">User Growth</div>
+            <div className="text-2xl font-heading font-bold text-zinc-900 dark:text-zinc-100">User Growth</div>
         </div>
         <div className="flex gap-2 items-center">
             <span className="flex h-2 w-2">
@@ -45,7 +45,7 @@ export default function ChartDemo() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1" 
-                className="text-orange-500"
+                className="text-zinc-600 dark:text-zinc-400"
                 points={points}
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
@@ -63,7 +63,7 @@ export default function ChartDemo() {
                         cx={x}
                         cy={y}
                         r="1.2" // 从 1.5 改为 1.2
-                        className="fill-white dark:fill-zinc-900 stroke-orange-500 cursor-pointer"
+                        className="fill-white dark:fill-zinc-900 stroke-zinc-600 dark:stroke-zinc-400 cursor-pointer"
                         strokeWidth="1"
                         initial={{ scale: 0, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}

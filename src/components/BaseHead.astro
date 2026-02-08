@@ -19,8 +19,8 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 <!-- 品牌色定义 (移动端浏览器顶栏颜色) -->
-<!-- 使用你的品牌橙色 #f97316 (Tailwind orange-500) -->
-<meta name="theme-color" content="#f97316" />
+<!-- 使用中性灰色 #71717a (Tailwind zinc-500) -->
+<meta name="theme-color" content="#71717a" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -51,25 +51,35 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
   src="https://cloud.umami.is/script.js"
   data-website-id="d7c290cc-3033-4ef1-8df1-f1a6484d9a08"></script>
 
-<!-- Fonts: 使用 Google Fonts (支持自动分包，加载中文更快) -->
-<!-- 引入: 
-     1. Inter (英文正文)
-     2. Newsreader (英文标题)
-     3. JetBrains Mono (代码)
-     4. Noto Sans SC (中文正文 - 黑体)
-     5. Noto Serif SC (中文标题 - 宋体)
--->
+<!-- 字体系统 -->
+<!-- Noto Serif SC 用于中文文章标题 -->
+<!-- Shippori Mincho 用于英文文章标题 -->
+<!-- 配置文件：src/styles/typography.css -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,wght@0,400..700;1,400..700&family=Noto+Sans+SC:wght@300..700&family=Noto+Serif+SC:wght@400..700&family=LXGW+WenKai:wght@300;400;500;700&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Shippori+Mincho:wght@600&display=swap"
   rel="stylesheet"
-/>
-<!-- 兼容网络环境：通过 jsDelivr 引入 LXGW WenKai 的 Webfont -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont/style.css"
 />
 
 <!-- 2. 启用视图过渡路由 -->
 <ClientRouter />
+
+<!-- 主题初始化脚本：防止闪烁，在页面渲染前应用主题 -->
+<script is:inline>
+  // 应用主题的函数
+  function applyTheme() {
+    const theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  // 页面加载时应用主题
+  applyTheme();
+
+  // Astro View Transitions: 页面切换后重新应用主题
+  document.addEventListener('astro:after-swap', applyTheme);
+</script>

@@ -3,20 +3,25 @@ import BaseHead from "../../components/BaseHead.astro";
 import FusionHeader from "../../components/react/FusionHeader";
 import BlogList from "../../components/react/BlogList";
 import FusionFooter from "../../components/react/FusionFooter";
-import SiliconBackground from "../../components/react/SiliconBackground";
 import { SITE_TITLE } from "../../consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import { translations } from "@/i18n/translations";
 
-// 1. 获取原始数据并排序
-const allPosts = (await getCollection("blog")).sort(
-	(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-		b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const lang = 'en';
+const t = translations[lang];
+
+// 1. 获取原始数据并按语言过滤（en/ 目录），然后排序
+const allPosts = (await getCollection("blog"))
+	.filter((post: CollectionEntry<"blog">) => post.id.startsWith("en/"))
+	.sort(
+		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
+			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
 
 // 2. 数据清洗：确保传给 React 的是纯净的 JSON 对象
 const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
-	slug: post.id.replace(/\.[^/.]+$/, ""),
+	slug: post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, ""),
 	data: {
 		title: post.data.title,
 		description: post.data.description,
@@ -29,7 +34,7 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`Blog | ${SITE_TITLE}`}
+			title={`${t['nav.blog']} | ${SITE_TITLE}`}
 			description="Writings and thoughts."
 		/>
 		<script is:inline>
@@ -53,16 +58,15 @@ const posts = allPosts.map((post: CollectionEntry<"blog">) => ({
 		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
-		<SiliconBackground client:load />
 		{/* 头部导航 */}
-		<FusionHeader client:load transition:persist />
+		<FusionHeader client:load currentPath="/blog" lang={lang} translations={t} />
 
-		<main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
+		<main class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
 			{/* 博客列表组件 */}
-			<BlogList client:load posts={posts} />
+			<BlogList client:load posts={posts} lang={lang} translations={t} />
 		</main>
 
 		{/* 统一的页脚 */}
-		<FusionFooter client:visible />
+		<FusionFooter client:visible translations={t} />
 	</body>
 </html>

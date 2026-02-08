@@ -1,0 +1,81 @@
+/**
+ * 字体系统 - 单一数据源
+ * 使用 Tailwind CSS 4 @theme 指令
+ */
+
+@theme {
+  /* ==================== 基础字体栈 ==================== */
+
+  /* 无衬线字体栈 */
+  --font-sans-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                     "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB",
+                     "Microsoft YaHei", "微软雅黑", sans-serif;
+
+  /* 衬线字体栈（中文文章标题专用） */
+  --font-serif-stack: "Noto Serif SC", "Source Han Serif SC", Georgia,
+                      "Times New Roman", serif;
+
+  /* 英文衬线字体栈（英文文章标题专用） */
+  --font-serif-en-stack: "Shippori Mincho", Georgia, "Times New Roman", serif;
+
+  /* 等宽字体栈 */
+  --font-mono-stack: ui-monospace, "SF Mono", Monaco, "Cascadia Code",
+                     Consolas, "Liberation Mono", "Courier New",
+                     "PingFang SC", "Microsoft YaHei", monospace;
+
+  /* ==================== 语义化字体族 ==================== */
+
+  --font-ui: var(--font-sans-stack);
+  --font-heading: var(--font-sans-stack);
+  --font-article-title: var(--font-serif-stack);
+  --font-article-title-en: var(--font-serif-en-stack);
+  --font-body: var(--font-sans-stack);
+  --font-mono: var(--font-mono-stack);
+
+  /* Tailwind 映射 */
+  --font-sans: var(--font-sans-stack);
+  --font-serif: var(--font-serif-stack);
+  --font-serif-en: var(--font-serif-en-stack);
+
+  /* ==================== 字号系统 ==================== */
+
+  /* 正文 */
+  --font-size-body: 1.0625rem;        /* 17px */
+  --font-size-body-lg: 1.25rem;       /* 20px */
+
+  /* 正文中的标题 */
+  --font-size-prose-heading: 1.625rem; /* 26px */
+
+  /* 文章大标题 */
+  --font-size-article-title: 2.5rem;   /* 40px */
+
+  /* UI 字号 */
+  --font-size-ui-xs: 0.75rem;          /* 12px */
+  --font-size-ui-sm: 0.875rem;         /* 14px */
+  --font-size-ui-md: 1rem;             /* 16px */
+  --font-size-ui-lg: 1.125rem;         /* 18px */
+
+  /* 代码字号 */
+  --font-size-code: 0.875rem;          /* 14px */
+
+  /* ==================== 字重系统 ==================== */
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ==================== 行高系统 ==================== */
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* ==================== 字间距系统 ==================== */
+
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.02em;
+}

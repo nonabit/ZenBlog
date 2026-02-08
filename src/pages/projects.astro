@@ -1,13 +1,16 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import FusionHeader from "../components/react/FusionHeader";
-import ProjectCard from "../components/react/ProjectCard";
+import { BentoGridDemo } from "../components/react/BentoGrid";
 import FusionFooter from "../components/react/FusionFooter";
-import SiliconBackground from "../components/react/SiliconBackground";
 import { SITE_TITLE } from "../consts";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { ProjectListItem } from "../types/content";
+import { translations } from "@/i18n/translations";
+
+const lang = 'en';
+const t = translations[lang];
 
 // 1. 获取原始数据
 const allProjects = (await getCollection("projects")).sort(
@@ -38,7 +41,7 @@ const projects: ProjectListItem[] = allProjects.map(
 <html lang="en">
     <head>
         <BaseHead
-            title={`Projects | ${SITE_TITLE}`}
+            title={`${t['nav.projects']} | ${SITE_TITLE}`}
             description="A collection of my digital artifacts."
         />
         <script is:inline>
@@ -62,40 +65,32 @@ const projects: ProjectListItem[] = allProjects.map(
         </script>
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
-        <SiliconBackground client:load />
-        <FusionHeader client:load />
+        <FusionHeader client:load currentPath="/projects" lang={lang} translations={t} />
 
         <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
             <div class="mb-16 max-w-2xl">
                 <h1
                     class="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6"
                 >
-                    Selected Works
+                    {t['projects.header.title']}
                 </h1>
                 <p
                     class="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light"
                 >
-                    A curated selection of side projects, open source
-                    contributions, and experiments.
+                    {t['projects.header.subtitle1']}
                     <br />
-                    Building things is the best way to learn.
+                    {t['projects.header.subtitle2']}
                 </p>
             </div>
 
-            <!-- Projects Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {
-                    projects.map((project) => (
-                        <ProjectCard client:load project={project} />
-                    ))
-                }
-            </div>
+            <!-- Bento Grid 占位布局 -->
+            <BentoGridDemo client:load />
 
             {
                 projects.length === 0 && (
                     <div class="py-20 text-center border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl">
                         <p class="text-zinc-400 font-mono text-sm">
-                            No projects found. Start building!
+                            {t['projects.empty']}
                         </p>
                     </div>
                 )
@@ -103,6 +98,6 @@ const projects: ProjectListItem[] = allProjects.map(
         </main>
 
         {/* 统一的页脚 */}
-        <FusionFooter client:visible />
+        <FusionFooter client:visible translations={t} />
     </body>
 </html>

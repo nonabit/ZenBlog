@@ -13,6 +13,13 @@ export default defineConfig({
   site: 'https://ninthbit.org',
   // 纯静态输出，可直接部署到 Cloudflare Pages
   output: 'static',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   integrations: [
     mdx(),
     sitemap(),
@@ -23,6 +30,12 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': path.resolve(__dirname, './src')
+      }
+    },
+    server: {
+      watch: {
+        // 忽略 content 目录的变化，防止 CMS 保存时触发 HMR 刷新
+        ignored: ['**/src/content/**']
       }
     }
   }

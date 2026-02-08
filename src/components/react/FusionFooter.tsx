@@ -1,13 +1,19 @@
-import { Github, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { Github, Twitter, Mail, Rss, ArrowUp } from 'lucide-react';
 import Magnetic from './Magnetic';
 
 const SOCIAL_LINKS = [
   { icon: Github, href: "https://github.com/99byte", label: "GitHub" },
   { icon: Twitter, href: "https://twitter.com/ninthbit_ai", label: "Twitter" },
   { icon: Mail, href: "mailto:oldmeatovo@gmail.com", label: "Email" },
+  { icon: Rss, href: "/rss.xml", label: "RSS Feed" },
 ];
 
-export default function FusionFooter() {
+interface FusionFooterProps {
+  translations?: Record<string, string>;
+}
+
+export default function FusionFooter({ translations = {} }: FusionFooterProps) {
+  const t = (key: string) => translations[key] || key;
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -43,7 +49,7 @@ export default function FusionFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 text-zinc-500 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+                  className="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                   aria-label={link.label}
                 >
                   <link.icon size={20} />

@@ -24,7 +24,7 @@ export default function Poll({ question, options }: PollProps) {
 
   return (
     <div className="my-8 p-6 border border-zinc-200 dark:border-zinc-800 rounded-xl bg-white dark:bg-zinc-900 shadow-sm">
-      <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-4">
+      <h3 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-4">
         {question}
       </h3>
       <div className="space-y-3">
@@ -45,15 +45,15 @@ export default function Poll({ question, options }: PollProps) {
                   initial={{ width: 0 }}
                   animate={{ width: `${percent}%` }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
-                  className={`absolute top-0 bottom-0 left-0 rounded-lg opacity-10 ${isSelected ? 'bg-orange-500' : 'bg-zinc-500'}`}
+                  className={`absolute top-0 bottom-0 left-0 rounded-lg opacity-10 ${isSelected ? 'bg-zinc-700 dark:bg-zinc-300' : 'bg-zinc-500'}`}
                 />
               )}
               
               {/* 选项内容 */}
               <div className={`relative p-3 rounded-lg border transition-all flex justify-between items-center
-                ${voted === null 
-                  ? 'border-zinc-200 dark:border-zinc-700 hover:border-orange-500 dark:hover:border-orange-500 bg-zinc-50 dark:bg-zinc-800/50' 
-                  : `border-transparent ${isSelected ? 'text-orange-600 dark:text-orange-400' : 'text-zinc-500 dark:text-zinc-400'}`
+                ${voted === null
+                  ? 'border-zinc-200 dark:border-zinc-700 hover:border-zinc-500 dark:hover:border-zinc-500 bg-zinc-50 dark:bg-zinc-800/50'
+                  : `border-transparent ${isSelected ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'}`
                 }
               `}>
                 <span className="font-medium text-sm">

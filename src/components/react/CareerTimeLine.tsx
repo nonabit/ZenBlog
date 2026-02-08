@@ -47,7 +47,7 @@ export default function CareerTimeline() {
       {/* 动态进度线 (高亮色) */}
       <motion.div
         style={{ height: lineHeight }}
-        className="absolute left-0 top-0 w-px bg-gradient-to-b from-orange-400 to-amber-600 origin-top"
+        className="absolute left-0 top-0 w-px bg-gradient-to-b from-zinc-400 to-zinc-600 dark:from-zinc-500 dark:to-zinc-400 origin-top"
       />
 
       {EXPERIENCES.map((item, index) => (
@@ -60,13 +60,13 @@ export default function CareerTimeline() {
           className="relative pl-8 group"
         >
           {/* Timeline Dot (像电路节点一样) */}
-          <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 z-10 transition-all duration-300 group-hover:scale-125 group-hover:border-orange-500 group-hover:bg-orange-50">
+          <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 z-10 transition-all duration-300 group-hover:scale-125 group-hover:border-zinc-500 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700">
             {/* 选中时的中心点 */}
-            <div className="absolute inset-0.5 rounded-full bg-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0.5 rounded-full bg-zinc-600 dark:bg-zinc-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2">
-            <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <h3 className="font-heading text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
               {item.role}
             </h3>
             <span className="text-xs font-mono text-zinc-400 flex items-center gap-1 shrink-0 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md">

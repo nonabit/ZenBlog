@@ -123,7 +123,7 @@ export default function ScrollProgress() {
       </div>
 
       {/* 橙色游标 */}
-      <motion.div 
+      <motion.div
         className="absolute left-0 w-full flex items-center z-10"
         style={{ top: y, translateY: '-50%' }}
       >

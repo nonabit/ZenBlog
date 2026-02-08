@@ -8,6 +8,7 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     heroImage: image().optional(),
     showOnHome: z.boolean().optional(),
+    lang: z.enum(['en', 'zh']).default('zh'),  // 语言标识，默认中文
   }),
 });
 
