@@ -1,0 +1,4 @@
+/admin /404 404
+/admin/* /404 404
+/api/admin /404 404
+/api/admin/* /404 404

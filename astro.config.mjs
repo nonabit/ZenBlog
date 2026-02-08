@@ -3,7 +3,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
@@ -12,9 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ninthbit.org',
-  // 静态模式，适用于纯静态站点
+  // 纯静态输出，可直接部署到 Cloudflare Pages
   output: 'static',
-  adapter: vercel(),
   integrations: [
     mdx(),
     sitemap(),

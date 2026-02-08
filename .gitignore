@@ -1,8 +1,11 @@
 # build output
 dist/
 .vercel/
+.wrangler/
 # generated types
 .astro/
+.claude/
+.conductor/
 
 # dependencies
 node_modules/
@@ -12,6 +15,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.npm-cache/
 
 
 # environment variables

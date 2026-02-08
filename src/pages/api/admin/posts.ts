@@ -12,8 +12,8 @@ import {
   deleteBlogPost,
 } from "../../../lib/cms/fs-manager";
 
-// 禁用预渲染，在服务端执行
-export const prerender = false;
+// 允许静态构建；该接口仅用于本地开发，生产环境由代码分支直接拒绝访问
+export const prerender = true;
 
 // 开发环境检查
 function checkDevEnv(): Response | null {
