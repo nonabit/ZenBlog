@@ -37,25 +37,6 @@ const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
 <html lang="zh">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<script is:inline>
-			const theme = (() => {
-				if (
-					typeof localStorage !== "undefined" &&
-					localStorage.getItem("theme")
-				) {
-					return localStorage.getItem("theme");
-				}
-				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-					return "dark";
-				}
-				return "light";
-			})();
-			if (theme === "dark") {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
-		</script>
 	</head>
 	<body class="bg-white dark:bg-black transition-colors duration-500">
 		<FusionHeader client:load currentPath="/zh" lang={lang} translations={t} />

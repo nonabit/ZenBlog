@@ -19,25 +19,6 @@ const t = translations[lang];
             title={`${t["nav.about"]} | ${SITE_TITLE}`}
             description="More about me and my journey."
         />
-        <script is:inline>
-            const theme = (() => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
-                }
-                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                    return "dark";
-                }
-                return "light";
-            })();
-            if (theme === "dark") {
-                document.documentElement.classList.add("dark");
-            } else {
-                document.documentElement.classList.remove("dark");
-            }
-        </script>
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
         <FusionHeader
@@ -63,7 +44,7 @@ const t = translations[lang];
                         </div>
 
                         <h1
-                            class="font-heading font-normal text-zinc-900 dark:text-zinc-100 mb-4"
+                            class="font-heading text-3xl font-normal text-zinc-900 dark:text-zinc-100 mb-4"
                         >
                             {t["about.name"]}
                         </h1>

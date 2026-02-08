@@ -44,25 +44,6 @@ const projects: ProjectListItem[] = allProjects.map(
             title={`${t['nav.projects']} | ${SITE_TITLE}`}
             description="A collection of my digital artifacts."
         />
-        <script is:inline>
-            const theme = (() => {
-                if (
-                    typeof localStorage !== "undefined" &&
-                    localStorage.getItem("theme")
-                ) {
-                    return localStorage.getItem("theme");
-                }
-                if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                    return "dark";
-                }
-                return "light";
-            })();
-            if (theme === "dark") {
-                document.documentElement.classList.add("dark");
-            } else {
-                document.documentElement.classList.remove("dark");
-            }
-        </script>
     </head>
     <body class="bg-white dark:bg-black transition-colors duration-500">
         <FusionHeader client:load currentPath="/zh/projects" lang={lang} translations={t} />
@@ -70,7 +51,7 @@ const projects: ProjectListItem[] = allProjects.map(
         <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
             <div class="mb-16 max-w-2xl">
                 <h1
-                    class="font-serif text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6"
+                    class="font-heading text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6"
                 >
                     {t['projects.header.title']}
                 </h1>
