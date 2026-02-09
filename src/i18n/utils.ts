@@ -8,7 +8,7 @@ export function getLangFromUrl(url: URL): Language {
 }
 
 export function useTranslations(lang: Language) {
-  return function t(key: string): string {
-    return translations[lang][key] || key;
+  return function t(key: keyof (typeof translations)[Language]): string {
+    return translations[lang][key];
   };
 }

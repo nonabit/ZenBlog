@@ -1,0 +1,32 @@
+---
+import type { TranslationDictionary } from '@/shared/i18n/types';
+import ProfileCard from '@/features/about/components/ProfileCard.astro';
+import IntroSection from '@/features/about/components/IntroSection.astro';
+import GearSection from '@/features/about/components/GearSection.astro';
+import CareerTimeline from '@/features/about/components/CareerTimeline.client';
+
+interface Props {
+  t: TranslationDictionary;
+}
+
+const { t } = Astro.props;
+---
+
+<div class="max-w-5xl mx-auto px-6 py-12 sm:py-20 relative z-10">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <ProfileCard t={t} />
+
+    <div class="md:col-span-2 space-y-16">
+      <IntroSection t={t} />
+
+      <section>
+        <h2 class="font-heading text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-8">
+          {t['about.career']}
+        </h2>
+        <CareerTimeline client:visible />
+      </section>
+
+      <GearSection t={t} />
+    </div>
+  </div>
+</div>

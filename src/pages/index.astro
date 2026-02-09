@@ -1,56 +1,15 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import FusionHeader from "../components/react/FusionHeader";
-import FusionHome from "../components/react/FusionHome";
-import FusionFooter from "../components/react/FusionFooter";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { getCollection } from "astro:content";
-// 1. 导入类型定义
-import type { CollectionEntry } from "astro:content";
-import type { BlogListItem } from "../types/content";
-import { translations } from "@/i18n/translations";
+import { SITE_DESCRIPTION, SITE_TITLE } from '@/consts';
+import { HomeLanding } from '@/features/home';
+import { getBlogListByLang } from '@/features/blog/server';
+import PageShell from '@/shared/components/layout/PageShell.astro';
+import { getTranslationDictionary } from '@/shared/i18n/types';
 
-const lang = 'en';
-const t = translations[lang];
-
-// 获取最新文章并按语言过滤（en/ 目录），然后按发布时间倒序
-const allPosts = (await getCollection("blog"))
-	.filter((post: CollectionEntry<"blog">) => post.id.startsWith("en/"))
-	.sort(
-		(a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
-			b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-	);
-
-// 3. 为 map 函数的参数 post 添加显式类型
-const posts: BlogListItem[] = allPosts.map((post: CollectionEntry<"blog">) => ({
-	slug: post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, ""),
-	data: {
-		title: post.data.title,
-		description: post.data.description,
-		pubDate: post.data.pubDate,
-		showOnHome: post.data.showOnHome === true,
-	},
-}));
-// 仅取首页展示的最新5篇
-const homePosts = posts.filter((p) => p.data.showOnHome === true).slice(0, 5);
+const lang = 'en' as const;
+const t = getTranslationDictionary(lang);
+const homePosts = await getBlogListByLang(lang, { homeOnly: true, limit: 5 });
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<!-- 解决暗色模式闪屏 (FOUC) 的小脚本 -->
-	</head>
-	<body class="bg-white dark:bg-black transition-colors duration-500">
-		<!-- Header: 使用 client:load 指令，因为它需要立即响应交互 (Cmd+K) -->
-		<FusionHeader client:load currentPath="/" lang={lang} translations={t} />
-
-		<main class="relative z-10">
-			<!-- Home Content: 使用 client:load 指令，因为它是首屏动画 -->
-			<FusionHome client:load posts={homePosts} translations={t} lang={lang} />
-		</main>
-
-		<!-- 首页：仅显示 Footer，移除 CTA 区域 -->
-		<FusionFooter client:visible translations={t} />
-	</body>
-</html>
+<PageShell lang={lang} title={SITE_TITLE} description={SITE_DESCRIPTION} currentPath="/">
+  <HomeLanding client:load posts={homePosts} lang={lang} t={t} />
+</PageShell>

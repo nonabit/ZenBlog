@@ -1,0 +1,45 @@
+---
+import BaseHead from '@/components/BaseHead.astro';
+import type { Language } from '@/i18n/config';
+import SiteHeader from '@/shared/components/navigation/SiteHeader.client';
+import SiteFooter from '@/shared/components/layout/SiteFooter.client';
+import { getTranslationDictionary } from '@/shared/i18n/types';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  currentPath: string;
+  image?: string;
+  mainClass?: string;
+  bodyClass?: string;
+  showFooter?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  currentPath,
+  image,
+  mainClass = 'relative z-10',
+  bodyClass = 'bg-white dark:bg-black transition-colors duration-500',
+  showFooter = true,
+} = Astro.props;
+
+const t = getTranslationDictionary(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body class={bodyClass}>
+    <SiteHeader client:load currentPath={currentPath} lang={lang} t={t} />
+    <main class={mainClass}>
+      <slot />
+    </main>
+    {showFooter && <SiteFooter client:visible lang={lang} t={t} currentPath={currentPath} />}
+  </body>
+</html>

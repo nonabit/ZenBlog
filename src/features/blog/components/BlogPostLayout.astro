@@ -1,0 +1,146 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '@/i18n/config';
+import type { TranslationDictionary } from '@/shared/i18n/types';
+import { getTranslationDictionary } from '@/shared/i18n/types';
+import BaseHead from '@/components/BaseHead.astro';
+import SiteHeader from '@/shared/components/navigation/SiteHeader.client';
+import SiteFooter from '@/shared/components/layout/SiteFooter.client';
+import ScrollProgress from '@/features/blog/components/ScrollProgress.client';
+import GiscusComments from '@/features/blog/components/GiscusComments.client';
+import DefaultAvatar from '@/assets/avatar.jpg';
+import { Calendar, Clock } from 'lucide-react';
+
+type Props = CollectionEntry<'blog'>['data'] & {
+  slug?: string;
+  readTimeMinutes?: number;
+  fallbackHeroImage?: string;
+};
+
+const {
+  title,
+  description,
+  pubDate,
+  heroImage,
+  author,
+  slug,
+  readTimeMinutes,
+  fallbackHeroImage,
+} = Astro.props;
+
+const lang: Language = Astro.url.pathname.startsWith('/zh/') ? 'zh' : 'en';
+const t: TranslationDictionary = getTranslationDictionary(lang);
+
+const currentPath = slug
+  ? lang === 'zh'
+    ? `/zh/blog/${slug}`
+    : `/blog/${slug}`
+  : lang === 'zh'
+    ? '/zh/blog'
+    : '/blog';
+
+const formattedDate = pubDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const readTimeLabel =
+  lang === 'zh'
+    ? `${Math.max(1, readTimeMinutes ?? 5)} 分钟阅读`
+    : `${Math.max(1, readTimeMinutes ?? 5)} min read`;
+
+const sectionLabel = 'WORK INSIGHTS';
+const authorName = author?.name ?? '静水深流';
+const authorTitle = author?.title ?? '天行健，君子以自强不息';
+const authorAvatar = author?.avatar ?? DefaultAvatar.src;
+const heroImageSrc = typeof heroImage === 'string' ? heroImage : heroImage?.src;
+const coverImageSrc = heroImageSrc || fallbackHeroImage;
+---
+
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} image={`/og/${Astro.params.slug}.png`} />
+  </head>
+
+  <body class="bg-white dark:bg-black text-zinc-800 dark:text-zinc-200 transition-colors duration-500 antialiased font-sans">
+    <ScrollProgress client:load />
+
+    <SiteHeader client:load currentPath={currentPath} lang={lang} t={t} />
+
+    <main class="max-w-7xl mx-auto px-6 py-12 sm:py-20 relative z-10">
+      <article class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <header class="mx-auto w-full max-w-3xl mb-12">
+          <p class="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500 dark:text-zinc-400 mb-6">
+            {sectionLabel}
+          </p>
+          <div class="flex items-center gap-4 text-xs font-mono text-zinc-400 mb-6 uppercase tracking-wider">
+            <span class="flex items-center gap-1">
+              <Clock size={12} /> {readTimeLabel}
+            </span>
+            <span class="w-px h-3 bg-zinc-200 dark:bg-zinc-800"></span>
+            <span class="flex items-center gap-1">
+              <Calendar size={12} />
+              {formattedDate}
+            </span>
+          </div>
+
+          <h1
+            class="text-[2.2rem] sm:text-[2.9rem] font-semibold text-zinc-900 dark:text-zinc-100 leading-[1.2] mb-8"
+            style={lang === 'zh' ? 'font-family: var(--font-serif)' : 'font-family: var(--font-serif-en)'}
+          >
+            {title}
+          </h1>
+        </header>
+
+        {
+          coverImageSrc && (
+            <div class="relative aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden border border-zinc-200 dark:border-zinc-800 mb-12 bg-zinc-50 dark:bg-zinc-900">
+              <img src={coverImageSrc} alt={title} class="object-cover w-full h-full" />
+            </div>
+          )
+        }
+
+        <section class="mx-auto w-full max-w-xl">
+          <p
+            class="text-xl sm:text-2xl leading-relaxed text-zinc-900 dark:text-zinc-100 mb-7"
+            style={lang === 'zh' ? 'font-family: var(--font-serif)' : 'font-family: var(--font-serif-en)'}
+          >
+            {description}
+          </p>
+
+          <div class="inline-flex items-center gap-3">
+            <img
+              src={authorAvatar}
+              alt={authorName}
+              class="h-10 w-10 rounded-full object-cover border border-zinc-200 dark:border-zinc-700"
+              loading="lazy"
+            />
+            <div>
+              <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-none mb-0.5">{authorName}</p>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400">{authorTitle}</p>
+            </div>
+          </div>
+
+          <hr class="border-zinc-200 dark:border-zinc-800 mt-6" />
+        </section>
+
+        <div class="prose mx-auto max-w-xl">
+          <slot />
+        </div>
+      </article>
+
+      <section class="mx-auto w-full max-w-xl mt-16 pt-12 border-t border-zinc-100 dark:border-zinc-800">
+        <h2
+          class="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-8"
+          style={lang === 'zh' ? 'font-family: var(--font-serif)' : 'font-family: var(--font-serif-en)'}
+        >
+          {lang === 'zh' ? '评论' : 'Comments'}
+        </h2>
+        <GiscusComments client:load lang={lang} />
+      </section>
+    </main>
+
+    <SiteFooter client:visible lang={lang} t={t} currentPath={currentPath} />
+  </body>
+</html>

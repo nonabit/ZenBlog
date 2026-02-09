@@ -1,46 +1,33 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
-import BlogPost from "../../layouts/BlogPost.astro";
+import type { CollectionEntry } from 'astro:content';
+import BlogPostLayout from '@/features/blog/components/BlogPostLayout.astro';
+import {
+  extractBlogSlug,
+  getBlogStaticPathsByLang,
+  getFallbackHeroImage,
+  getReadTime,
+} from '@/features/blog/server';
+
+const lang = 'en' as const;
 
 export async function getStaticPaths() {
-	// 只获取英文文章（en/ 目录下的文章）
-	const posts = (await getCollection("blog")).filter(
-		(post: CollectionEntry<"blog">) => post.id.startsWith("en/")
-	);
-	return posts.map((post: CollectionEntry<"blog">) => {
-		// 从 "en/my-2025-summary.md" 提取 "my-2025-summary"
-		const slug = post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
-		return {
-			params: { slug },
-			props: post,
-		};
-	});
+  return getBlogStaticPathsByLang('en');
 }
-type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props as Props;
 const { Content } = await post.render();
-// 获取当前文章的 slug（不含语言前缀）
-const currentSlug = post.id.replace(/^en\//, "").replace(/\.[^/.]+$/, "");
-const rawText = post.body
-	.replace(/```[\s\S]*?```/g, " ")
-	.replace(/`[^`]*`/g, " ")
-	.replace(/!\[[^\]]*?\]\([^)]+\)/g, " ")
-	.replace(/\[[^\]]+]\([^)]+\)/g, " ")
-	.replace(/[>#*_~\-]+/g, " ")
-	.replace(/\s+/g, " ")
-	.trim();
-const wordCount = rawText ? rawText.split(" ").length : 0;
-const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 220));
-const fallbackHeroImage =
-	post.body.match(/!\[[^\]]*?\]\(([^)\s]+)(?:\s+"[^"]*")?\)/)?.[1] ?? "";
+const currentSlug = extractBlogSlug(post.id, lang);
+const readTimeMinutes = getReadTime(post.body, lang);
+const fallbackHeroImage = getFallbackHeroImage(post.body);
 ---
 
-<BlogPost
-	{...post.data}
-	slug={currentSlug}
-	readTimeMinutes={readTimeMinutes}
-	fallbackHeroImage={fallbackHeroImage}
+<BlogPostLayout
+  {...post.data}
+  slug={currentSlug}
+  readTimeMinutes={readTimeMinutes}
+  fallbackHeroImage={fallbackHeroImage}
 >
-	<Content />
-</BlogPost>
+  <Content />
+</BlogPostLayout>

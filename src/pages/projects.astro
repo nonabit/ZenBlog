@@ -1,84 +1,30 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import FusionHeader from "../components/react/FusionHeader";
-import { BentoGridDemo } from "../components/react/BentoGrid";
-import FusionFooter from "../components/react/FusionFooter";
-import { SITE_TITLE } from "../consts";
-import { getCollection } from "astro:content";
-import type { CollectionEntry } from "astro:content";
-import type { ProjectListItem } from "../types/content";
-import { translations } from "@/i18n/translations";
+import { SITE_TITLE } from '@/consts';
+import { ProjectsShowcase } from '@/features/projects';
+import { getProjects } from '@/features/projects/server';
+import PageShell from '@/shared/components/layout/PageShell.astro';
+import { getTranslationDictionary } from '@/shared/i18n/types';
 
-const lang = 'en';
-const t = translations[lang];
-
-// 1. 获取原始数据
-const allProjects = (await getCollection("projects")).sort(
-    // 2. 显式标注类型，解决 TS 报错
-    (a: CollectionEntry<"projects">, b: CollectionEntry<"projects">) =>
-        a.data.order - b.data.order,
-);
-
-// 3. 数据清洗：转换为纯净对象，确保 React 组件能正确接收
-const projects: ProjectListItem[] = allProjects.map(
-    (project: CollectionEntry<"projects">) => ({
-        slug: project.id,
-        data: {
-            title: project.data.title,
-            description: project.data.description,
-            heroImage: project.data.heroImage
-                ? project.data.heroImage.src
-                : undefined,
-            stack: project.data.stack,
-            github: project.data.github,
-            demo: project.data.demo,
-        },
-    }),
-);
+const lang = 'en' as const;
+const t = getTranslationDictionary(lang);
+const projects = await getProjects();
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <BaseHead
-            title={`${t['nav.projects']} | ${SITE_TITLE}`}
-            description="A collection of my digital artifacts."
-        />
-    </head>
-    <body class="bg-white dark:bg-black transition-colors duration-500">
-        <FusionHeader client:load currentPath="/projects" lang={lang} translations={t} />
+<PageShell
+  lang={lang}
+  title={`${t['nav.projects']} | ${SITE_TITLE}`}
+  description={t['projects.description']}
+  currentPath="/projects"
+  mainClass="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10"
+>
+  <div class="mb-16 max-w-2xl">
+    <h1 class="font-heading text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6">
+      {t['projects.header.title']}
+    </h1>
+    <p class="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
+      {t['projects.header.subtitle1']}<br />{t['projects.header.subtitle2']}
+    </p>
+  </div>
 
-        <main class="max-w-screen-lg mx-auto px-6 py-12 sm:py-20 relative z-10">
-            <div class="mb-16 max-w-2xl">
-                <h1
-                    class="font-heading text-4xl sm:text-5xl font-medium tracking-tight text-zinc-900 dark:text-zinc-100 mb-6"
-                >
-                    {t['projects.header.title']}
-                </h1>
-                <p
-                    class="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-light"
-                >
-                    {t['projects.header.subtitle1']}
-                    <br />
-                    {t['projects.header.subtitle2']}
-                </p>
-            </div>
-
-            <!-- Bento Grid 占位布局 -->
-            <BentoGridDemo client:load />
-
-            {
-                projects.length === 0 && (
-                    <div class="py-20 text-center border border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl">
-                        <p class="text-zinc-400 font-mono text-sm">
-                            {t['projects.empty']}
-                        </p>
-                    </div>
-                )
-            }
-        </main>
-
-        {/* 统一的页脚 */}
-        <FusionFooter client:visible translations={t} />
-    </body>
-</html>
+  <ProjectsShowcase client:load projects={projects} t={t} />
+</PageShell>

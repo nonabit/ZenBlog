@@ -8,6 +8,7 @@
     "build": "rm -rf dist && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "check:arch": "node scripts/check-architecture.mjs",
     "new:post": "node scripts/create-post.mjs",
     "new:project": "node scripts/create-project.mjs"
   },
