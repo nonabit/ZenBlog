@@ -10,7 +10,9 @@
     "astro": "astro",
     "check:arch": "node scripts/check-architecture.mjs",
     "new:post": "node scripts/create-post.mjs",
-    "new:project": "node scripts/create-project.mjs"
+    "new:project": "node scripts/create-project.mjs",
+    "r2:images:upload": "node scripts/r2-upload-external-images.mjs",
+    "r2:images:replace": "node scripts/replace-image-host.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

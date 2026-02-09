@@ -6,7 +6,7 @@ heroImage: ''
 showOnHome: true
 lang: zh
 ---
-![YouMind公众号SOP-Chiikawa风格信息图](https://cdn.gooo.ai/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
+![YouMind公众号SOP-Chiikawa风格信息图](https://cdn.ninthbit.org/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
 
 ## 1. 确定选题
 
@@ -20,7 +20,7 @@ lang: zh
 
 输出得到一篇深度调研报告：《DeepSeek V3.2 模型技术创新深度调研报告》
 
-![image.png](https://cdn.gooo.ai/web-images/70d947862d64da22cbe3b5bc4a0887b1330734bf6eb4b30704a94983295939c9)
+![image.png](https://cdn.ninthbit.org/web-images/70d947862d64da22cbe3b5bc4a0887b1330734bf6eb4b30704a94983295939c9)
 
 ## 3. 人工审视
 
@@ -30,7 +30,7 @@ lang: zh
 
   -> 不懂的：理解了在写在 annotation 中
 
-![image.png](https://cdn.gooo.ai/web-images/022e309a6e258c56c859e9ac84e6d4d73b9e35974607123d0c68f2d88f235ac8)
+![image.png](https://cdn.ninthbit.org/web-images/022e309a6e258c56c859e9ac84e6d4d73b9e35974607123d0c68f2d88f235ac8)
 
 ## 4. 输出内容
 
@@ -50,7 +50,7 @@ lang: zh
 
 这样会得到一个公众号文章深度拆解的作品（craft）。
 
-![image.png](https://cdn.gooo.ai/web-images/59db8fec624552121239bb1bea0f1c044944658366227dd95a2f920fca181f53)
+![image.png](https://cdn.ninthbit.org/web-images/59db8fec624552121239bb1bea0f1c044944658366227dd95a2f920fca181f53)
 
 #### 4.1.2 融合自己的风格与定位
 
@@ -68,7 +68,7 @@ lang: zh
 
 最后把 prompt 放到 shortcut 中方便调用。
 
-![image.png](https://cdn.gooo.ai/web-images/2c180653e02a3b3f33c1abf983b617fbeee09a75cfb98043bef36cca4ee9213a)
+![image.png](https://cdn.ninthbit.org/web-images/2c180653e02a3b3f33c1abf983b617fbeee09a75cfb98043bef36cca4ee9213a)
 
 ### 4.2 生成配图建议
 
@@ -76,7 +76,7 @@ lang: zh
 
 配图建议具体的内容其实就是：需要一个什么风格的图片？这个图片的内容是什么？这根据每个人的喜好，还有文章类型，应该都是不一样的，需要自己去摸索一下。
 
-![image.png](https://cdn.gooo.ai/web-images/666adafd3f9bb0dbbed9dac8f12cdb8aa5f08bf96e424152f8f2bff9238d77be)
+![image.png](https://cdn.ninthbit.org/web-images/666adafd3f9bb0dbbed9dac8f12cdb8aa5f08bf96e424152f8f2bff9238d77be)
 
 ### 4.3 添加配图
 
@@ -92,13 +92,13 @@ lang: zh
 
 YouMind 提供了一个文字排版工具，这个排版工具可以让你的文章看起来尽量比较符合规范一些。
 
-![image.png](https://cdn.gooo.ai/web-images/fc03622806848be97c190d466cddb8ae55c05ed8a5cdd75d9bc8d560551f0ba8)
+![image.png](https://cdn.ninthbit.org/web-images/fc03622806848be97c190d466cddb8ae55c05ed8a5cdd75d9bc8d560551f0ba8)
 
 ### 4.5 复制公众号格式
 
 同时，Youmind 还支持直接复制文章为公众号格式，方便粘贴到公众号的编辑器当中。对公众号作者太友好了！
 
-![image.png](https://cdn.gooo.ai/web-images/b4a5ea99e9ec6d2f33941f433141f474e0e4213be5c2f60b7c5eae4edde8779c)
+![image.png](https://cdn.ninthbit.org/web-images/b4a5ea99e9ec6d2f33941f433141f474e0e4213be5c2f60b7c5eae4edde8779c)
 
 ## 5. 封面图生成
 
@@ -116,4 +116,4 @@ SUBTITLE (Below main
 ...
 ```
 
-![Image.png](https://cdn.gooo.ai/web-images/2b047644a34c8f26495ab68e0a6854b589e2b5fd26758536f9f435ef8a21ff80)
+![Image.png](https://cdn.ninthbit.org/web-images/2b047644a34c8f26495ab68e0a6854b589e2b5fd26758536f9f435ef8a21ff80)

@@ -19,7 +19,7 @@ Unexpectedly, I was persuaded to stay. In exchange, I was allowed to choose a ne
 
 After handing over my previous work, I spent nearly half of this year on the road.
 
-![img_v3_02ta_791e0601-c2e1-492d-813b-e2369bae163g.jpg](https://cdn.gooo.ai/web-images/8b00b409986698db131b166643a5847380d2499a247141d4d52d41c3d0c6237b)
+![img_v3_02ta_791e0601-c2e1-492d-813b-e2369bae163g.jpg](https://cdn.ninthbit.org/web-images/8b00b409986698db131b166643a5847380d2499a247141d4d52d41c3d0c6237b)
 
 I visited Beijing, Shanghai, Hangzhou, and Shenzhen, leaving footprints behind;
 
@@ -37,7 +37,7 @@ On WeChat Official Accounts, Xiaohongshu, and X, I began Building In Public, gro
 
 I took on two promotions on Xiaohongshu, though the earnings were modest; I wrote thirty to forty original articles on my WeChat account; my GitHub commit history became much denser than last year, and I participated in some open-source project remix competitions.
 
-![PixPin_2025-12-25_00-15-52.png](https://cdn.gooo.ai/web-images/6395716bc1cc9bd10180a8a2951bc7c8de5735f755ccb1dabb93795faafd127b)
+![PixPin_2025-12-25_00-15-52.png](https://cdn.ninthbit.org/web-images/6395716bc1cc9bd10180a8a2951bc7c8de5735f755ccb1dabb93795faafd127b)
 
 Looking back at this year, the value of that resignation letter has become clear. Even if I could do it again, I might still be persuaded to stay. It's not that I lack the courage to quit outright, but what I needed to learn was how not to burn out under pressure, how to confront the source of stress head-on.
 

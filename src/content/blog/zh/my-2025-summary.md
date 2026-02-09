@@ -19,7 +19,7 @@ lang: zh
 
 交接完原有工作后，今年近半的时间，我都在路上。
 
-![img_v3_02ta_791e0601-c2e1-492d-813b-e2369bae163g.jpg](https://cdn.gooo.ai/web-images/8b00b409986698db131b166643a5847380d2499a247141d4d52d41c3d0c6237b)
+![img_v3_02ta_791e0601-c2e1-492d-813b-e2369bae163g.jpg](https://cdn.ninthbit.org/web-images/8b00b409986698db131b166643a5847380d2499a247141d4d52d41c3d0c6237b)
 
 我去了北京、上海、杭州、深圳，留下了一些足迹； 
 
@@ -37,7 +37,7 @@ lang: zh
 
 小红书接过两次推广，虽收益不多；公众号写了三四十篇原创；GitHub 的提交记录也比去年密集了许多，还参与了一些开源项目的二创比赛。
 
-![PixPin_2025-12-25_00-15-52.png](https://cdn.gooo.ai/web-images/6395716bc1cc9bd10180a8a2951bc7c8de5735f755ccb1dabb93795faafd127b)
+![PixPin_2025-12-25_00-15-52.png](https://cdn.ninthbit.org/web-images/6395716bc1cc9bd10180a8a2951bc7c8de5735f755ccb1dabb93795faafd127b)
 
 回望这一年，那封辞职信的价值渐渐清晰。即便重来一次，我或许仍会被挽留。并非缺乏裸辞的勇气，而是我更需要学会的，是如何在压力面前不内耗，如何与压力的源头正面交锋。
 

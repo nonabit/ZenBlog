@@ -9,7 +9,7 @@ lang: zh
 
 ### 1. The Origin （原点）
 
-![Cover: The Origin](https://cdn.gooo.ai/gen-images/c9b516b172f241adbb4578b401e5d26966656ba6654a5e2c068bb8a427cd5926.png)
+![Cover: The Origin](https://cdn.ninthbit.org/gen-images/c9b516b172f241adbb4578b401e5d26966656ba6654a5e2c068bb8a427cd5926.png)
 
 我们为何出发？ 不是为了抵达某处，而是为了在流逝中确认存在。 哪怕只是一个微小的原点，也是一切可能性的开端。
 
@@ -17,7 +17,7 @@ lang: zh
 
 ### 2. The State （状态）
 
-![Content: Introspection, Values, Resonance](https://cdn.gooo.ai/gen-images/8be8e3804f9be834298fda5b73115d4f23b248a5511074c3d4a41ec208e80a5e.png)
+![Content: Introspection, Values, Resonance](https://cdn.ninthbit.org/gen-images/8be8e3804f9be834298fda5b73115d4f23b248a5511074c3d4a41ec208e80a5e.png)
 
 **自省 (Introspection)** 向内求索。在喧嚣中保留一份“放空”的权利， 像清除 Context 一样，为下一次灵感腾出空间。
 
@@ -27,7 +27,7 @@ lang: zh
 
 ### 3. The Growth （生长）
 
-![Ending: Growth & Connection](https://cdn.gooo.ai/gen-images/013df05b84ec8fb8826ad27c970c5dd938d1e9f51e7f49f218c9548580b193dd.png)
+![Ending: Growth & Connection](https://cdn.ninthbit.org/gen-images/013df05b84ec8fb8826ad27c970c5dd938d1e9f51e7f49f218c9548580b193dd.png)
 
 梦想不需要被定义为一个具体的终点。 它是一种持续的“状态”——
 

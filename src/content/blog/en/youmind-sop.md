@@ -7,7 +7,7 @@ showOnHome: true
 lang: en
 ---
 
-![YouMind WeChat SOP - Chiikawa Style Infographic](https://cdn.gooo.ai/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
+![YouMind WeChat SOP - Chiikawa Style Infographic](https://cdn.ninthbit.org/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
 
 ## 1. Choose Your Topic
 
@@ -21,7 +21,7 @@ For example: "What's special about DeepSeek's latest V3.2 model paper? Look at b
 
 Output: A deep research report titled "DeepSeek V3.2 Model Technical Innovation Deep Research Report"
 
-![image.png](https://cdn.gooo.ai/web-images/70d947862d64da22cbe3b5bc4a0887b1330734bf6eb4b30704a94983295939c9)
+![image.png](https://cdn.ninthbit.org/web-images/70d947862d64da22cbe3b5bc4a0887b1330734bf6eb4b30704a94983295939c9)
 
 ## 3. Manual Review
 
@@ -31,7 +31,7 @@ Manual review: For parts where you have your own thoughts and parts you don't un
 
   -> Don't understand: Write in annotations after understanding
 
-![image.png](https://cdn.gooo.ai/web-images/022e309a6e258c56c859e9ac84e6d4d73b9e35974607123d0c68f2d88f235ac8)
+![image.png](https://cdn.ninthbit.org/web-images/022e309a6e258c56c859e9ac84e6d4d73b9e35974607123d0c68f2d88f235ac8)
 
 ## 4. Output Content
 
@@ -51,7 +51,7 @@ Create a new blank Board, add links to viral articles with 100k+ views to your n
 
 This gives you a deep breakdown of WeChat article craftsmanship.
 
-![image.png](https://cdn.gooo.ai/web-images/59db8fec624552121239bb1bea0f1c044944658366227dd95a2f920fca181f53)
+![image.png](https://cdn.ninthbit.org/web-images/59db8fec624552121239bb1bea0f1c044944658366227dd95a2f920fca181f53)
 
 #### 4.1.2 Integrate Your Own Style and Positioning
 
@@ -69,7 +69,7 @@ After generating the prompt, do another manual review to see if it matches your 
 
 Finally, put the prompt in a shortcut for easy access.
 
-![image.png](https://cdn.gooo.ai/web-images/2c180653e02a3b3f33c1abf983b617fbeee09a75cfb98043bef36cca4ee9213a)
+![image.png](https://cdn.ninthbit.org/web-images/2c180653e02a3b3f33c1abf983b617fbeee09a75cfb98043bef36cca4ee9213a)
 
 ### 4.2 Generate Image Suggestions
 
@@ -77,7 +77,7 @@ This step can actually be included in the prompt from the previous step. I usual
 
 The image suggestion content is essentially: What style of image is needed? What should the image contain? This varies based on personal preference and article type—you'll need to explore this yourself.
 
-![image.png](https://cdn.gooo.ai/web-images/666adafd3f9bb0dbbed9dac8f12cdb8aa5f08bf96e424152f8f2bff9238d77be)
+![image.png](https://cdn.ninthbit.org/web-images/666adafd3f9bb0dbbed9dac8f12cdb8aa5f08bf96e424152f8f2bff9238d77be)
 
 ### 4.3 Add Images
 
@@ -93,13 +93,13 @@ I generally use two approaches:
 
 YouMind provides a text formatting tool that helps make your article look more standardized.
 
-![image.png](https://cdn.gooo.ai/web-images/fc03622806848be97c190d466cddb8ae55c05ed8a5cdd75d9bc8d560551f0ba8)
+![image.png](https://cdn.ninthbit.org/web-images/fc03622806848be97c190d466cddb8ae55c05ed8a5cdd75d9bc8d560551f0ba8)
 
 ### 4.5 Copy in WeChat Format
 
 Additionally, YouMind supports copying articles directly in WeChat format, making it easy to paste into the WeChat editor. So friendly for WeChat authors!
 
-![image.png](https://cdn.gooo.ai/web-images/b4a5ea99e9ec6d2f33941f433141f474e0e4213be5c2f60b7c5eae4edde8779c)
+![image.png](https://cdn.ninthbit.org/web-images/b4a5ea99e9ec6d2f33941f433141f474e0e4213be5c2f60b7c5eae4edde8779c)
 
 ## 5. Cover Image Generation
 
@@ -117,4 +117,4 @@ SUBTITLE (Below main
 ...
 ```
 
-![Image.png](https://cdn.gooo.ai/web-images/2b047644a34c8f26495ab68e0a6854b589e2b5fd26758536f9f435ef8a21ff80)
+![Image.png](https://cdn.ninthbit.org/web-images/2b047644a34c8f26495ab68e0a6854b589e2b5fd26758536f9f435ef8a21ff80)
