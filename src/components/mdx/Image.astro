@@ -1,0 +1,12 @@
+---
+import { Image as AstroImage } from 'astro:assets';
+
+interface Props {
+  src?: string;
+  alt?: string;
+}
+
+const { src = '', alt = '' } = Astro.props;
+---
+
+<AstroImage src={src} alt={alt} inferSize class="w-full h-auto" />

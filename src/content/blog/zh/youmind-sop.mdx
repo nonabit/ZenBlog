@@ -1,0 +1,119 @@
+---
+title: Youmind 公众号文章创作 SOP
+description: 分享一下我用 YouMind 进行内容创作的工作流程
+pubDate: '2025-12-13'
+heroImage: ''
+showOnHome: true
+lang: zh
+---
+![YouMind公众号SOP-Chiikawa风格信息图](https://cdn.ninthbit.org/gen-images/d8c27342c655a634984ab718c91abbe377c58523bc60bc3499fa66a4383ef2bd.png)
+
+## 1. 确定选题
+
+刷自媒体，关注市场热点话题，RSS 订阅（期待 YouMind 未来能在这方面也有好的体验，比如热点话题排行，让用户在不知道创作什么的时候，给一点灵感💡）
+
+## 2. 生成调查报告
+
+使用 Youmind 的 AI Board 功能进行 Research 生成调研报告，尽量提清楚自己的需求。
+
+例如："DeepSeek 最新的模型 V3.2 的论文中有什么特别之处，结合论文和媒体评价去看。主要看看技术创新。"
+
+输出得到一篇深度调研报告：《DeepSeek V3.2 模型技术创新深度调研报告》
+
+![image.png](https://cdn.ninthbit.org/web-images/70d947862d64da22cbe3b5bc4a0887b1330734bf6eb4b30704a94983295939c9)
+
+## 3. 人工审视
+
+人工审视：对有自己思考的部分和不懂的部分，进行 picks：
+
+  -> 思考：直接写在 annotation 中
+
+  -> 不懂的：理解了在写在 annotation 中
+
+![image.png](https://cdn.ninthbit.org/web-images/022e309a6e258c56c859e9ac84e6d4d73b9e35974607123d0c68f2d88f235ac8)
+
+## 4. 输出内容
+
+使用 YouMind 的 shortcut 功能进行公众号文章的改写。
+
+这个 shortcut 功能相当于一个二进制文件入口，程序是你用自然语言描述去编码的。
+
+通常可以用来执行一个自定义的任务，并且这个任务流程是可以被分享的，其他人使用，作者可以获得积分。
+
+### 4.1 如何使用 YouMind 迭代一个想要的公众号改写 prompt
+
+#### 4.1.1 收集顶流的爆款文章
+
+比如，对标的公众号是数字生命卡兹克，AGI 领域的顶流。
+
+新建一个空白 Board，将浏览量超过 10w+ 的爆款文章链接加入到资料（note）中，使用 AI 对这些爆款文章进行分析，提取出文章的写作风格和行文结构。
+
+这样会得到一个公众号文章深度拆解的作品（craft）。
+
+![image.png](https://cdn.ninthbit.org/web-images/59db8fec624552121239bb1bea0f1c044944658366227dd95a2f920fca181f53)
+
+#### 4.1.2 融合自己的风格与定位
+
+在这一步中，可以先把自己的公众号的品牌定位写到资料中（note），比如想做一个什么样的公众号，你的目标受众是哪些，然后你的行文风格更偏好于哪一种。
+
+如果之前已经写过的一些文章和片段，也可以都放进去，方便后续 AI 去做一个参考。
+
+#### 4.1.3 生成 prompt
+
+准备好前两个材料之后，你就可以在聊天窗口（chat）选择刚刚准备好的这些内容，以及提供的这些内容。再让 AI 去帮你将个人风格和爆款文章的风格融合在一起，生成一个提示词。如果你对pick 中的内容很看重，记得在提示词中加上**结合你的所有 picks **的需求。
+
+生成完的提示词，需要再对它做一遍人工的校验，看看是否符合自己的想法。
+
+（这个提示词也不是一成不变的，在生成完之后，可以利用它去试验效果到底怎么样。如果生成出来的文章有你认为不好的地方，需要再去反复的迭代和优化。）
+
+最后把 prompt 放到 shortcut 中方便调用。
+
+![image.png](https://cdn.ninthbit.org/web-images/2c180653e02a3b3f33c1abf983b617fbeee09a75cfb98043bef36cca4ee9213a)
+
+### 4.2 生成配图建议
+
+其实这一步也可以放到上一步说的这个 prompt 里面。我通常是习惯让 AI 以一个特定的格式，将每一段的配图建议生成出来。
+
+配图建议具体的内容其实就是：需要一个什么风格的图片？这个图片的内容是什么？这根据每个人的喜好，还有文章类型，应该都是不一样的，需要自己去摸索一下。
+
+![image.png](https://cdn.ninthbit.org/web-images/666adafd3f9bb0dbbed9dac8f12cdb8aa5f08bf96e424152f8f2bff9238d77be)
+
+### 4.3 添加配图
+
+根据上一步的配图建议，生成配图。
+
+我一般有两种：
+
+1. 比如一些实操性的或者是有实效性的文章，它可能需要你自己去网上寻找一些图片，或者让 AI 去寻找一些图片。
+
+2. 如果不需要这种截图或者是实际使用的图片，就可以让 AI 去生成，YouMind 接入了 Nano Banana 2 模型，生成的图片质量非常高。
+
+### 4.4 文字排版工具校验
+
+YouMind 提供了一个文字排版工具，这个排版工具可以让你的文章看起来尽量比较符合规范一些。
+
+![image.png](https://cdn.ninthbit.org/web-images/fc03622806848be97c190d466cddb8ae55c05ed8a5cdd75d9bc8d560551f0ba8)
+
+### 4.5 复制公众号格式
+
+同时，Youmind 还支持直接复制文章为公众号格式，方便粘贴到公众号的编辑器当中。对公众号作者太友好了！
+
+![image.png](https://cdn.ninthbit.org/web-images/b4a5ea99e9ec6d2f33941f433141f474e0e4213be5c2f60b7c5eae4edde8779c)
+
+## 5. 封面图生成
+
+下面是我公众号目前的封面图风格，每次修改主标题和副标题去生成。
+
+后面可以继续优化提示词，增加预处理阶段，让 Agent 根据文章自动抽取标题、分析封面应该使用什么元素和意象。
+
+```plaintext
+Create a clean, minimalist WeChat article cover design with abundant white space:
+
+MAIN TITLE (Top section, top-aligned, large and bold): "DeepSeek 扔下核弹！"
+
+SUBTITLE (Below main 
+
+...
+```
+
+![Image.png](https://cdn.ninthbit.org/web-images/2b047644a34c8f26495ab68e0a6854b589e2b5fd26758536f9f435ef8a21ff80)

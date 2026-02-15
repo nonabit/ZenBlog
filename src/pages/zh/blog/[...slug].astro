@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import BlogPostLayout from '@/features/blog/components/BlogPostLayout.astro';
+import { mdxComponents } from '@/components/mdx/components';
 import {
   extractBlogSlug,
   getBlogStaticPathsByLang,
@@ -29,5 +30,5 @@ const fallbackHeroImage = getFallbackHeroImage(post.body);
   readTimeMinutes={readTimeMinutes}
   fallbackHeroImage={fallbackHeroImage}
 >
-  <Content />
+  <Content components={mdxComponents} />
 </BlogPostLayout>
