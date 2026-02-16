@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Briefcase, GraduationCap, Calendar } from 'lucide-react';
+import { RiBriefcaseLine, RiGraduationCapLine, RiCalendarLine } from '@remixicon/react';
 import { useRef } from 'react';
 
 const EXPERIENCES = [
@@ -65,16 +65,16 @@ export default function CareerTimeline() {
               {item.role}
             </h3>
             <span className="text-xs font-mono text-zinc-400 flex items-center gap-1 shrink-0 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md">
-              <Calendar size={11} />
+              <RiCalendarLine size={11} />
               {item.period}
             </span>
           </div>
 
           <div className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">
             {item.type === 'work' ? (
-              <Briefcase size={14} className="text-zinc-400" />
+              <RiBriefcaseLine size={14} className="text-zinc-400" />
             ) : (
-              <GraduationCap size={14} className="text-zinc-400" />
+              <RiGraduationCapLine size={14} className="text-zinc-400" />
             )}
             <span>{item.company}</span>
           </div>

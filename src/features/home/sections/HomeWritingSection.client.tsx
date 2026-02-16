@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { RiArrowRightUpLine } from '@remixicon/react';
 import type { BlogListItem } from '@/types/content';
 import type { Language } from '@/i18n/config';
 import type { TranslationDictionary, TranslationKey } from '@/shared/i18n/types';
@@ -57,7 +57,7 @@ export default function HomeWritingSection({ posts, lang, t }: HomeWritingSectio
               </p>
               <div className="mt-3 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all ease-out duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <span className="text-xs text-zinc-400 flex items-center gap-1">
-                  Read <ArrowUpRight size={12} />
+                  Read <RiArrowRightUpLine size={12} />
                 </span>
               </div>
             </a>

@@ -20,6 +20,9 @@ export default defineConfig({
       prefixDefaultLocale: false
     }
   },
+  image: {
+    domains: ['gravatar.com', 'cdn.ninthbit.org'],
+  },
   integrations: [
     mdx(),
     sitemap(),

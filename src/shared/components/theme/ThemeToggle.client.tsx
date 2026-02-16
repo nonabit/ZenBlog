@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { RiMoonLine, RiSunLine } from '@remixicon/react';
 import { flushSync } from 'react-dom';
 
 interface ThemeToggleProps extends React.ComponentPropsWithoutRef<'button'> {
@@ -71,7 +71,7 @@ export default function ThemeToggle({ className = '', duration = 400, ...props }
 
   return (
     <button ref={buttonRef} onClick={toggleTheme} className={className} {...props}>
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      {isDark ? <RiSunLine size={18} /> : <RiMoonLine size={18} />}
       <span className="sr-only">Toggle theme</span>
     </button>
   );

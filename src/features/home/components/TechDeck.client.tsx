@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useInView } from 'framer-motion';
-import type { LucideIcon } from 'lucide-react';
+import type { RemixiconComponentType } from '@remixicon/react';
 
 interface TechDeckGroup {
   title: string;
-  icon: LucideIcon;
+  icon: RemixiconComponentType;
   items: string[];
 }
 

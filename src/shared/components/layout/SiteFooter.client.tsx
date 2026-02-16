@@ -1,13 +1,13 @@
-import { Code2, MessageCircle, Mail, Rss, ArrowUp } from 'lucide-react';
+import { RiGithubLine, RiChat3Line, RiMailLine, RiRssLine, RiArrowUpLine } from '@remixicon/react';
 import type { Language } from '@/i18n/config';
 import type { TranslationDictionary } from '@/shared/i18n/types';
 import Magnetic from '@/components/react/Magnetic';
 
 const SOCIAL_LINKS = [
-  { icon: Code2, href: 'https://github.com/99byte', label: 'GitHub' },
-  { icon: MessageCircle, href: 'https://twitter.com/ninthbit_ai', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:oldmeatovo@gmail.com', label: 'Email' },
-  { icon: Rss, href: '/rss.xml', label: 'RSS Feed' },
+  { icon: RiGithubLine, href: 'https://github.com/99byte', label: 'GitHub' },
+  { icon: RiChat3Line, href: 'https://twitter.com/ninthbit_ai', label: 'Twitter' },
+  { icon: RiMailLine, href: 'mailto:oldmeatovo@gmail.com', label: 'Email' },
+  { icon: RiRssLine, href: '/rss.xml', label: 'RSS Feed' },
 ];
 
 interface SiteFooterProps {
@@ -72,7 +72,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
               className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
               aria-label={lang === 'zh' ? '回到顶部' : 'Back to Top'}
             >
-              <ArrowUp size={20} />
+              <RiArrowUpLine size={20} />
             </button>
           </Magnetic>
         </div>

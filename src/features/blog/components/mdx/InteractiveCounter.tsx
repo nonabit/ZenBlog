@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { RiAddLine, RiSubtractLine } from '@remixicon/react';
 
 export default function InteractiveCounter() {
   const [count, setCount] = useState(0);
@@ -17,14 +17,14 @@ export default function InteractiveCounter() {
           onClick={() => setCount(c => c - 1)}
           className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-500 transition-colors"
         >
-          <Minus size={16} />
+          <RiSubtractLine size={16} />
         </motion.button>
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setCount(c => c + 1)}
           className="p-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg hover:border-zinc-500 transition-colors"
         >
-          <Plus size={16} />
+          <RiAddLine size={16} />
         </motion.button>
       </div>
     </div>

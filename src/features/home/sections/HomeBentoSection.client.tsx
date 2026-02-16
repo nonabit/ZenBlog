@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Clock, Code2, Cpu, Disc, MapPin, PenTool, Server } from 'lucide-react';
+import { RiTimeLine, RiCodeBoxLine, RiCpuLine, RiDiscLine, RiMapPinLine, RiEditLine, RiServerLine } from '@remixicon/react';
 import BentoItem from '@/features/home/components/BentoItem.client';
 import TechDeck from '@/features/home/components/TechDeck.client';
 import TimeDisplay from '@/features/home/components/TimeDisplay.client';
@@ -18,9 +18,9 @@ const musicWave = [
 ];
 
 const STACK_GROUPS = [
-  { title: 'Frontend', icon: Code2, items: ['React', 'Astro', 'Next.js', 'Tailwind', 'TypeScript', 'Framer Motion'] },
-  { title: 'Backend', icon: Server, items: ['Rust', 'Python', 'PostgreSQL', 'Redis', 'Docker', 'Go', 'Cpp'] },
-  { title: 'Toolkit', icon: PenTool, items: ['Neovim', 'Git', 'Gemini', 'YouMind', 'Muset', 'ChatGPT', 'Vercel'] },
+  { title: 'Frontend', icon: RiCodeBoxLine, items: ['React', 'Astro', 'Next.js', 'Tailwind', 'TypeScript', 'Framer Motion'] },
+  { title: 'Backend', icon: RiServerLine, items: ['Rust', 'Python', 'PostgreSQL', 'Redis', 'Docker', 'Go', 'Cpp'] },
+  { title: 'Toolkit', icon: RiEditLine, items: ['Neovim', 'Git', 'Gemini', 'YouMind', 'Muset', 'ChatGPT', 'Vercel'] },
 ];
 
 interface HomeBentoSectionProps {
@@ -51,7 +51,7 @@ export default function HomeBentoSection({ t }: HomeBentoSectionProps) {
 
         <div>
           <div className="flex items-center gap-2 text-zinc-400 mb-4 text-xs font-bold font-mono uppercase tracking-widest opacity-80">
-            <Cpu size={14} />
+            <RiCpuLine size={14} />
             <span>{translate('home.building')}</span>
           </div>
           <h3 className="text-3xl font-heading text-zinc-900 dark:text-zinc-100 relative z-10 tracking-tight">
@@ -76,11 +76,11 @@ export default function HomeBentoSection({ t }: HomeBentoSectionProps) {
 
         <div className="flex flex-col items-center gap-2">
           <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-full mb-2">
-            <MapPin size={20} className="text-zinc-600 dark:text-zinc-300" />
+            <RiMapPinLine size={20} className="text-zinc-600 dark:text-zinc-300" />
           </div>
           <div className="font-medium text-zinc-900 dark:text-zinc-100">{translate('home.location')}</div>
           <div className="text-xs font-mono text-zinc-400 flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/50 px-2 py-1 rounded-md">
-            <Clock size={10} />
+            <RiTimeLine size={10} />
             <TimeDisplay />
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function HomeBentoSection({ t }: HomeBentoSectionProps) {
         <div className="flex justify-between items-start">
           <div className="text-zinc-400 text-xs font-bold font-mono uppercase tracking-widest flex items-center gap-2">
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}>
-              <Disc size={14} />
+              <RiDiscLine size={14} />
             </motion.div>
             <span>{translate('home.music')}</span>
           </div>

@@ -1,4 +1,4 @@
-import { ExternalLink, Folder, GitBranch } from 'lucide-react';
+import { RiExternalLinkLine, RiFolderLine, RiGitBranchLine } from '@remixicon/react';
 import type { ProjectListItem } from '@/types/content';
 import type { TranslationDictionary, TranslationKey } from '@/shared/i18n/types';
 
@@ -34,7 +34,7 @@ export default function ProjectsShowcase({ projects, t }: ProjectsShowcaseProps)
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-zinc-300 dark:text-zinc-600">
-                <Folder size={42} strokeWidth={1.5} />
+                <RiFolderLine size={42} />
               </div>
             )}
           </div>
@@ -51,7 +51,7 @@ export default function ProjectsShowcase({ projects, t }: ProjectsShowcaseProps)
                     className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
                     aria-label="GitHub"
                   >
-                    <GitBranch size={16} />
+                    <RiGitBranchLine size={16} />
                   </a>
                 )}
                 {project.data.demo && (
@@ -62,7 +62,7 @@ export default function ProjectsShowcase({ projects, t }: ProjectsShowcaseProps)
                     className="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
                     aria-label="Live Demo"
                   >
-                    <ExternalLink size={16} />
+                    <RiExternalLinkLine size={16} />
                   </a>
                 )}
               </div>

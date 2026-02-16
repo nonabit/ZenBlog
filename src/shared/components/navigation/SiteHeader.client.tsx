@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react';
+import { RiMenuLine, RiCloseLine } from '@remixicon/react';
 import { useMemo, useState } from 'react';
 import type { Language } from '@/i18n/config';
 import type { TranslationDictionary, TranslationKey } from '@/shared/i18n/types';
@@ -91,7 +91,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
               className="sm:hidden flex items-center justify-center w-8 h-8 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileMenuOpen ? <RiCloseLine size={20} /> : <RiMenuLine size={20} />}
             </button>
           </div>
         </nav>
