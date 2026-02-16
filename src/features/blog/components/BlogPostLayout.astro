@@ -9,13 +9,14 @@ import SiteHeader from '@/shared/components/navigation/SiteHeader.client';
 import SiteFooter from '@/shared/components/layout/SiteFooter.client';
 import ScrollProgress from '@/features/blog/components/ScrollProgress.client';
 import GiscusComments from '@/features/blog/components/GiscusComments.client';
-import DefaultAvatar from '@/assets/avatar.jpg';
-import { Calendar, Clock } from 'lucide-react';
+import { RiCalendarLine, RiTimeLine } from '@remixicon/react';
+
+// R2 CDN 头像 URL
+const AVATAR_URL = 'https://cdn.ninthbit.org/avatar.jpg';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   slug?: string;
   readTimeMinutes?: number;
-  fallbackHeroImage?: string;
 };
 
 const {
@@ -26,7 +27,6 @@ const {
   author,
   slug,
   readTimeMinutes,
-  fallbackHeroImage,
 } = Astro.props;
 
 const lang: Language = Astro.url.pathname.startsWith('/zh/') ? 'zh' : 'en';
@@ -54,9 +54,7 @@ const readTimeLabel =
 const sectionLabel = 'WORK INSIGHTS';
 const authorName = author?.name ?? '静水深流';
 const authorTitle = author?.title ?? '天行健，君子以自强不息';
-const authorAvatar = author?.avatar ?? DefaultAvatar;
-const heroImageSrc = typeof heroImage === 'string' ? heroImage : heroImage?.src;
-const coverImageSrc = heroImageSrc || fallbackHeroImage;
+const authorAvatar = author?.avatar ?? AVATAR_URL;
 ---
 
 <html lang={lang}>
@@ -77,11 +75,11 @@ const coverImageSrc = heroImageSrc || fallbackHeroImage;
           </p>
           <div class="flex items-center gap-4 text-xs font-mono text-zinc-400 mb-6 uppercase tracking-wider">
             <span class="flex items-center gap-1">
-              <Clock size={12} /> {readTimeLabel}
+              <RiTimeLine size={12} /> {readTimeLabel}
             </span>
             <span class="w-px h-3 bg-zinc-200 dark:bg-zinc-800"></span>
             <span class="flex items-center gap-1">
-              <Calendar size={12} />
+              <RiCalendarLine size={12} />
               {formattedDate}
             </span>
           </div>
@@ -95,9 +93,9 @@ const coverImageSrc = heroImageSrc || fallbackHeroImage;
         </header>
 
         {
-          coverImageSrc && (
+          heroImage && (
             <div class="relative aspect-[16/10] sm:aspect-[21/9] w-full overflow-hidden border border-zinc-200 dark:border-zinc-800 mb-12 bg-zinc-50 dark:bg-zinc-900">
-              <Image src={coverImageSrc} alt={title} class="object-cover w-full h-full" inferSize loading="eager" />
+              <Image src={heroImage} alt={title} class="object-cover w-full h-full" inferSize loading="eager" />
             </div>
           )
         }
@@ -115,10 +113,11 @@ const coverImageSrc = heroImageSrc || fallbackHeroImage;
               src={authorAvatar}
               alt={authorName}
               class="h-10 w-10 rounded-full object-cover border border-zinc-200 dark:border-zinc-700"
-              width={40}
-              height={40}
+              width={200}
+              height={200}
+              format="png"
+              quality={100}
               loading="lazy"
-              inferSize
             />
             <div>
               <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-none mb-0.5">{authorName}</p>

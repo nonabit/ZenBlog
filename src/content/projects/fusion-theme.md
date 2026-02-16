@@ -2,7 +2,6 @@
 title: "Astro Fusion Theme"
 description: "A minimalist yet interactive blog theme built for developers. Featuring distinct typography and micro-interactions."
 order: 1
-heroImage: "../../assets/blog-placeholder-1.jpg"
 stack: ["Astro", "React", "Tailwind", "Framer Motion"]
 github: "https://github.com/99byte/ZenBlog"
 demo: "https://ninthbit.org"

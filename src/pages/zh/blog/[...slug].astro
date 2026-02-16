@@ -5,7 +5,6 @@ import { mdxComponents } from '@/components/mdx/components';
 import {
   extractBlogSlug,
   getBlogStaticPathsByLang,
-  getFallbackHeroImage,
   getReadTime,
 } from '@/features/blog/server';
 
@@ -21,14 +20,12 @@ const post = Astro.props as Props;
 const { Content } = await post.render();
 const currentSlug = extractBlogSlug(post.id, lang);
 const readTimeMinutes = getReadTime(post.body, lang);
-const fallbackHeroImage = getFallbackHeroImage(post.body);
 ---
 
 <BlogPostLayout
   {...post.data}
   slug={currentSlug}
   readTimeMinutes={readTimeMinutes}
-  fallbackHeroImage={fallbackHeroImage}
 >
   <Content components={mdxComponents} />
 </BlogPostLayout>

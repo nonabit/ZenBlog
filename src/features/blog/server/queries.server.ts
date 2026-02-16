@@ -79,6 +79,3 @@ export function getReadTime(content: string, lang: Language): number {
   return Math.max(1, Math.ceil(wordCount / 220));
 }
 
-export function getFallbackHeroImage(content: string): string {
-  return content.match(/!\[[^\]]*?\]\(([^)\s]+)(?:\s+"[^"]*")?\)/)?.[1] ?? '';
-}
