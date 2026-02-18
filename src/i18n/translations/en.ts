@@ -1,6 +1,7 @@
 export const en = {
   // Navigation
   'nav.blog': 'BLOG',
+  'nav.photography': 'PHOTOGRAPHY',
   'nav.projects': 'PROJECTS',
   'nav.about': 'ABOUT ME',
 
@@ -24,6 +25,20 @@ export const en = {
   // Blog
   'blog.title': 'Writing',
   'blog.description': 'Sharing thoughts and explorations on backend architecture, AI full-stack development, and new innovations.',
+
+  // Photography
+  'photography.title': 'Photography',
+  'photography.description': 'A visual archive of moments, light, and places.',
+  'photography.empty': 'No photos yet. Add your first shot.',
+  'photography.exif.camera': 'Camera',
+  'photography.exif.lens': 'Lens',
+  'photography.exif.focalLength': 'Focal',
+  'photography.exif.aperture': 'Aperture',
+  'photography.exif.shutter': 'Shutter',
+  'photography.exif.iso': 'ISO',
+  'photography.lightbox.prev': 'Previous photo',
+  'photography.lightbox.next': 'Next photo',
+  'photography.lightbox.close': 'Close lightbox',
 
   // About
   'about.title': 'About Me',

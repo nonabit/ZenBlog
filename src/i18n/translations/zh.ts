@@ -1,6 +1,7 @@
 export const zh = {
   // 导航
   'nav.blog': '博客',
+  'nav.photography': '摄影',
   'nav.projects': '项目',
   'nav.about': '关于我',
 
@@ -24,6 +25,20 @@ export const zh = {
   // 博客页
   'blog.title': '文章',
   'blog.description': '分享关于后端架构、AI 全栈开发和新技术探索的思考。',
+
+  // 摄影页
+  'photography.title': '摄影',
+  'photography.description': '记录光影、街巷与时间切片的视觉档案。',
+  'photography.empty': '还没有照片，先上传第一张吧。',
+  'photography.exif.camera': '机身',
+  'photography.exif.lens': '镜头',
+  'photography.exif.focalLength': '焦距',
+  'photography.exif.aperture': '光圈',
+  'photography.exif.shutter': '快门',
+  'photography.exif.iso': 'ISO',
+  'photography.lightbox.prev': '上一张',
+  'photography.lightbox.next': '下一张',
+  'photography.lightbox.close': '关闭预览',
 
   // 关于页
   'about.title': '关于我',

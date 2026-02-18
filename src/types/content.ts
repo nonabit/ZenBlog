@@ -29,3 +29,26 @@ export interface ProjectListItem {
     demo?: string;
   };
 }
+
+export interface PhotoExif {
+  brand?: string;
+  model?: string;
+  lens?: string;
+  focalLength?: string;
+  aperture?: string;
+  shutterSpeed?: string;
+  iso?: number;
+}
+
+export interface PhotographyPhotoItem {
+  slug: string;
+  data: {
+    title: string;
+    location?: string;
+    shotDate: Date;
+    imageSrc: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    exif?: PhotoExif;
+  };
+}

@@ -30,7 +30,34 @@ const projects = defineCollection({
   }),
 });
 
+const photography = defineCollection({
+  type: 'content',
+  schema: ({ image }) => z.object({
+    title: z.object({
+      en: z.string(),
+      zh: z.string(),
+    }),
+    location: z.object({
+      en: z.string(),
+      zh: z.string(),
+    }).optional(),
+    shotDate: z.coerce.date(),
+    image: z.union([image(), z.string().url()]),
+    order: z.number().optional(),
+    exif: z.object({
+      brand: z.string().optional(),
+      model: z.string().optional(),
+      lens: z.string().optional(),
+      focalLength: z.string().optional(),
+      aperture: z.string().optional(),
+      shutterSpeed: z.string().optional(),
+      iso: z.number().int().positive().optional(),
+    }).optional(),
+  }),
+});
+
 export const collections = {
   blog,
   projects,
+  photography,
 };

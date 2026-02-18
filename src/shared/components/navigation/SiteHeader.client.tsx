@@ -16,7 +16,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const translate = (key: TranslationKey) => t[key] || key;
 
-  const isActive = (item: 'blog' | 'about') => {
+  const isActive = (item: 'blog' | 'photography' | 'about') => {
     const path = currentPath.toLowerCase();
     const itemPath = lang === 'zh' ? `/zh/${item}` : `/${item}`;
     return path === itemPath || path.startsWith(`${itemPath}/`);
@@ -25,6 +25,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
   const navItems = useMemo(
     () => [
       { key: 'blog' as const, label: translate('nav.blog') },
+      { key: 'photography' as const, label: translate('nav.photography') },
       { key: 'about' as const, label: translate('nav.about') },
     ],
     [t],
@@ -40,7 +41,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
     <header className="relative z-40 w-full transition-all duration-300">
       <div className="absolute inset-0 bg-white/80 dark:bg-black/80 backdrop-blur-md" />
 
-      <div className="relative max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="relative max-w-[84rem] mx-auto px-6 h-16 flex items-center justify-between">
         <a
           href={lang === 'zh' ? '/zh' : '/'}
           className="font-heading font-normal text-xl tracking-tight flex items-center gap-2 no-underline text-zinc-900 dark:text-zinc-100 leading-none"

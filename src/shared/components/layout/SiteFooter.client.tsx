@@ -30,7 +30,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
 
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
-      <div className="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="max-w-[84rem] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex flex-col items-center md:items-start gap-2">
           <div className="flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
             <span>© {new Date().getFullYear()} Silicon Universe</span>
