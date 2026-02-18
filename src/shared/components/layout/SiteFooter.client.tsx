@@ -1,11 +1,11 @@
-import { RiGithubLine, RiChat3Line, RiMailLine, RiRssLine, RiArrowUpLine } from '@remixicon/react';
+import { RiGithubFill, RiTwitterXFill, RiMailLine, RiRssLine, RiArrowUpLine } from '@remixicon/react';
 import type { Language } from '@/i18n/config';
 import type { TranslationDictionary } from '@/shared/i18n/types';
 import Magnetic from '@/components/react/Magnetic';
 
 const SOCIAL_LINKS = [
-  { icon: RiGithubLine, href: 'https://github.com/99byte', label: 'GitHub' },
-  { icon: RiChat3Line, href: 'https://twitter.com/ninthbit_ai', label: 'Twitter' },
+  { icon: RiGithubFill, href: 'https://github.com/99byte', label: 'GitHub' },
+  { icon: RiTwitterXFill, href: 'https://twitter.com/ninthbit_ai', label: 'Twitter' },
   { icon: RiMailLine, href: 'mailto:oldmeatovo@gmail.com', label: 'Email' },
   { icon: RiRssLine, href: '/rss.xml', label: 'RSS Feed' },
 ];

@@ -16,7 +16,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const translate = (key: TranslationKey) => t[key] || key;
 
-  const isActive = (item: 'blog' | 'projects' | 'about') => {
+  const isActive = (item: 'blog' | 'about') => {
     const path = currentPath.toLowerCase();
     const itemPath = lang === 'zh' ? `/zh/${item}` : `/${item}`;
     return path === itemPath || path.startsWith(`${itemPath}/`);
@@ -25,7 +25,6 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
   const navItems = useMemo(
     () => [
       { key: 'blog' as const, label: translate('nav.blog') },
-      { key: 'projects' as const, label: translate('nav.projects') },
       { key: 'about' as const, label: translate('nav.about') },
     ],
     [t],

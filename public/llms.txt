@@ -23,7 +23,6 @@
 
 - [首页](https://ninthbit.org/): 网站入口，展示精选内容
 - [博客](https://ninthbit.org/blog/): 所有文章列表
-- [项目](https://ninthbit.org/projects/): 开源项目展示
 - [关于](https://ninthbit.org/about/): 关于作者
 
 ## 开源项目
