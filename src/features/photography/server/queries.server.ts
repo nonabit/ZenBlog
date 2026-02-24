@@ -69,3 +69,8 @@ export async function getPhotographyDateGroups(lang: Language): Promise<Photogra
 
   return Array.from(groups.entries()).map(([dateKey, photos]) => ({ dateKey, photos }));
 }
+
+export async function getPhotographyForHome(lang: Language, limit = 6): Promise<PhotographyPhotoItem[]> {
+  const entries = (await getCollection('photography')).sort(comparePhotographyEntries);
+  return entries.slice(0, limit).map((entry) => mapPhotographyPhotoItem(entry, lang));
+}
