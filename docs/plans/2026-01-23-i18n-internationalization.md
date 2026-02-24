@@ -25,7 +25,7 @@
 export default defineConfig({
   site: 'https://ninthbit.org',
   output: 'static',
-  adapter: vercel(),
+  adapter: cloudflare(),
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],

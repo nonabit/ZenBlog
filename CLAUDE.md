@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-ZenBlog 是一个基于 Astro 5 + React 19 + Tailwind CSS 4 的个人博客与作品集网站，采用静态站点生成（SSG）模式，部署在 Vercel 上。
+ZenBlog 是一个基于 Astro 5 + React 19 + Tailwind CSS 4 的个人博客与作品集网站，采用静态站点生成（SSG）模式，部署在 Cloudflare Workers 上。
 
 **网站域名：** https://ninthbit.org
 

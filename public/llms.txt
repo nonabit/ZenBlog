@@ -51,7 +51,7 @@ HarmonyOS 命令行工具的 MCP 封装，方便 AI 助手操作鸿蒙开发环�
 - React (交互组件)
 - Tailwind CSS (样式)
 - MDX (增强 Markdown)
-- Vercel (部署)
+- Cloudflare Workers (部署)
 
 ## 引用说明
 
