@@ -1,25 +1,14 @@
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { RiGithubFill, RiTwitterXFill, RiMailLine } from '@remixicon/react';
 import type { TranslationDictionary, TranslationKey } from '@/shared/i18n/types';
-import { Cover } from '@/components/ui/cover';
 
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
-  visible: {
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      type: 'spring',
-      damping: 25,
-      stiffness: 100,
-      mass: 0.5,
-    },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+  }),
 };
 
 interface HomeHeroSectionProps {
@@ -30,21 +19,45 @@ export default function HomeHeroSection({ t }: HomeHeroSectionProps) {
   const translate = (key: TranslationKey) => t[key] || key;
 
   return (
-    <motion.section initial="hidden" animate="visible" variants={staggerContainer} className="mb-32">
+    <section className="mb-24 sm:mb-32">
       <motion.h1
-        variants={fadeInUp}
-        className="font-heading text-6xl sm:text-8xl font-medium tracking-tighter text-zinc-900 dark:text-zinc-50 mb-8 leading-[1]"
+        custom={0}
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="text-2xl sm:text-3xl font-normal tracking-tight text-zinc-900 dark:text-zinc-100"
       >
-        {translate('home.hero.title1')} <br />
-        <Cover shakeIntensity={1} scaleDuration={3}>{translate('home.hero.title2')}</Cover>{' '}
-        {translate('home.hero.title3')}
+        {translate('home.hero.name')}
       </motion.h1>
       <motion.p
-        variants={fadeInUp}
-        className="text-xl sm:text-2xl text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-light tracking-wide"
+        custom={1}
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="mt-3 text-base text-zinc-500 dark:text-zinc-400"
       >
-        {translate('home.hero.subtitle')}
+        {translate('home.hero.tagline')}
       </motion.p>
-    </motion.section>
+      <motion.div
+        custom={2}
+        initial="hidden"
+        animate="visible"
+        variants={fadeIn}
+        className="mt-4 flex items-center gap-4"
+      >
+        <a href="https://github.com/99byte" target="_blank" rel="noopener noreferrer"
+          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+          <RiGithubFill size={18} />
+        </a>
+        <a href="https://x.com" target="_blank" rel="noopener noreferrer"
+          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+          <RiTwitterXFill size={18} />
+        </a>
+        <a href="mailto:contact@ninthbit.org"
+          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors">
+          <RiMailLine size={18} />
+        </a>
+      </motion.div>
+    </section>
   );
 }
