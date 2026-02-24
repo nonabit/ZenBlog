@@ -21,6 +21,10 @@ export const zh = {
   'home.location': '上海，中国',
   'home.music': '音乐',
   'home.writing': '精选文章',
+  'home.hero.name': '静水深流',
+  'home.hero.tagline': '软件工程师 & 独立开发者',
+  'home.photography': '摄影',
+  'home.projects': '项目',
 
   // 博客页
   'blog.title': '文章',

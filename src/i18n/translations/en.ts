@@ -21,6 +21,10 @@ export const en = {
   'home.location': 'Shanghai, CN',
   'home.music': 'Music',
   'home.writing': 'Selected Writing',
+  'home.hero.name': 'Latens',
+  'home.hero.tagline': 'Software Engineer & Indie Developer',
+  'home.photography': 'Photography',
+  'home.projects': 'Projects',
 
   // Blog
   'blog.title': 'Writing',
