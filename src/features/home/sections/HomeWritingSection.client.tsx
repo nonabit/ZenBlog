@@ -22,34 +22,36 @@ export default function HomeWritingSection({ posts, lang, t }: HomeWritingSectio
       transition={{ duration: 0.5 }}
       className="mb-24 sm:mb-32"
     >
-      <div className="flex items-baseline justify-between mb-8">
-        <h2 className="text-sm text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">
-          {translate('home.writing')}
-        </h2>
-        <a
-          href={getBlogListUrl()}
-          className="text-sm text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
-        >
-          {translate('home.viewAll')} →
-        </a>
+      <div className="mb-8">
+        <div className="flex items-baseline justify-between">
+          <h2 className="text-[17px] font-normal tracking-tight text-zinc-900 dark:text-zinc-100">
+            {translate('home.writing')}
+          </h2>
+          <a
+            href={getBlogListUrl()}
+            className="text-sm text-zinc-400"
+          >
+            {translate('home.viewAll')} →
+          </a>
+        </div>
+        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-zinc-600 dark:text-zinc-400">
+          {translate('home.writing.description')}
+        </p>
       </div>
 
-      <div className="space-y-0 divide-y divide-zinc-100 dark:divide-zinc-800/50">
+      <div className="space-y-6">
         {posts.map((post) => (
           <a
             key={post.slug}
             href={getBlogUrl(post.slug)}
-            className="group flex items-baseline justify-between py-3 no-underline transition-transform hover:translate-x-0.5"
+            className="block no-underline"
           >
-            <span className="text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors truncate mr-4">
+            <h3 className="text-[17px] font-normal leading-6 text-zinc-900 dark:text-zinc-100">
               {post.data.title}
-            </span>
-            <span className="text-xs text-zinc-400 dark:text-zinc-500 shrink-0 font-mono tabular-nums">
-              {new Date(post.data.pubDate).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
-                year: 'numeric',
-                month: 'short',
-              })}
-            </span>
+            </h3>
+            <p className="mt-1 text-base font-light leading-7 text-zinc-600 dark:text-zinc-400 line-clamp-2">
+              {post.data.description}
+            </p>
           </a>
         ))}
       </div>

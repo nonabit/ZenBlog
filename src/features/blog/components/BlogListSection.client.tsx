@@ -26,7 +26,7 @@ export default function BlogListSection({ posts, lang, t }: BlogListSectionProps
   const getBlogUrl = (slug: string) => (lang === 'zh' ? `/zh/blog/${slug}` : `/blog/${slug}`);
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="w-full">
       <div className="mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
         <h1 className="font-heading text-4xl sm:text-5xl font-normal tracking-tight text-zinc-900 dark:text-zinc-100 mb-6">
           {translate('blog.title')}

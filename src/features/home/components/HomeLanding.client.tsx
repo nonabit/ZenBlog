@@ -6,18 +6,11 @@ import HomeProjectsSection from '@/features/home/sections/HomeProjectsSection.cl
 
 export default function HomeLanding({ posts, photos, projects, lang, t }: HomeLandingProps) {
   return (
-    <div className="mx-auto px-6 py-16 sm:py-24">
-      {/* Hero 和 Writing 区：窄宽度 640px */}
-      <div className="max-w-2xl mx-auto">
-        <HomeHeroSection t={t} />
-        <HomeWritingSection posts={posts} lang={lang} t={t} />
-      </div>
-
-      {/* Photography 和 Projects 区：宽宽度 960px */}
-      <div className="max-w-4xl mx-auto">
-        <HomePhotographySection photos={photos} lang={lang} t={t} />
-        <HomeProjectsSection projects={projects} lang={lang} t={t} />
-      </div>
+    <div className="max-w-[84rem] mx-auto px-6 py-16 sm:py-24">
+      <HomeHeroSection t={t} />
+      <HomeProjectsSection projects={projects} lang={lang} t={t} />
+      <HomeWritingSection posts={posts} lang={lang} t={t} />
+      <HomePhotographySection photos={photos} lang={lang} t={t} />
     </div>
   );
 }

@@ -11,11 +11,15 @@ export const zh = {
   'home.latest': '最新文章',
   'home.viewAll': '查看全部',
   'home.readMore': '阅读更多',
-  'home.writing': '精选文章',
+  'home.writing': '博客',
   'home.hero.name': '静水深流',
   'home.hero.tagline': '软件工程师 & 独立开发者',
+  'home.hero.intro': '好久不见，欢迎来到我的个人网站。这里记录我在软件工程、AI 产品与独立开发上的思考和实践，也分享一些正在打磨中的项目。希望这些内容能为你带来一点启发。',
   'home.photography': '摄影',
   'home.projects': '项目',
+  'home.projects.description': '记录我正在打磨的产品与实验，从 AI 工具到效率应用，持续迭代并追求可用性。',
+  'home.writing.description': '分享我在软件工程、AI 与产品实践中的思考、复盘与方法论。',
+  'home.photography.description': '用镜头记录日常与旅途，保存那些稍纵即逝的光影与情绪。',
 
   // 博客页
   'blog.title': '文章',

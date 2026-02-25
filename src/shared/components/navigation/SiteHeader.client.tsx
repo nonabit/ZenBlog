@@ -12,11 +12,14 @@ interface SiteHeaderProps {
   t: TranslationDictionary;
 }
 
+type NavItemKey = 'blog' | 'photography' | 'about';
+
 export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const translate = (key: TranslationKey) => t[key] || key;
+  const getHref = (item: NavItemKey) => (lang === 'zh' ? `/zh/${item}` : `/${item}`);
 
-  const isActive = (item: 'blog' | 'photography' | 'about') => {
+  const isActive = (item: NavItemKey) => {
     const path = currentPath.toLowerCase();
     const itemPath = lang === 'zh' ? `/zh/${item}` : `/${item}`;
     return path === itemPath || path.startsWith(`${itemPath}/`);
@@ -33,7 +36,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
 
   const mobileItems = navItems.map((item) => ({
     ...item,
-    href: lang === 'zh' ? `/zh/${item.key}` : `/${item.key}`,
+    href: getHref(item.key),
     active: isActive(item.key),
   }));
 
@@ -54,7 +57,7 @@ export default function SiteHeader({ currentPath, lang, t }: SiteHeaderProps) {
           <div className="hidden sm:flex items-center gap-6 text-sm font-normal text-zinc-500 dark:text-zinc-400">
             {navItems.map((item) => {
               const active = isActive(item.key);
-              const href = lang === 'zh' ? `/zh/${item.key}` : `/${item.key}`;
+              const href = getHref(item.key);
 
               return (
                 <a

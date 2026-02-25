@@ -14,8 +14,12 @@ export const en = {
   'home.writing': 'Selected Writing',
   'home.hero.name': 'Latens',
   'home.hero.tagline': 'Software Engineer & Indie Developer',
+  'home.hero.intro': 'Welcome to my personal website. I share thoughts and hands-on work around software engineering, AI products, and indie building, along with selected projects in progress.',
   'home.photography': 'Photography',
   'home.projects': 'Projects',
+  'home.projects.description': 'A running log of products and experiments I am building, from AI tools to practical apps.',
+  'home.writing.description': 'Notes, breakdowns, and lessons from software engineering, AI, and product work.',
+  'home.photography.description': 'A visual journal of daily life and travels, capturing fleeting light and moods.',
 
   // Blog
   'blog.title': 'Writing',
