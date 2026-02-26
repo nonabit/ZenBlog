@@ -10,60 +10,99 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-ZenBlog 是一个基于 Astro 5 + React 19 + Tailwind CSS 4 的个人博客与作品集网站，采用静态站点生成（SSG）模式，部署在 Cloudflare Workers 上。
+ZenBlog 是一个基于 Astro 5 + React 19 + Tailwind CSS 4 的个人博客与作品集网站，采用纯静态输出（SSG），部署在 Cloudflare Pages 上。
 
 **网站域名：** https://ninthbit.org
+**图片 CDN：** https://cdn.ninthbit.org（Cloudflare R2）
 
 ## 常用命令
 
 ```bash
-npm install          # 安装依赖
-npm run dev          # 启动开发服务器 (localhost:4321)
-npm run build        # 构建生产环境
-npm run preview      # 预览构建结果
-npm run new:post "标题"     # 创建新博客文章
-npm run new:project "标题"  # 创建新项目
+bun install                    # 安装依赖
+bun run dev                    # 启动开发服务器 (localhost:4321)
+bun run build                  # 构建生产环境（先清除 dist/）
+bun run preview                # 预览构建结果
+bun run new:post "标题"         # 创建新博客文章
+bun run new:project "标题"      # 创建新项目
+bun run check:arch             # 架构边界检查（features 间禁止交叉依赖）
+bun run photos:sync-exif       # 从本地图片读取 EXIF 写入 frontmatter
+bun run r2:images:upload       # 扫描 content 中外部图片上传到 R2
 ```
 
 ## 核心架构
 
+### Feature 模块化架构
+
+项目采用按功能垂直切分的模块化架构，核心代码在 `src/features/` 下：
+
+```
+src/features/
+├── home/          # 首页（Hero、Writing、Photography、Projects 四区块）
+├── blog/          # 博客（文章列表、文章布局、评论、MDX 组件）
+├── photography/   # 摄影集（画廊、EXIF 展示）
+├── projects/      # 项目展示
+└── about/         # 关于页（个人资料、职业时间线、装备清单）
+```
+
+每个 feature 内部结构：
+- `components/` — UI 组件
+- `server/queries.server.ts` — 构建时数据查询（Content Collections API）
+- `index.ts` — 公开导出
+
+**架构边界规则**（`scripts/check-architecture.mjs` 强制检查）：
+- `shared/` 不能依赖 `features/` 或 `pages/`
+- `features/` 之间禁止直接交叉依赖
+- `pages/` 可以依赖 `features/` 和 `shared/`
+
+### 文件命名约定
+
+- `.client.tsx` — 客户端 React 组件（需要浏览器 API / 交互）
+- `.server.ts` — 仅在构建时运行的服务端代码
+- `.astro` — Astro 组件（服务端渲染）
+
+### 数据流模式
+
+```
+queries.server.ts → Astro 页面（.astro）→ React 组件（.client.tsx）
+```
+
+Astro 页面在构建时调用 server 查询获取数据，通过 props 传递给 React 客户端组件。翻译字典也通过 props drilling 传入，避免客户端重新加载。
+
 ### 国际化（i18n）
 
-- 默认语言：英文（无 URL 前缀）
-- 中文：使用 `/zh/` 前缀
+- 默认语言：英文（无 URL 前缀），中文使用 `/zh/` 前缀
 - 翻译文件：`src/i18n/translations/en.ts` 和 `zh.ts`
-- 工具函数：`src/i18n/utils.ts`
+- 页面层：`src/pages/` 和 `src/pages/zh/` 镜像结构，每个页面顶部硬编码 `const lang`
+- 博客文章按语言分目录：`src/content/blog/en/`、`src/content/blog/zh/`
+- 摄影集合的多语言通过 frontmatter 内嵌字段实现（`title: { en, zh }`），不分目录
 
 ### Content Collections
 
-- 博客文章：`src/content/blog/`（.md/.mdx）
-- 项目展示：`src/content/projects/`
-- Schema 定义：`src/content.config.ts`
+三个集合，Schema 定义在 `src/content.config.ts`：
+- `blog` — 博客文章（`src/content/blog/en/` 和 `zh/`，.md/.mdx）
+- `projects` — 项目展示（`src/content/projects/`）
+- `photography` — 摄影作品（`src/content/photography/`，含 EXIF 数据）
 
-### 样式系统
+### 共享层
 
-- 全局样式：`src/styles/global.css`
-- 字体系统：`src/styles/typography.css`（系统字体栈，零网络请求）
-- SCSS 变量：`src/styles/_variables.scss`
+`src/shared/` 存放跨功能共享代码：
+- `components/layout/PageShell.astro` — 通用页面 Shell（html + head + header + main + footer）
+- `components/navigation/` — 导航栏、语言切换、移动端菜单
+- `components/theme/` — 深色/浅色模式切换
+- `i18n/types.ts` — `getTranslationDictionary()` 函数
 
-### 评论系统
+### OG 图片生成
 
-使用 Giscus（基于 GitHub Discussions），配置在 `src/components/react/GiscusComments.tsx`。
+`src/pages/og/[...slug].png.ts` 使用 `satori` + `sharp` 动态生成 OG 图片，字体配置在 `src/config/fonts.ts`。
 
-## 路径别名
+### 路径别名
 
-使用 `@/` 指向 `src/` 目录，例如 `@/components/react/Header.tsx`。
-
-## 关键文件
-
-| 文件 | 说明 |
-|------|------|
-| `astro.config.mjs` | Astro 配置（i18n、Vite 插件等） |
-| `src/consts.ts` | 全局常量 |
-| `src/content.config.ts` | Content Collections Schema |
+`@/` 指向 `src/` 目录。
 
 ## 注意事项
 
-- 修改 `src/content/` 目录后可能需要重启开发服务器
+- `src/content/` 目录的文件变化被 Vite watcher 忽略（见 `astro.config.mjs`），修改后需重启开发服务器
 - Slug 必须符合 kebab-case 格式
-- 图片路径使用 `../../assets/` 或 `/assets/`
+- 外部图片域名需在 `astro.config.mjs` 的 `image.domains` 中注册
+- 评论系统使用 Giscus（`@giscus/react`），配置在 `src/features/blog/components/GiscusComments.client.tsx`
+- 动画使用 `framer-motion`，图标使用 `@remixicon/react`
