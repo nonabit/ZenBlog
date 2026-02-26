@@ -34,7 +34,7 @@ export default function HomeWritingSection({ posts, lang, t }: HomeWritingSectio
             {translate('home.viewAll')} →
           </a>
         </div>
-        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-zinc-600 dark:text-zinc-400">
+        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-[var(--color-text-primary)]">
           {translate('home.writing.description')}
         </p>
       </div>
@@ -49,7 +49,7 @@ export default function HomeWritingSection({ posts, lang, t }: HomeWritingSectio
             <h3 className="text-[17px] font-normal leading-6 text-zinc-900 dark:text-zinc-100">
               {post.data.title}
             </h3>
-            <p className="mt-1 text-base font-light leading-7 text-zinc-600 dark:text-zinc-400 line-clamp-2">
+            <p className="mt-1 text-base font-light leading-7 text-[var(--color-text-primary)] line-clamp-2">
               {post.data.description}
             </p>
           </a>

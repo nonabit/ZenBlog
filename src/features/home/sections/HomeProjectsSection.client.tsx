@@ -30,7 +30,7 @@ export default function HomeProjectsSection({ projects, t }: HomeProjectsSection
             {translate('home.projects')}
           </h2>
         </div>
-        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-zinc-600 dark:text-zinc-400">
+        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-[var(--color-text-primary)]">
           {translate('home.projects.description')}
         </p>
       </div>

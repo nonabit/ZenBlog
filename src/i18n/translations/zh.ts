@@ -17,9 +17,9 @@ export const zh = {
   'home.hero.intro': '好久不见，欢迎来到我的个人网站。这里记录我在软件工程、AI 产品与独立开发上的思考和实践，也分享一些正在打磨中的项目。希望这些内容能为你带来一点启发。',
   'home.photography': '摄影',
   'home.projects': '项目',
-  'home.projects.description': '记录我正在打磨的产品与实验，从 AI 工具到效率应用，持续迭代并追求可用性。',
+  'home.projects.description': '我信奉实用主义但也对好看有着偏执，希望打磨出好看又好用的产品，把已有的一些实践和成果记录在这里。',
   'home.writing.description': '分享我在软件工程、AI 与产品实践中的思考、复盘与方法论。',
-  'home.photography.description': '用镜头记录日常与旅途，保存那些稍纵即逝的光影与情绪。',
+  'home.photography.description': '不知道什么时候开始，需要用力地从记忆深处找寻一些时光碎片，这些照片是我与世界的交互，也留下一些我来过的痕迹。',
 
   // 博客页
   'blog.title': '文章',

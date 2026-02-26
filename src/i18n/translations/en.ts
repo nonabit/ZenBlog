@@ -17,9 +17,9 @@ export const en = {
   'home.hero.intro': 'Welcome to my personal website. I share thoughts and hands-on work around software engineering, AI products, and indie building, along with selected projects in progress.',
   'home.photography': 'Photography',
   'home.projects': 'Projects',
-  'home.projects.description': 'A running log of products and experiments I am building, from AI tools to practical apps.',
+  'home.projects.description': 'A pragmatist with an obsession for aesthetics — I strive to craft products that are both beautiful and functional, and document the practices and results here.',
   'home.writing.description': 'Notes, breakdowns, and lessons from software engineering, AI, and product work.',
-  'home.photography.description': 'A visual journal of daily life and travels, capturing fleeting light and moods.',
+  'home.photography.description': 'At some point, I started having to dig deep into memory for fragments of time. These photos are my interactions with the world, leaving traces that I was here.',
 
   // Blog
   'blog.title': 'Writing',

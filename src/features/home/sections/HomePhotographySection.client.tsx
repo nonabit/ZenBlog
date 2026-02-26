@@ -35,7 +35,7 @@ export default function HomePhotographySection({ photos, lang, t }: HomePhotogra
             {translate('home.viewAll')} →
           </a>
         </div>
-        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-zinc-600 dark:text-zinc-400">
+        <p className="mt-4 max-w-4xl text-base font-light leading-8 text-[var(--color-text-primary)]">
           {translate('home.photography.description')}
         </p>
       </div>

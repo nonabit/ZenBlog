@@ -49,7 +49,7 @@ export default function HomeHeroSection({ t }: HomeHeroSectionProps) {
         initial="hidden"
         animate="visible"
         variants={fadeIn}
-        className="mt-5 max-w-4xl text-base font-light leading-8 text-zinc-600 dark:text-zinc-400"
+        className="mt-5 max-w-4xl text-base font-light leading-8 text-[var(--color-text-primary)]"
       >
         {translate('home.hero.intro')}
       </motion.p>
