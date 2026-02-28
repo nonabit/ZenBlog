@@ -69,6 +69,10 @@ export const zh = {
 
   // 页脚
   'footer.rights': '版权所有',
+  'footer.navigate': '导航',
+  'footer.connect': '联系',
+  'footer.backToTop': '回到顶部',
+  'footer.systemStatus': '系统运行正常',
 
   // 通用
   'common.loading': '加载中...',

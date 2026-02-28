@@ -69,6 +69,10 @@ export const en = {
 
   // Footer
   'footer.rights': 'All rights reserved',
+  'footer.navigate': 'Navigate',
+  'footer.connect': 'Connect',
+  'footer.backToTop': 'Back to Top',
+  'footer.systemStatus': 'All Systems Normal',
 
   // Common
   'common.loading': 'Loading...',
