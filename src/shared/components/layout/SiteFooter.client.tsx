@@ -54,7 +54,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
           </div>
 
           {/* 右侧：导航 + 社交 */}
-          <div className="flex flex-col sm:flex-row gap-12 sm:gap-16">
+          <div className="flex flex-col sm:flex-row gap-12 sm:gap-24">
             {/* 导航区 */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
