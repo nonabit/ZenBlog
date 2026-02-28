@@ -40,6 +40,6 @@ const t = getTranslationDictionary(lang);
     <main class={mainClass}>
       <slot />
     </main>
-    {showFooter && <SiteFooter client:visible lang={lang} t={t} currentPath={currentPath} />}
+    {showFooter && <SiteFooter client:visible lang={lang} t={t} />}
   </body>
 </html>
