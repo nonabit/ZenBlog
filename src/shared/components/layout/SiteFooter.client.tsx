@@ -3,6 +3,13 @@ import type { Language } from '@/i18n/config';
 import type { TranslationDictionary } from '@/shared/i18n/types';
 import Magnetic from '@/components/react/Magnetic';
 
+const NAV_LINKS = [
+  { href: '/blog', labelKey: 'nav.blog' as const },
+  { href: '/photography', labelKey: 'nav.photography' as const },
+  { href: '/projects', labelKey: 'nav.projects' as const },
+  { href: '/about', labelKey: 'nav.about' as const },
+] as const;
+
 const SOCIAL_LINKS = [
   { icon: RiGithubFill, href: 'https://github.com/99byte', label: 'GitHub' },
   { icon: RiTwitterXFill, href: 'https://twitter.com/ninthbit_ai', label: 'Twitter' },
@@ -17,6 +24,10 @@ interface SiteFooterProps {
 }
 
 export default function SiteFooter({ lang, t }: SiteFooterProps) {
+  const getLocalizedPath = (path: string) => {
+    return lang === 'zh' ? `/zh${path}` : path;
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
