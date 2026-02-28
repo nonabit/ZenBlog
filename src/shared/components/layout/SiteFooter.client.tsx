@@ -43,51 +43,40 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
 
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
-      <div className="max-w-[84rem] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
-            <span>© {new Date().getFullYear()} Silicon Universe</span>
-            <span className="text-zinc-300 dark:text-zinc-700">/</span>
-            <span className="flex items-center gap-1.5">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
-              </span>
-              <span className="text-xs text-zinc-500 font-mono">{statusText}</span>
-            </span>
+      <div className="max-w-[84rem] mx-auto px-6 py-16">
+        {/* 主体三栏区 */}
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-8 lg:gap-12">
+          {/* 左栏：品牌区 - 占 5 列 */}
+          <div className="md:col-span-5">
+            <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
+              Silicon Universe
+            </h2>
           </div>
-          <p className="text-xs text-zinc-400">{builtText}</p>
-          <p className="text-xs text-zinc-400">{rightsText}</p>
+
+          {/* 中栏：导航区 - 占 2.5 列 */}
+          <div className="md:col-span-2">
+            <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
+              {t['footer.navigate']}
+            </h3>
+            <nav className="flex flex-col space-y-2">
+              {/* 导航链接将在下一步添加 */}
+            </nav>
+          </div>
+
+          {/* 右栏：社交区 - 占 2.5 列 */}
+          <div className="md:col-span-3">
+            <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
+              {t['footer.connect']}
+            </h3>
+            <div className="flex flex-col space-y-2">
+              {/* 社交图标将在下一步添加 */}
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            {SOCIAL_LINKS.map((link) => (
-              <Magnetic key={link.label} strength={0.2}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-                  aria-label={link.label}
-                >
-                  <link.icon size={20} />
-                </a>
-              </Magnetic>
-            ))}
-          </div>
-
-          <div className="w-px h-4 bg-zinc-200 dark:bg-zinc-800 mx-2 hidden md:block" />
-
-          <Magnetic>
-            <button
-              onClick={scrollToTop}
-              className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-              aria-label={lang === 'zh' ? '回到顶部' : 'Back to Top'}
-            >
-              <RiArrowUpLine size={20} />
-            </button>
-          </Magnetic>
+        {/* 底部信息行 */}
+        <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* 版权和状态信息将在下一步添加 */}
         </div>
       </div>
     </footer>
