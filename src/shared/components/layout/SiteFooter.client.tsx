@@ -22,7 +22,6 @@ const SOCIAL_LINKS = [
 interface SiteFooterProps {
   lang: Language;
   t: TranslationDictionary;
-  currentPath?: string;
 }
 
 export default function SiteFooter({ lang, t }: SiteFooterProps) {
@@ -33,13 +32,6 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const rightsText = t['footer.rights'];
-  const statusText = lang === 'zh' ? '系统运行正常' : 'All Systems Normal';
-  const builtText =
-    lang === 'zh'
-      ? 'Built with Astro, React & Tailwind. Crafted in Shanghai.'
-      : 'Built with Astro, React & Tailwind. Crafted in Shanghai.';
 
   return (
     <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-black">
