@@ -1,13 +1,14 @@
 import { RiGithubFill, RiTwitterXFill, RiMailLine, RiRssLine } from '@remixicon/react';
 import type { Language } from '@/i18n/config';
+import type { TranslationDictionary } from '@/shared/i18n/types';
 
 // TODO: 考虑将导航数据提取到 src/shared/constants/navigation.ts
 // 以便与 SiteHeader 共享，避免重复定义
 const NAV_LINKS = [
-  { href: '/blog', label: 'BLOG' },
-  { href: '/photography', label: 'PHOTOGRAPHY' },
-  { href: '/projects', label: 'PROJECTS' },
-  { href: '/about', label: 'ABOUT ME' },
+  { href: '/blog', labelKey: 'nav.blog' as const },
+  { href: '/photography', labelKey: 'nav.photography' as const },
+  { href: '/projects', labelKey: 'nav.projects' as const },
+  { href: '/about', labelKey: 'nav.about' as const },
 ] as const;
 
 const SOCIAL_LINKS = [
@@ -19,9 +20,10 @@ const SOCIAL_LINKS = [
 
 interface SiteFooterProps {
   lang: Language;
+  t: TranslationDictionary;
 }
 
-export default function SiteFooter({ lang }: SiteFooterProps) {
+export default function SiteFooter({ lang, t }: SiteFooterProps) {
   const getLocalizedPath = (path: string) => {
     return lang === 'zh' ? `/zh${path}` : path;
   };
@@ -56,7 +58,7 @@ export default function SiteFooter({ lang }: SiteFooterProps) {
             {/* 导航区 */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
-                NAVIGATE
+                {t['footer.navigate']}
               </h3>
               <nav className="flex flex-col space-y-2">
                 {NAV_LINKS.map((link) => (
@@ -65,7 +67,7 @@ export default function SiteFooter({ lang }: SiteFooterProps) {
                     href={getLocalizedPath(link.href)}
                     className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                   >
-                    {link.label}
+                    {t[link.labelKey]}
                   </a>
                 ))}
               </nav>
@@ -74,7 +76,7 @@ export default function SiteFooter({ lang }: SiteFooterProps) {
             {/* 社交区 */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
-                CONNECT
+                {t['footer.connect']}
               </h3>
               <div className="flex flex-col space-y-2">
                 {SOCIAL_LINKS.map((link) => (
