@@ -59,7 +59,15 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
               {t['footer.navigate']}
             </h3>
             <nav className="flex flex-col space-y-2">
-              {/* 导航链接将在下一步添加 */}
+              {NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={getLocalizedPath(link.href)}
+                  className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                >
+                  {t[link.labelKey]}
+                </a>
+              ))}
             </nav>
           </div>
 
@@ -69,14 +77,53 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
               {t['footer.connect']}
             </h3>
             <div className="flex flex-col space-y-2">
-              {/* 社交图标将在下一步添加 */}
+              {SOCIAL_LINKS.map((link) => (
+                <Magnetic key={link.label} strength={0.2}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+                    aria-label={link.label}
+                  >
+                    <link.icon size={20} />
+                    <span>{link.label}</span>
+                  </a>
+                </Magnetic>
+              ))}
             </div>
           </div>
         </div>
 
         {/* 底部信息行 */}
         <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* 版权和状态信息将在下一步添加 */}
+          {/* 左侧：版权和系统状态 */}
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p className="text-xs text-zinc-400">
+              © {new Date().getFullYear()} Silicon Universe · {t['footer.rights']}
+            </p>
+            <span className="hidden md:block text-zinc-300 dark:text-zinc-700">·</span>
+            <div className="flex items-center gap-1.5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+              </span>
+              <span className="text-xs text-zinc-500 font-mono">
+                {t['footer.systemStatus']}
+              </span>
+            </div>
+          </div>
+
+          {/* 右侧：回到顶部按钮 */}
+          <Magnetic>
+            <button
+              onClick={scrollToTop}
+              className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+              aria-label={t['footer.backToTop']}
+            >
+              <RiArrowUpLine size={20} />
+            </button>
+          </Magnetic>
         </div>
       </div>
     </footer>
