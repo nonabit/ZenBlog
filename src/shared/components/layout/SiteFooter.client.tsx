@@ -1,14 +1,13 @@
 import { RiGithubFill, RiTwitterXFill, RiMailLine, RiRssLine } from '@remixicon/react';
 import type { Language } from '@/i18n/config';
-import type { TranslationDictionary } from '@/shared/i18n/types';
 
 // TODO: 考虑将导航数据提取到 src/shared/constants/navigation.ts
 // 以便与 SiteHeader 共享，避免重复定义
 const NAV_LINKS = [
-  { href: '/blog', labelKey: 'nav.blog' as const },
-  { href: '/photography', labelKey: 'nav.photography' as const },
-  { href: '/projects', labelKey: 'nav.projects' as const },
-  { href: '/about', labelKey: 'nav.about' as const },
+  { href: '/blog', label: 'BLOG' },
+  { href: '/photography', label: 'PHOTOGRAPHY' },
+  { href: '/projects', label: 'PROJECTS' },
+  { href: '/about', label: 'ABOUT ME' },
 ] as const;
 
 const SOCIAL_LINKS = [
@@ -20,10 +19,9 @@ const SOCIAL_LINKS = [
 
 interface SiteFooterProps {
   lang: Language;
-  t: TranslationDictionary;
 }
 
-export default function SiteFooter({ lang, t }: SiteFooterProps) {
+export default function SiteFooter({ lang }: SiteFooterProps) {
   const getLocalizedPath = (path: string) => {
     return lang === 'zh' ? `/zh${path}` : path;
   };
@@ -39,7 +37,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
             </h2>
             <div className="flex flex-col gap-2">
               <p className="text-xs text-zinc-400">
-                © {new Date().getFullYear()} Silicon Universe · {t['footer.rights']}
+                © {new Date().getFullYear()} Silicon Universe · All rights reserved
               </p>
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-2 w-2">
@@ -47,7 +45,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                 </span>
                 <span className="text-xs text-zinc-500 font-mono">
-                  {t['footer.systemStatus']}
+                  All Systems Normal
                 </span>
               </div>
             </div>
@@ -58,7 +56,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
             {/* 导航区 */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
-                {t['footer.navigate']}
+                NAVIGATE
               </h3>
               <nav className="flex flex-col space-y-2">
                 {NAV_LINKS.map((link) => (
@@ -67,7 +65,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
                     href={getLocalizedPath(link.href)}
                     className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
                   >
-                    {t[link.labelKey]}
+                    {link.label}
                   </a>
                 ))}
               </nav>
@@ -76,7 +74,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
             {/* 社交区 */}
             <div>
               <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
-                {t['footer.connect']}
+                CONNECT
               </h3>
               <div className="flex flex-col space-y-2">
                 {SOCIAL_LINKS.map((link) => (
