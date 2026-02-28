@@ -53,7 +53,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
             </h2>
           </div>
 
-          {/* 中栏：导航区 - 占 2.5 列 */}
+          {/* 中栏：导航区 - 占 2 列 */}
           <div className="md:col-span-2">
             <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
               {t['footer.navigate']}
@@ -63,7 +63,7 @@ export default function SiteFooter({ lang, t }: SiteFooterProps) {
             </nav>
           </div>
 
-          {/* 右栏：社交区 - 占 2.5 列 */}
+          {/* 右栏：社交区 - 占 3 列 */}
           <div className="md:col-span-3">
             <h3 className="text-xs uppercase tracking-wider text-zinc-400 mb-3">
               {t['footer.connect']}
