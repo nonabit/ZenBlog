@@ -5,10 +5,10 @@ import type { TranslationDictionary } from '@/shared/i18n/types';
 // TODO: 考虑将导航数据提取到 src/shared/constants/navigation.ts
 // 以便与 SiteHeader 共享，避免重复定义
 const NAV_LINKS = [
+  { href: '/', labelKey: 'nav.home' as const },
+  { href: '/about', labelKey: 'nav.about' as const },
   { href: '/blog', labelKey: 'nav.blog' as const },
   { href: '/photography', labelKey: 'nav.photography' as const },
-  { href: '/projects', labelKey: 'nav.projects' as const },
-  { href: '/about', labelKey: 'nav.about' as const },
 ] as const;
 
 const SOCIAL_LINKS = [

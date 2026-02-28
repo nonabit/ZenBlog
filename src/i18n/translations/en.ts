@@ -1,5 +1,6 @@
 export const en = {
   // Navigation
+  'nav.home': 'HOME',
   'nav.blog': 'BLOG',
   'nav.photography': 'PHOTOGRAPHY',
   'nav.projects': 'PROJECTS',
@@ -69,7 +70,7 @@ export const en = {
 
   // Footer
   'footer.rights': 'All rights reserved',
-  'footer.navigate': 'Navigate',
+  'footer.navigate': 'Site Links',
   'footer.connect': 'Connect',
   'footer.backToTop': 'Back to Top',
   'footer.systemStatus': 'All Systems Normal',

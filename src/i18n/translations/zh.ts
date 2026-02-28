@@ -1,5 +1,6 @@
 export const zh = {
   // 导航
+  'nav.home': '首页',
   'nav.blog': '博客',
   'nav.photography': '摄影',
   'nav.projects': '项目',
@@ -69,7 +70,7 @@ export const zh = {
 
   // 页脚
   'footer.rights': '版权所有',
-  'footer.navigate': '导航',
+  'footer.navigate': '站内链接',
   'footer.connect': '联系',
   'footer.backToTop': '回到顶部',
   'footer.systemStatus': '系统运行正常',
