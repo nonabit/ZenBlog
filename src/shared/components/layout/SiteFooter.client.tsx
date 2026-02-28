@@ -3,6 +3,8 @@ import type { Language } from '@/i18n/config';
 import type { TranslationDictionary } from '@/shared/i18n/types';
 import Magnetic from '@/components/react/Magnetic';
 
+// TODO: 考虑将导航数据提取到 src/shared/constants/navigation.ts
+// 以便与 SiteHeader 共享，避免重复定义
 const NAV_LINKS = [
   { href: '/blog', labelKey: 'nav.blog' as const },
   { href: '/photography', labelKey: 'nav.photography' as const },
